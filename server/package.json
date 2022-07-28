@@ -1,14 +1,10 @@
 {
-  "name": "project_a2o6b_q1f2b_z3j4e",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.students.cs.ubc.ca/CPSC304-2022S-T2/project_a2o6b_q1f2b_z3j4e.git"
   },
   "keywords": [],
   "author": "",
