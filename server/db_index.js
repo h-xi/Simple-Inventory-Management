@@ -3,8 +3,9 @@ const mySQL = require("mysql");
 const bodyParser = require("body-parser");
 
 require("dotenv").config();
+
 const HOST = process.env.HOST;
-const USER = process.env.USER;
+const MYUSER = process.env.MYUSER;
 const PASSWORD = process.env.PASSWORD;
 const DATABASE = process.env.DATABASE;
 const SECRET = process.env.SECRET;
@@ -13,16 +14,22 @@ myServer = express();
 
 const database = mySQL.createConnection({
   host: HOST,
-  user: USER,
+  user: MYUSER,
   password: PASSWORD,
   database: DATABASE,
   multipleStatments: true,
 });
 
-database.connect();
+database.connect(function (error) {
+  if (error){
+    console.error('error connecting :' + error.stack);
+    return;
+  }
+  console.log('Connected as id :'+ database.threadId);
+});
 
-myServer.set("serverSecret", SECRET);
-myServer.use(bodyParser.json());
-myServer.use(bodyParser.urlencoded({ extended: true }));
+// myServer.set("serverSecret", SECRET);
+// myServer.use(bodyParser.json());
+// myServer.use(bodyParser.urlencoded({ extended: true }));
 
-myServer.listen(5000);
+// myServer.listen(5000);
