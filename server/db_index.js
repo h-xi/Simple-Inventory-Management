@@ -8,7 +8,6 @@ const HOST = process.env.HOST;
 const MYUSER = process.env.MYUSER;
 const PASSWORD = process.env.PASSWORD;
 const DATABASE = process.env.DATABASE;
-const SECRET = process.env.SECRET;
 
 myServer = express();
 
@@ -21,15 +20,14 @@ const database = mySQL.createConnection({
 });
 
 database.connect(function (error) {
-  if (error){
-    console.error('error connecting :' + error.stack);
+  if (error) {
+    console.error("error connecting :" + error.stack);
     return;
   }
-  console.log('Connected as id :'+ database.threadId);
+  console.log("Connected as id :" + database.threadId);
 });
 
-// myServer.set("serverSecret", SECRET);
-// myServer.use(bodyParser.json());
-// myServer.use(bodyParser.urlencoded({ extended: true }));
+myServer.use(bodyParser.json());
+myServer.use(bodyParser.urlencoded({ extended: true }));
 
-// myServer.listen(5000);
+myServer.listen(5000);
