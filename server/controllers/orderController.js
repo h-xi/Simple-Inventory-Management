@@ -20,9 +20,9 @@ const addOrder = async (order, incoming = true) => {
     sql = `INSERT INTO ${table} VALUES(${order_id}, ${shipmentDate}, ${quantity}, ${assignedEmployee}, ${barcode}, ${product}, ${manager})`;
   } else {
     table = "OutgoingShipmentOrder";
-    let assignedEmployee = order.AssignedDriver;
-    let daysToShipment = order.DaysToShipment;
-    let deliveryAddress = order.DeliveryAddress;
+    assignedEmployee = order.AssignedDriver;
+    daysToShipment = order.DaysToShipment;
+    deliveryAddress = order.DeliveryAddress;
     sql = `INSERT INTO ${table} VALUES(${order_id}, ${shipmentDate}, ${quantity}, ${assignedEmployee}, ${deliveryAddress}, ${daysToShipment}, ${barcode}, ${product}, ${manager})`;
   }
   try {
