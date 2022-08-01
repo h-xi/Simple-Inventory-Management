@@ -6,54 +6,22 @@ const pool = require("../dbConnector");
 const poolPromise = pool.promise();
 
 // dotenv.config({ path: "./config.env" });
-// let connection;
-
-// const connect = async () => {
-//   connection = await mysql.createConnection({
-//     host: process.env.DATABASE_IP,
-//     user: process.env.DATABASE_USER,
-//     password: process.env.DATABASE_PASSWORD,
-//     multipleStatements: true,
-//   });
-//   await connection.query(`USE superRentDatabase`);
-//   await connection.query(`SELECT DATABASE()`);
-//   log.success("👌 database connection successful!");
-// };
 
 const createTables = async () => {
-  const path = process.cwd() + "createTable.sql";
-  const statements = fs
-    .readFileSync("createTable.sql", "utf-8")
-    .toString()
-    .split(";");
-  console.log(statements);
-  for (const statement in statements) {
-    try {
-      console.log(statement);
-      //   const res = await poolPromise.query(statement);
-      //   console.log(res);
-    } catch (e) {
-      throw e;
-    }
+  const schemasString = fs.readFileSync("createTable.sql", "utf-8");
+  //Split and filter logic taken from cccttt10's "super-rent-backend"
+  const tableSchemas = schemasString
+    .split(";")
+    .filter(
+      (tableSchema) => typeof tableSchema === "string" && tableSchema.length > 0
+    );
+  for (const tableSchema of tableSchemas) {
+    await poolPromise.query(tableSchema);
   }
-  return statements;
+  log.success("Tables succesfully Created");
 };
 
 createTables();
-
-// const createTables = async () => {
-//   const schemasString = fs.readFileSync(
-//     "src/dev-data/createTables.sql",
-//     "utf-8"
-//   );
-//   const schemas = schemasString
-//     .split(";")
-//     .filter((schema) => typeof schema === "string" && schema.length > 0);
-//   for (const schema of schemas) {
-//     await connection.query(schema);
-//   }
-//   log.success("👌 created tables!");
-// };
 
 // const importVehicleTypes = async () => {
 //   const vehicleTypes = JSON.parse(
