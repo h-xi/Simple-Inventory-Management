@@ -23,6 +23,7 @@ router.post("/", async (req, res) => {
 
   if (orderData.AssignedReceiver) {
     //TODO: create a getEmployee function that checks if employee exists in DB
+    getEmployee();
   }
 
   if (orderData.Inventory_Barcode) {
