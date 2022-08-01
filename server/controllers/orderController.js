@@ -61,23 +61,8 @@ const createTest = async () => {
   } catch (err) {
     throw err;
   }
-};
+//TODO: DELETE ON CASCADE 
+  
+//TODO: UPDATE FN ON ORDER
 
-// const createSupplier = () => {
-//   let sql =
-//     "CREATE TABLE supplier (s_contact VARCHAR(50), supplier_name VARCHAR(40), supplier_ID INT)";
-//   pool.query(sql, function (err, res) {
-//     if (err) throw err;
-//     console.log("i am here");
-//     return res;
-//   });
-// };
-
-// const createTable = (tableName, params) => {
-//   let sql = `CREATE TABLE ${tableName} ${params}`;
-//   pool.query(sql, function (err, res) {
-//     if (err) throw err;
-//     console.log("i am here");
-//     return res;
-//   });
-// };
+module.exports = { addOrder: addOrder };
