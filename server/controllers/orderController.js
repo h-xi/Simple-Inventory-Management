@@ -61,8 +61,9 @@ const createTest = async () => {
   } catch (err) {
     throw err;
   }
-//TODO: DELETE ON CASCADE 
-  
+};
+//TODO: DELETE ON CASCADE
+
 //TODO: UPDATE FN ON ORDER
 
 module.exports = { addOrder: addOrder };
