@@ -35,6 +35,32 @@ const addOrder = async (order, incoming = true) => {
   }
 };
 
+
+//Delete ORDER function
+const deleteOrder = async (order, incoming = true) => {
+  let order_id = order.Order_ID;
+
+  if (incoming) {
+    table = "IncomingShipmentOrder";
+    sql = `DELETE FROM ${table} WHERE Order_ID = ${order_id}`;
+  } else {
+    table = "OutgoingShipmentOrder";
+    sql = `DELETE FROM ${table} WHERE Order_ID = ${order_id}`;
+  }
+  try {
+    console.log(sql);
+    const [rows, fields] = await promisePool.query(sql);
+    console.debug(rows);
+    console.debug(fields);
+  } catch (e) {
+    throw e;
+  }
+};
+
+
+
+
+
 // addOrder(
 //   {
 //     Order_ID: 48231,
