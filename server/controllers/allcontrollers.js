@@ -16,7 +16,7 @@ const createBrands = async () => {
 
 createBrands();
 
-const CreateAisle = async () => {
+const createAisle = async () => {
     try {
       const [rows, fields] = await promisePool.query(
         "CREATE TABLE Aisle(Aisle_no Integer, PRIMARY KEY (Aisle_no))"
@@ -28,9 +28,9 @@ const CreateAisle = async () => {
     }
 };
 
-CreateAisle();
+createAisle();
 
-const CreateBin = async () => {
+const createBin = async () => {
     try {
       const [rows, fields] = await promisePool.query(
         "CREATE TABLE Bin(Bin_name CHAR(2), Capacity Integer, Aisle_no Integer, quant_filled Integer, PRIMARY KEY (Bin_name,Aisle_no), FOREIGN KEY (Aisle_no) REFERENCES Aisle ON DELETE NO ACTION)"
@@ -42,9 +42,9 @@ const CreateBin = async () => {
     }
 };
 
-CreateBin();
+createBin();
 
-const CreateCategories = async () => {
+const createCategories = async () => {
     try {
       const [rows, fields] = await promisePool.query(
         "CREATE TABLE Categories(Category_ID Integer, Cat_name Char(30), Aisle_no Integer, PRIMARY KEY (Category_ID), FOREIGN KEY (Aisle_no) REFERENCES Aisle)"
@@ -56,7 +56,7 @@ const CreateCategories = async () => {
     }
 };
 
-CreateCategories();
+createCategories();
 
     
 
