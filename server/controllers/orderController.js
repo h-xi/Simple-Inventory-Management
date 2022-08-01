@@ -58,6 +58,63 @@ const deleteOrder = async (order, incoming = true) => {
 };
 
 
+//Delete ORDER function  (need to check)
+const deleteOrder = async (order, incoming = true) => {
+  let order_id = order.Order_ID;
+
+  if (incoming) {
+    table = "IncomingShipmentOrder";
+    sql = `DELETE FROM ${table} WHERE Order_ID = ${order_id}`;
+  } else {
+    table = "OutgoingShipmentOrder";
+    sql = `DELETE FROM ${table} WHERE Order_ID = ${order_id}`;
+  }
+  try {
+    console.log(sql);
+    const [rows, fields] = await promisePool.query(sql);
+    console.debug(rows);
+    console.debug(fields);
+  } catch (e) {
+    throw e;
+  }
+};
+
+//UPDATE order function (need to check)
+const updateOrder = async (order, incoming = true) => {
+  let order_id = order.Order_ID;
+  let shipmentDate = order.ShipmentDate;
+  let quantity = order.Quantity;
+  let barcode = order.Inventory_Barcode;
+  let product = order.Product_Barcode;
+  let manager = order.Manager;
+  let table;
+  let assignedEmployee;
+  let daysToShipment;
+  let deliveryAddress;
+
+  if (incoming) {
+    table = "IncomingShipmentOrder";
+    assignedEmployee = order.AssignedReceiver;
+    sql = `UPDATE ${table} SET ShipmentDate = ${shipmentDate}, Quantity = ${quantity}, AssignedReceiver = ${assignedEmployee}, Inventory_Barcode = ${barcode}, Product_Barcode = ${product}, Manager = ${manager} WHERE Order_ID = ${order_id})`;
+    } else {
+    table = "OutgoingShipmentOrder";
+    assignedEmployee = order.AssignedDriver;
+    daysToShipment = order.DaysToShipment;
+    deliveryAddress = order.DeliveryAddress;
+    sql = `UPDATE ${table} SET ShipmentDate = ${shipmentDate}, Quantity = ${quantity}, AssignedDriver = ${assignedEmployee}, DeliveryAddress = ${deliveryAddress}, DaysToShipment = ${daysToShipment}, Inventory_Barcode = ${barcode}, Product_Barcode = ${product}, Manager = ${manager})`;
+  }
+  try {
+    console.log(sql);
+    const [rows, fields] = await promisePool.query(sql);
+    console.debug(rows);
+    console.debug(fields);
+  } catch (e) {
+    throw e;
+  }
+};
+
+
+
 
 
 
