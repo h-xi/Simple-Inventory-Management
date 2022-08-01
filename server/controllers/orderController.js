@@ -20,9 +20,9 @@ const addOrder = async (order, incoming = true) => {
     sql = `INSERT INTO ${table} VALUES(${order_id}, ${shipmentDate}, ${quantity}, ${assignedEmployee}, ${barcode}, ${product}, ${manager})`;
   } else {
     table = "OutgoingShipmentOrder";
-    let assignedEmployee = order.AssignedDriver;
-    let daysToShipment = order.DaysToShipment;
-    let deliveryAddress = order.DeliveryAddress;
+    assignedEmployee = order.AssignedDriver;
+    daysToShipment = order.DaysToShipment;
+    deliveryAddress = order.DeliveryAddress;
     sql = `INSERT INTO ${table} VALUES(${order_id}, ${shipmentDate}, ${quantity}, ${assignedEmployee}, ${deliveryAddress}, ${daysToShipment}, ${barcode}, ${product}, ${manager})`;
   }
   try {
@@ -88,22 +88,8 @@ const createTest = async () => {
     throw err;
   }
 };
+//TODO: DELETE ON CASCADE
 
-// const createSupplier = () => {
-//   let sql =
-//     "CREATE TABLE supplier (s_contact VARCHAR(50), supplier_name VARCHAR(40), supplier_ID INT)";
-//   pool.query(sql, function (err, res) {
-//     if (err) throw err;
-//     console.log("i am here");
-//     return res;
-//   });
-// };
+//TODO: UPDATE FN ON ORDER
 
-// const createTable = (tableName, params) => {
-//   let sql = `CREATE TABLE ${tableName} ${params}`;
-//   pool.query(sql, function (err, res) {
-//     if (err) throw err;
-//     console.log("i am here");
-//     return res;
-//   });
-// };
+module.exports = { addOrder: addOrder };
