@@ -2,6 +2,7 @@ const pool = require("../dbConnector.js");
 
 const promisePool = pool.promise();
 
+//Given order object and orderType flag, add order into database, else throw error
 const addOrder = async (order, incoming = true) => {
   let order_id = order.Order_ID;
   let shipmentDate = order.ShipmentDate;
@@ -35,39 +36,14 @@ const addOrder = async (order, incoming = true) => {
   }
 };
 
-
 //Delete ORDER function
-const deleteOrder = async (order, incoming = true) => {
-  let order_id = order.Order_ID;
-
+const deleteOrder = async (orderID, incoming = true) => {
   if (incoming) {
     table = "IncomingShipmentOrder";
-    sql = `DELETE FROM ${table} WHERE Order_ID = ${order_id}`;
+    sql = `DELETE FROM ${table} WHERE Order_ID = ${orderID}`;
   } else {
     table = "OutgoingShipmentOrder";
-    sql = `DELETE FROM ${table} WHERE Order_ID = ${order_id}`;
-  }
-  try {
-    console.log(sql);
-    const [rows, fields] = await promisePool.query(sql);
-    console.debug(rows);
-    console.debug(fields);
-  } catch (e) {
-    throw e;
-  }
-};
-
-
-//Delete ORDER function  (need to check)
-const deleteOrder = async (order, incoming = true) => {
-  let order_id = order.Order_ID;
-
-  if (incoming) {
-    table = "IncomingShipmentOrder";
-    sql = `DELETE FROM ${table} WHERE Order_ID = ${order_id}`;
-  } else {
-    table = "OutgoingShipmentOrder";
-    sql = `DELETE FROM ${table} WHERE Order_ID = ${order_id}`;
+    sql = `DELETE FROM ${table} WHERE Order_ID = ${orderID}`;
   }
   try {
     console.log(sql);
@@ -96,7 +72,7 @@ const updateOrder = async (order, incoming = true) => {
     table = "IncomingShipmentOrder";
     assignedEmployee = order.AssignedReceiver;
     sql = `UPDATE ${table} SET ShipmentDate = ${shipmentDate}, Quantity = ${quantity}, AssignedReceiver = ${assignedEmployee}, Inventory_Barcode = ${barcode}, Product_Barcode = ${product}, Manager = ${manager} WHERE Order_ID = ${order_id})`;
-    } else {
+  } else {
     table = "OutgoingShipmentOrder";
     assignedEmployee = order.AssignedDriver;
     daysToShipment = order.DaysToShipment;
@@ -112,11 +88,6 @@ const updateOrder = async (order, incoming = true) => {
     throw e;
   }
 };
-
-
-
-
-
 
 // addOrder(
 //   {
@@ -149,4 +120,4 @@ const createTest = async () => {
 
 //TODO: UPDATE FN ON ORDER
 
-module.exports = { addOrder: addOrder };
+module.exports = { addOrder: addOrder, deleteOrder: deleteOrder };
