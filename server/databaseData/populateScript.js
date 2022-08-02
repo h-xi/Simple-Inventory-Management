@@ -8,7 +8,10 @@ const poolPromise = pool.promise();
 // dotenv.config({ path: "./config.env" });
 
 const createTables = async () => {
-  const schemasString = fs.readFileSync("createTable.sql", "utf-8");
+  const schemasString = fs.readFileSync(
+    "createTable_minus_foreign_keys.sql",
+    "utf-8"
+  );
   //Split and filter logic taken from cccttt10's "super-rent-backend"
   const tableSchemas = schemasString
     .split(";")

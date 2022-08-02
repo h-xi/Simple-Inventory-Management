@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { addOrder } = require("../controllers/orderController");
+const { getEmployee } = require("../controllers/employeeController");
 
 router.post("/", async (req, res) => {
   let errors = [];
