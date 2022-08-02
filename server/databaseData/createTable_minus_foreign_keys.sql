@@ -20,10 +20,11 @@ PRIMARY KEY(Category_ID)
 
 
 CREATE TABLE Supplier(
-Supplier_ID Integer,
 S_contact Char(50),
 Supplier_name Char(40),
-PRIMARY KEY(Supplier_ID)
+Supplier_ID Integer,
+ProductID Integer,
+PRIMARY KEY(Supplier_ID, ProductID)
 );
 
 CREATE TABLE ManagerEmployee(
@@ -101,14 +102,6 @@ Quantity Integer NOT NULL,
 PRIMARY KEY (Barcode)
 );
 
-
-CREATE TABLE ProductSupplier(
-Barcode Integer,
-SupplierID Integer,
-PRIMARY KEY (Barcode,SupplierID)
-);
-
-
 CREATE TABLE OutgoingShipmentOrder(
 Order_ID Integer,
 ShipmentDate Integer,
@@ -178,24 +171,21 @@ ADD CONSTRAINT fk10
     FOREIGN KEY (Barcode)
     REFERENCES Product (Barcode);
 
-ALTER TABLE ProductSupplier
+ALTER TABLE Supplier
 ADD CONSTRAINT fk11
-    FOREIGN KEY (Barcode)
+    FOREIGN KEY (ProductID)
     REFERENCES Product (Barcode);
 
-ALTER TABLE ProductSupplier
-ADD CONSTRAINT fk12
-    FOREIGN KEY (SupplierID) 
-    REFERENCES Supplier (SupplierID);
+
 
 
 ALTER TABLE OutgoingShipmentOrder
 ADD CONSTRAINT fk13
-FOREIGN KEY (AssignedDriver) REFERENCES DriverEmployee (AssignedDriver);
+FOREIGN KEY (AssignedDriver) REFERENCES DriverEmployee(Employee_ID);
 
 ALTER TABLE OutgoingShipmentOrder
 ADD CONSTRAINT fk14
-FOREIGN KEY (Inventory_barcode) REFERENCES Inventory (Inventory_barcode);
+FOREIGN KEY (Inventory_barcode) REFERENCES Inventory(Barcode);
 
 ALTER TABLE OutgoingShipmentOrder
 ADD CONSTRAINT fk15
@@ -212,7 +202,7 @@ FOREIGN KEY (AssignedReceiver) REFERENCES WorkerEmployee (Employee_ID);
 
 ALTER TABLE IncomingShipmentOrder
 ADD CONSTRAINT fk18
-FOREIGN KEY (Inventory_barcode) REFERENCES Inventory Barcode;
+FOREIGN KEY (Inventory_barcode) REFERENCES Inventory (Barcode);
 
 ALTER TABLE IncomingShipmentOrder
 ADD CONSTRAINT fk19
