@@ -11,24 +11,12 @@ CREATE TABLE Bin(
   );
 
 
-ALTER TABLE Bin
-ADD CONSTRAINT fk1
-    FOREIGN KEY (Aisle_no)
-    REFERENCES Aisle (Aisle_no) ON DELETE NO ACTION;
-
-
 CREATE TABLE Categories(
 Category_ID Integer,
 Cat_name Char(30),
 Aisle_no Integer,
 PRIMARY KEY (Category_ID),
 );
-
-ALTER TABLE Categories
-ADD CONSTRAINT fk2
-    FOREIGN KEY (Aisle_no)
-    REFERENCES Aisle (Aisle_no);
-
 
 
 CREATE TABLE Supplier(
@@ -86,24 +74,11 @@ Benefits_Class Char(1),
 Primary Key (YearsWorked)
 );
 
-ALTER TABLE Benefits
-ADD CONSTRAINT fk3
-    FOREIGN KEY (YearsWorked)
-    REFERENCES ManagerEmployee (YearsWorked);
-
-
-
 CREATE TABLE Holiday(
 YearsWorked Integer,
 Holiday_dest Char(15),
 Primary Key (YearsWorked)
 );
-
-ALTER TABLE Holiday
-ADD CONSTRAINT fk4
-    FOREIGN KEY (YearsWorked)
-    REFERENCES ManagerEmployee (YearsWorked);
-
 
 CREATE TABLE Product(
 Barcode Integer,
@@ -118,14 +93,6 @@ Order_ID Integer,
 PRIMARY KEY (Barcode),
 UNIQUE (Order_ID)
 );
-
-ALTER TABLE Product
-ADD CONSTRAINT fk5
-    FOREIGN KEY (Bin_name,Aisle_no) REFERENCES Bin (Bin_name,Aisle_no),
-    FOREIGN KEY (Category_ID) REFERENCES Categories,
-    FOREIGN KEY (Brand_ID) REFERENCES Brands,
-    FOREIGN KEY (Inventory_barcode) REFERENCES Inventory,
-    FOREIGN KEY (Order_ID) REFERENCES Order;
 
 CREATE TABLE Inventory(
 Barcode Integer NOT NULL,
@@ -142,24 +109,11 @@ FOREIGN KEY (Barcode) REFERENCES Product(Barcode),
 );
 
 
-ALTER TABLE Inventory
-ADD CONSTRAINT fk6
-    FOREIGN KEY (Barcode)
-    REFERENCES Product (Barcode);
-
-
-
 CREATE TABLE ProductSupplier(
 Barcode Integer,
 SupplierID Integer,
 PRIMARY KEY (Barcode,SupplierID),
 );
-
-ALTER TABLE ProductSupplier
-ADD CONSTRAINT fk7
-FOREIGN KEY Barcode REFERENCES Product,
-FOREIGN KEY SupplierID REFERENCES Supplier;
-
 
 
 CREATE TABLE OutgoingShipmentOrder(
@@ -175,14 +129,6 @@ Manager Integer NOT NULL,
 PRIMARY KEY (Order_ID)
 );
 
-ALTER TABLE OutgoingShipmentOrder
-ADD CONSTRAINT fk8
-FOREIGN KEY (AssignedDriver) REFERENCES DriverEmployee,
-FOREIGN KEY (Inventory_barcode) REFERENCES Inventory,
-FOREIGN KEY (Product_Barcode) REFERENCES Product(Barcode),
-FOREIGN KEY (Manager) REFERENCES ManagerEmployee;
-
-
 
 CREATE TABLE IncomingShipmentOrder(
 Order_ID Integer,
@@ -195,25 +141,11 @@ Manager Integer NOT NULL,
 PRIMARY KEY (Order_ID)
 );
 
-ALTER TABLE IncomingShipmentOrder
-ADD CONSTRAINT fk9
-FOREIGN KEY (AssignedReceiver) REFERENCES WorkerEmployee,
-FOREIGN KEY (Inventory_barcode) REFERENCES Inventory,
-FOREIGN KEY (Product_Barcode) REFERENCES Product (Barcode) ON DELETE CASCADE,
-FOREIGN KEY (Manager) REFERENCES ManagerEmployee;
-
-
-
 CREATE TABLE Priority(
 Quantity Integer,
 PriorityStatus Char(6),
 PRIMARY KEY (Quantity)
 );
-
-ALTER TABLE Priority
-ADD CONSTRAINT fk10
-FOREIGN KEY (Quantity) REFERENCES OutgoingShipmentOrder (Quantity);
-
 
 
 CREATE TABLE Highlight(
@@ -222,6 +154,3 @@ HighLightView Char(1),
 PRIMARY KEY (DaysToShipment)
 );
 
-ALTER TABLE Highlight
-ADD CONSTRAINT fk11
-FOREIGN KEY (DaysToShipment) REFERENCES OutgoingShipmentOrder(DaysToShipment);
