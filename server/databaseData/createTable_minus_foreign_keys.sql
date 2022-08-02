@@ -15,7 +15,7 @@ CREATE TABLE Categories(
 Category_ID Integer,
 Cat_name Char(30),
 Aisle_no Integer,
-PRIMARY KEY (Category_ID),
+PRIMARY KEY(Category_ID)
 );
 
 
@@ -101,18 +101,10 @@ PRIMARY KEY (Barcode)
 );
 
 
-CREATE TABLE Inventory(
-Barcode Integer NOT NUL,
-Quantity Integer NOT NULL,
-PRIMARY KEY (Barcode),
-FOREIGN KEY (Barcode) REFERENCES Product(Barcode),
-);
-
-
 CREATE TABLE ProductSupplier(
 Barcode Integer,
 SupplierID Integer,
-PRIMARY KEY (Barcode,SupplierID),
+PRIMARY KEY (Barcode,SupplierID)
 );
 
 
@@ -153,4 +145,3 @@ DaysToShipment Integer,
 HighLightView Char(1),
 PRIMARY KEY (DaysToShipment)
 );
-

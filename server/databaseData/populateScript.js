@@ -19,9 +19,14 @@ const createTables = async () => {
       (tableSchema) => typeof tableSchema === "string" && tableSchema.length > 0
     );
   for (const tableSchema of tableSchemas) {
-    await poolPromise.query(tableSchema);
+    try {
+      await poolPromise.query(tableSchema);
+      console.log("Tables succesfully Created");
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
   }
-  log.success("Tables succesfully Created");
 };
 
 createTables();
