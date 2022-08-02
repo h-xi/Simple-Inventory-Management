@@ -129,7 +129,7 @@ Manager Integer NOT NULL,
 PRIMARY KEY (Order_ID),
 FOREIGN KEY (AssignedDriver) REFERENCES DriverEmployee,
 FOREIGN KEY (Inventory_barcode) REFERENCES Inventory,
-FOREIGN KEY (Product_Barcode) REFERENCES Product(Barcode) ON DELETE CASCADE,
+FOREIGN KEY (Product_Barcode) REFERENCES Product(Barcode),
 FOREIGN KEY (Manager) REFERENCES ManagerEmployee
 );
 
@@ -144,7 +144,7 @@ Manager Integer NOT NULL,
 PRIMARY KEY (Order_ID),
 FOREIGN KEY (AssignedReceiver) REFERENCES WorkerEmployee,
 FOREIGN KEY (Inventory_barcode) REFERENCES Inventory,
-FOREIGN KEY (Product_Barcode) REFERENCES Product(Barcode) ON DELETE CASCADE,
+FOREIGN KEY (Product_Barcode) REFERENCES Product(Barcode),
 FOREIGN KEY (Manager) REFERENCES ManagerEmployee
 );
 

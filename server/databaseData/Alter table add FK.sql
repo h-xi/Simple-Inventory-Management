@@ -41,14 +41,14 @@ ALTER TABLE OutgoingShipmentOrder
 ADD CONSTRAINT fk8
 FOREIGN KEY (AssignedDriver) REFERENCES DriverEmployee,
 FOREIGN KEY (Inventory_barcode) REFERENCES Inventory,
-FOREIGN KEY (Product_Barcode) REFERENCES Product(Barcode) ON DELETE CASCADE,
+FOREIGN KEY (Product_Barcode) REFERENCES Product(Barcode),
 FOREIGN KEY (Manager) REFERENCES ManagerEmployee;
 
 ALTER TABLE IncomingShipmentOrder
 ADD CONSTRAINT fk9
 FOREIGN KEY (AssignedReceiver) REFERENCES WorkerEmployee,
 FOREIGN KEY (Inventory_barcode) REFERENCES Inventory,
-FOREIGN KEY (Product_Barcode) REFERENCES Product (Barcode) ON DELETE CASCADE,
+FOREIGN KEY (Product_Barcode) REFERENCES Product (Barcode),
 FOREIGN KEY (Manager) REFERENCES ManagerEmployee;
 
 ALTER TABLE Priority

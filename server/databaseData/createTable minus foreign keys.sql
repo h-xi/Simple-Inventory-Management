@@ -133,6 +133,15 @@ Quantity Integer NOT NULL,
 PRIMARY KEY (Barcode)
 );
 
+
+CREATE TABLE Inventory(
+Barcode Integer NOT NUL,
+Quantity Integer NOT NULL,
+PRIMARY KEY (Barcode),
+FOREIGN KEY (Barcode) REFERENCES Product(Barcode),
+);
+
+
 ALTER TABLE Inventory
 ADD CONSTRAINT fk6
     FOREIGN KEY (Barcode)
@@ -170,7 +179,7 @@ ALTER TABLE OutgoingShipmentOrder
 ADD CONSTRAINT fk8
 FOREIGN KEY (AssignedDriver) REFERENCES DriverEmployee,
 FOREIGN KEY (Inventory_barcode) REFERENCES Inventory,
-FOREIGN KEY (Product_Barcode) REFERENCES Product(Barcode) ON DELETE CASCADE,
+FOREIGN KEY (Product_Barcode) REFERENCES Product(Barcode),
 FOREIGN KEY (Manager) REFERENCES ManagerEmployee;
 
 
