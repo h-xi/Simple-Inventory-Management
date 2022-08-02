@@ -8,17 +8,6 @@ ADD CONSTRAINT fk2
     FOREIGN KEY (Aisle_no)
     REFERENCES Aisle (Aisle_no);
 
-ALTER TABLE Benefits
-ADD CONSTRAINT fk3
-    FOREIGN KEY (YearsWorked)
-    REFERENCES ManagerEmployee (YearsWorked);
-
-ALTER TABLE Holiday
-ADD CONSTRAINT fk4
-    FOREIGN KEY (YearsWorked)
-    REFERENCES ManagerEmployee (YearsWorked);
-
-
 ALTER TABLE Product
 ADD CONSTRAINT fk5
     FOREIGN KEY (Bin_name,Aisle_no) REFERENCES Bin (Bin_name,Aisle_no),
@@ -51,10 +40,13 @@ FOREIGN KEY (Inventory_barcode) REFERENCES Inventory,
 FOREIGN KEY (Product_Barcode) REFERENCES Product (Barcode),
 FOREIGN KEY (Manager) REFERENCES ManagerEmployee;
 
-ALTER TABLE Priority
-ADD CONSTRAINT fk10
-FOREIGN KEY (Quantity) REFERENCES OutgoingShipmentOrder (Quantity);
+-- what to do abou this??
+--ALTER TABLE Product
+--ADD CONSTRAINT fk9
+--    FOREIGN KEY (Order_ID) REFERENCES Order (Order_ID);
 
-ALTER TABLE Highlight
+
+ALTER TABLE ProductSupplier
 ADD CONSTRAINT fk11
-FOREIGN KEY (DaysToShipment) REFERENCES OutgoingShipmentOrder(DaysToShipment);
+    FOREIGN KEY Barcode
+    REFERENCES Product (Barcode);

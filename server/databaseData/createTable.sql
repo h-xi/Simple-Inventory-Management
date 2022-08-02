@@ -72,14 +72,16 @@ CREATE TABLE Benefits(
 YearsWorked Integer,
 Benefits_Class Char(1),
 Primary Key (YearsWorked)
-Foreign Key (YearsWorked) REFERENCES ManagerEmployee(YearsWorked)
+-- removed this foreign key
+-- Foreign Key (YearsWorked) REFERENCES ManagerEmployee(YearsWorked)
 );
 
 CREATE TABLE Holiday(
 YearsWorked Integer,
 Holiday_dest Char(15),
 Primary Key (YearsWorked)
-Foreign Key (YearsWorked) REFERENCES ManagerEmployee(YearsWorked)
+-- removed this foreign key
+-- Foreign Key (YearsWorked) REFERENCES ManagerEmployee(YearsWorked)
 );
 
 CREATE TABLE Product(
@@ -92,6 +94,8 @@ Category_ID Integer NOT NULL,
 Brand_ID Integer NOT NULL,
 Inventory_barcode Integer NOT NULL,
 Order_ID Integer,
+-- supplier ID added later
+SupplierID Integer,
 PRIMARY KEY (Barcode),
 UNIQUE (Order_ID),
 FOREIGN KEY (Bin_name,Aisle_no) REFERENCES Bin(Bin_name,Aisle_no),
@@ -152,12 +156,14 @@ CREATE TABLE Priority(
 Quantity Integer,
 PriorityStatus Char(6),
 PRIMARY KEY (Quantity)
-FOREIGN KEY (Quantity) REFERENCES OutgoingShipmentOrder(Quantity)
+--remove this
+--FOREIGN KEY (Quantity) REFERENCES OutgoingShipmentOrder(Quantity)
 );
 
 CREATE TABLE Highlight(
 DaysToShipment Integer,
 HighLightView Char(1),
 PRIMARY KEY (DaysToShipment)
-FOREIGN KEY (DaysToShipment) REFERENCES OutgoingShipmentOrder(DaysToShipment)
+-- remove this
+--FOREIGN KEY (DaysToShipment) REFERENCES OutgoingShipmentOrder(DaysToShipment)
 );

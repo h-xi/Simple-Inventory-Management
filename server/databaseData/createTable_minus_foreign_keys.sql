@@ -20,9 +20,9 @@ PRIMARY KEY(Category_ID)
 
 
 CREATE TABLE Supplier(
+Supplier_ID Integer,
 S_contact Char(50),
 Supplier_name Char(40),
-Supplier_ID Integer,
 PRIMARY KEY(Supplier_ID)
 );
 
@@ -90,6 +90,7 @@ Category_ID Integer NOT NULL,
 Brand_ID Integer NOT NULL,
 Inventory_barcode Integer NOT NULL,
 Order_ID Integer,
+SupplierID Integer,
 PRIMARY KEY (Barcode),
 UNIQUE (Order_ID)
 );
@@ -145,3 +146,78 @@ DaysToShipment Integer,
 HighLightView Char(1),
 PRIMARY KEY (DaysToShipment)
 );
+
+ALTER TABLE Bin
+ADD CONSTRAINT fk1
+    FOREIGN KEY (Aisle_no)
+    REFERENCES Aisle (Aisle_no) ON DELETE NO ACTION;
+
+ALTER TABLE Categories
+ADD CONSTRAINT fk2
+    FOREIGN KEY (Aisle_no)
+    REFERENCES Aisle (Aisle_no);
+
+ALTER TABLE Product
+ADD CONSTRAINT fk5
+    FOREIGN KEY (Bin_name,Aisle_no) REFERENCES Bin (Bin_name,Aisle_no);
+
+ALTER TABLE Product
+ADD CONSTRAINT fk6
+    FOREIGN KEY (Category_ID) REFERENCES Categories (Category_ID);
+
+ALTER TABLE Product
+ADD CONSTRAINT fk7    
+    FOREIGN KEY (Brand_ID) REFERENCES Brands (Brand_ID);
+
+ALTER TABLE Product
+ADD CONSTRAINT fk8    
+    FOREIGN KEY (Inventory_barcode) REFERENCES Inventory (Barcode);
+
+ALTER TABLE Inventory
+ADD CONSTRAINT fk10
+    FOREIGN KEY (Barcode)
+    REFERENCES Product (Barcode);
+
+ALTER TABLE ProductSupplier
+ADD CONSTRAINT fk11
+    FOREIGN KEY (Barcode)
+    REFERENCES Product (Barcode);
+
+ALTER TABLE ProductSupplier
+ADD CONSTRAINT fk12
+    FOREIGN KEY (SupplierID) 
+    REFERENCES Supplier (SupplierID);
+
+
+ALTER TABLE OutgoingShipmentOrder
+ADD CONSTRAINT fk13
+FOREIGN KEY (AssignedDriver) REFERENCES DriverEmployee (AssignedDriver);
+
+ALTER TABLE OutgoingShipmentOrder
+ADD CONSTRAINT fk14
+FOREIGN KEY (Inventory_barcode) REFERENCES Inventory (Inventory_barcode);
+
+ALTER TABLE OutgoingShipmentOrder
+ADD CONSTRAINT fk15
+FOREIGN KEY (Product_Barcode) REFERENCES Product(Barcode);
+
+ALTER TABLE OutgoingShipmentOrder
+ADD CONSTRAINT fk16
+FOREIGN KEY (Manager) REFERENCES ManagerEmployee (Employee_ID);
+
+
+ALTER TABLE IncomingShipmentOrder
+ADD CONSTRAINT fk17
+FOREIGN KEY (AssignedReceiver) REFERENCES WorkerEmployee (Employee_ID);
+
+ALTER TABLE IncomingShipmentOrder
+ADD CONSTRAINT fk18
+FOREIGN KEY (Inventory_barcode) REFERENCES Inventory Barcode;
+
+ALTER TABLE IncomingShipmentOrder
+ADD CONSTRAINT fk19
+FOREIGN KEY (Product_Barcode) REFERENCES Product (Barcode);
+
+ALTER TABLE IncomingShipmentOrder
+ADD CONSTRAINT fk20
+FOREIGN KEY (Manager) REFERENCES ManagerEmployee (Employee_ID);
