@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { addOrder } = require("../controllers/orderController");
 const { getEmployee } = require("../controllers/employeeController");
+const { getBarcode } = require("../controllers/inventoryController");
 
 router.post("/", async (req, res) => {
   let errors = [];
@@ -22,17 +23,12 @@ router.post("/", async (req, res) => {
     errors.push("Invalid Quantity Amount");
   }
 
-  if (orderData.AssignedReceiver) {
-    //TODO: create a getEmployee function that checks if employee exists in DB
-    getEmployee();
-  }
-
   if (orderData.Inventory_Barcode) {
-    //TODO: Create a getInventory function that checks if product exists in DB, returns both inventory barcode and product barcode
-  }
-
-  if (orderData.Product_Barcode) {
-    // Retreive product barcode from getInventory function and check if. if Inventory barcode exists, product barcode exists.
+    let result = await getBarcode(orderData.Inventory_Barcode);
+    if (!result) {
+      errors.push("Invalid Inventory Barcode");
+      errors.push("Invalid Product Barcode");
+    }
   }
 
   if (orderData.Manager) {
@@ -41,10 +37,34 @@ router.post("/", async (req, res) => {
 
   if (req.body.orderType == "IncomingShipmentOrder") {
     incoming = true;
+    if (orderData.AssignedReceiver) {
+      //TODO: create a getEmployee function that checks if employee exists in DB
+      try {
+        result = await getEmployee();
+        if (!result) {
+          errors.push("Invalid Employee ID");
+        }
+      } catch (e) {
+        console.error(e);
+        // errors.push(e);
+      }
+    }
   } else {
     incoming = false;
     if (typeof orderData.DeliveryAddress != "string") {
       errors.push("Please provide a valid Delivery Address");
+    }
+    if (orderData.AssignedDriver) {
+      //TODO: create a getEmployee function that checks if employee exists in DB
+      try {
+        result = await getEmployee();
+        if (!result) {
+          errors.push("Invalid Employee ID");
+        }
+      } catch (e) {
+        console.error(e);
+        // errors.push(e);
+      }
     }
   }
 
