@@ -1,5 +1,6 @@
 import './App.css';
 import { useState } from 'react';
+import Axios from 'axios';
 
 function App() {
   const [orderId, setOrderId] = useState(0);
@@ -9,6 +10,20 @@ function App() {
   const [assignedReceiver, setAssignedReceiver] = useState("");
   const [assignedDriver, setAssignedDriver] = useState("");
   const [deliveryAddress, setDeliveryAddress] = useState("");
+
+  const addOrder = () => {
+    Axios.post('http://localhost:8000/', {
+      orderId: orderId,
+      itemNumber: itemNumber,
+      shipmentDate: shipmentDate,
+      quantity: quantity,
+      assignedReceiver: assignedReceiver,
+      assignedDriver: assignedDriver,
+      deliveryAddress: deliveryAddress
+    }).then(() => {
+      console.log("success");
+    });
+  }
 
   const displayInfo = () => {
     console.log(orderId + itemNumber + shipmentDate + quantity + assignedReceiver + assignedDriver + deliveryAddress);
@@ -47,7 +62,7 @@ function App() {
             setAssignedDriver(event.target.value);
           }}
         />
-        <button onClick={displayInfo}>Incoming Shipment</button>
+        <button onClick={addOrder}>Incoming Shipment</button>
       </div>
       <div className="Outgoing">
         <label>Order ID:</label>
@@ -86,7 +101,7 @@ function App() {
             setDeliveryAddress(event.target.value);
           }}
         />
-        <button onClick={displayInfo}>Outgoing Shipment</button>
+        <button onClick={addOrder}>Outgoing Shipment</button>
       </div>
     </div>
   );

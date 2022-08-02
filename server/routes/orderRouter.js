@@ -3,6 +3,11 @@ const router = express.Router();
 const { addOrder } = require("../controllers/orderController");
 const { getEmployee } = require("../controllers/employeeController");
 const { getBarcode } = require("../controllers/inventoryController");
+const cors = require('cors');
+const { app } = require("tailwind");
+
+app.use(cors());
+app.use(express.json());
 
 router.post("/", async (req, res) => {
   let errors = [];
