@@ -19,11 +19,14 @@ PRIMARY KEY (Category_ID),
 FOREIGN KEY (Aisle_no) REFERENCES Aisle (Aisle_no)
 );
 
+--- SUPPLIER ID has productID added to it and added to its primary key
 CREATE TABLE Supplier(
 S_contact Char(50),
 Supplier_name Char(40),
 Supplier_ID Integer,
-PRIMARY KEY(Supplier_ID)
+ProductID Integer,
+PRIMARY KEY(Supplier_ID,ProductID),
+FOREIGN KEY (ProductID) REFERENCES Product (Barcode)
 );
 
 CREATE TABLE ManagerEmployee(
@@ -112,13 +115,14 @@ PRIMARY KEY (Barcode),
 FOREIGN KEY (Barcode) REFERENCES Product(Barcode),
 );
 
-CREATE TABLE ProductSupplier(
-Barcode Integer,
-SupplierID Integer,
-PRIMARY KEY (Barcode,SupplierID),
-FOREIGN KEY Barcode REFERENCES Product,
-FOREIGN KEY SupplierID REFERENCES Supplier
-);
+--Removed this relation
+--CREATE TABLE ProductSupplier(
+--Barcode Integer,
+--SupplierID Integer,
+--PRIMARY KEY (Barcode,SupplierID),
+--FOREIGN KEY Barcode REFERENCES Product,
+--FOREIGN KEY SupplierID REFERENCES Supplier
+--);
 
 CREATE TABLE OutgoingShipmentOrder(
 Order_ID Integer,
@@ -131,8 +135,8 @@ Inventory_Barcode Integer NOT NULL,
 Product_Barcode Integer NOT NULL,
 Manager Integer NOT NULL,
 PRIMARY KEY (Order_ID),
-FOREIGN KEY (AssignedDriver) REFERENCES DriverEmployee,
-FOREIGN KEY (Inventory_barcode) REFERENCES Inventory,
+FOREIGN KEY (AssignedDriver) REFERENCES DriverEmployee(Employee_ID),
+FOREIGN KEY (Inventory_barcode) REFERENCES Inventory(Barcode),
 FOREIGN KEY (Product_Barcode) REFERENCES Product(Barcode),
 FOREIGN KEY (Manager) REFERENCES ManagerEmployee
 );
@@ -146,8 +150,8 @@ Inventory_barcode Integer NOT NULL,
 Product_Barcode Integer NOT NULL,
 Manager Integer NOT NULL,
 PRIMARY KEY (Order_ID),
-FOREIGN KEY (AssignedReceiver) REFERENCES WorkerEmployee,
-FOREIGN KEY (Inventory_barcode) REFERENCES Inventory,
+FOREIGN KEY (AssignedReceiver) REFERENCES WorkerEmployee(Employee_ID),
+FOREIGN KEY (Inventory_barcode) REFERENCES Inventory(Barcode),
 FOREIGN KEY (Product_Barcode) REFERENCES Product(Barcode),
 FOREIGN KEY (Manager) REFERENCES ManagerEmployee
 );
