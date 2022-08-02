@@ -1,23 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="Incoming">
+        <label>Order ID:</label>
+        <input type="number" />
+        <label>Item Number:</label>
+        <input type="number" />
+        <label>Shipment Date:</label>
+        <input type="date" />
+        <label>Quantity:</label>
+        <input type="number" />
+        <label>Assigned Receiver:</label>
+        <input type="text" />
+        <button>Incoming Shipment</button>
+      </div>
+      <div className="Outgoing">
+        <label>Order ID:</label>
+        <input type="number" />
+        <label>Item Number:</label>
+        <input type="number" />
+        <label>Shipment Date:</label>
+        <input type="date" />
+        <label>Quantity:</label>
+        <input type="number" />
+        <label>Assigned Driver:</label>
+        <input type="text" />
+        <label>Delivery Address:</label>
+        <input type="text" />
+        <button>Outgoing Shipment</button>
+      </div>
     </div>
   );
 }
