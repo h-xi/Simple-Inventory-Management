@@ -19,11 +19,14 @@ PRIMARY KEY (Category_ID),
 FOREIGN KEY (Aisle_no) REFERENCES Aisle (Aisle_no)
 );
 
+--- SUPPLIER ID has productID added to it and added to its primary key
 CREATE TABLE Supplier(
 S_contact Char(50),
 Supplier_name Char(40),
 Supplier_ID Integer,
-PRIMARY KEY(Supplier_ID)
+ProductID Integer,
+PRIMARY KEY(Supplier_ID,ProductID),
+FOREIGN KEY (ProductID) REFERENCES Product (Barcode)
 );
 
 CREATE TABLE ManagerEmployee(
@@ -72,14 +75,16 @@ CREATE TABLE Benefits(
 YearsWorked Integer,
 Benefits_Class Char(1),
 Primary Key (YearsWorked)
-Foreign Key (YearsWorked) REFERENCES ManagerEmployee(YearsWorked)
+-- removed this foreign key
+-- Foreign Key (YearsWorked) REFERENCES ManagerEmployee(YearsWorked)
 );
 
 CREATE TABLE Holiday(
 YearsWorked Integer,
 Holiday_dest Char(15),
 Primary Key (YearsWorked)
-Foreign Key (YearsWorked) REFERENCES ManagerEmployee(YearsWorked)
+-- removed this foreign key
+-- Foreign Key (YearsWorked) REFERENCES ManagerEmployee(YearsWorked)
 );
 
 CREATE TABLE Product(
@@ -92,6 +97,8 @@ Category_ID Integer NOT NULL,
 Brand_ID Integer NOT NULL,
 Inventory_barcode Integer NOT NULL,
 Order_ID Integer,
+-- supplier ID added later
+SupplierID Integer,
 PRIMARY KEY (Barcode),
 UNIQUE (Order_ID),
 FOREIGN KEY (Bin_name,Aisle_no) REFERENCES Bin(Bin_name,Aisle_no),
@@ -108,13 +115,14 @@ PRIMARY KEY (Barcode),
 FOREIGN KEY (Barcode) REFERENCES Product(Barcode),
 );
 
-CREATE TABLE ProductSupplier(
-Barcode Integer,
-SupplierID Integer,
-PRIMARY KEY (Barcode,SupplierID),
-FOREIGN KEY Barcode REFERENCES Product,
-FOREIGN KEY SupplierID REFERENCES Supplier
-);
+--Removed this relation
+--CREATE TABLE ProductSupplier(
+--Barcode Integer,
+--SupplierID Integer,
+--PRIMARY KEY (Barcode,SupplierID),
+--FOREIGN KEY Barcode REFERENCES Product,
+--FOREIGN KEY SupplierID REFERENCES Supplier
+--);
 
 CREATE TABLE OutgoingShipmentOrder(
 Order_ID Integer,
@@ -127,8 +135,8 @@ Inventory_Barcode Integer NOT NULL,
 Product_Barcode Integer NOT NULL,
 Manager Integer NOT NULL,
 PRIMARY KEY (Order_ID),
-FOREIGN KEY (AssignedDriver) REFERENCES DriverEmployee,
-FOREIGN KEY (Inventory_barcode) REFERENCES Inventory,
+FOREIGN KEY (AssignedDriver) REFERENCES DriverEmployee(Employee_ID),
+FOREIGN KEY (Inventory_barcode) REFERENCES Inventory(Barcode),
 FOREIGN KEY (Product_Barcode) REFERENCES Product(Barcode),
 FOREIGN KEY (Manager) REFERENCES ManagerEmployee
 );
@@ -142,8 +150,8 @@ Inventory_barcode Integer NOT NULL,
 Product_Barcode Integer NOT NULL,
 Manager Integer NOT NULL,
 PRIMARY KEY (Order_ID),
-FOREIGN KEY (AssignedReceiver) REFERENCES WorkerEmployee,
-FOREIGN KEY (Inventory_barcode) REFERENCES Inventory,
+FOREIGN KEY (AssignedReceiver) REFERENCES WorkerEmployee(Employee_ID),
+FOREIGN KEY (Inventory_barcode) REFERENCES Inventory(Barcode),
 FOREIGN KEY (Product_Barcode) REFERENCES Product(Barcode),
 FOREIGN KEY (Manager) REFERENCES ManagerEmployee
 );
@@ -152,12 +160,14 @@ CREATE TABLE Priority(
 Quantity Integer,
 PriorityStatus Char(6),
 PRIMARY KEY (Quantity)
-FOREIGN KEY (Quantity) REFERENCES OutgoingShipmentOrder(Quantity)
+--remove this
+--FOREIGN KEY (Quantity) REFERENCES OutgoingShipmentOrder(Quantity)
 );
 
 CREATE TABLE Highlight(
 DaysToShipment Integer,
 HighLightView Char(1),
 PRIMARY KEY (DaysToShipment)
-FOREIGN KEY (DaysToShipment) REFERENCES OutgoingShipmentOrder(DaysToShipment)
+-- remove this
+--FOREIGN KEY (DaysToShipment) REFERENCES OutgoingShipmentOrder(DaysToShipment)
 );
