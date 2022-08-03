@@ -144,30 +144,23 @@ PRIMARY KEY (DaysToShipment)
 );
 
 
-
 INSERT INTO inventory_system.Brands VALUES (100, 'Nike');
 INSERT INTO inventory_system.Brands VALUES (200, 'Adidas');
 INSERT INTO inventory_system.Brands VALUES (300, 'Fila');
 INSERT INTO inventory_system.Brands VALUES (400, 'Champion');
 INSERT INTO inventory_system.Brands VALUES (500, 'Columbia');
 
-INSERT INTO inventory_system.Categories VALUES (1, 'T-shirt', 1);
-INSERT INTO inventory_system.Categories VALUES (2, 'Shirt', 2);
-INSERT INTO inventory_system.Categories VALUES (3, 'Pants', 3);
-INSERT INTO inventory_system.Categories VALUES (4, 'Shorts', 4);
-INSERT INTO inventory_system.Categories VALUES (5, 'Coats', 5);
-
-INSERT INTO inventory_system.Supplier VALUES (9513124873, 'Acme', 302, 364);
-INSERT INTO inventory_system.Supplier VALUES (9513124192, 'Peak', 402, 374);
-INSERT INTO inventory_system.Supplier VALUES (9519021001, 'Admire', 502, 384);
-INSERT INTO inventory_system.Supplier VALUES (9517701000, 'ClothingInc', 650, 394);
-INSERT INTO inventory_system.Supplier VALUES (9501000013, 'DivineClothing', 71, 354);
-
 INSERT INTO inventory_system.Aisle VALUES (1);
 INSERT INTO inventory_system.Aisle VALUES (2);
 INSERT INTO inventory_system.Aisle VALUES (3);
 INSERT INTO inventory_system.Aisle VALUES (4);
 INSERT INTO inventory_system.Aisle VALUES (5);
+
+INSERT INTO inventory_system.Categories VALUES (1, 'T-shirt', 1);
+INSERT INTO inventory_system.Categories VALUES (2, 'Shirt', 2);
+INSERT INTO inventory_system.Categories VALUES (3, 'Pants', 3);
+INSERT INTO inventory_system.Categories VALUES (4, 'Shorts', 4);
+INSERT INTO inventory_system.Categories VALUES (5, 'Coats', 5);
 
 INSERT INTO inventory_system.Bin VALUES ('AE', 1000, 1, 0);
 INSERT INTO inventory_system.Bin VALUES ('FG', 1000, 1, 0);
@@ -195,17 +188,29 @@ INSERT INTO inventory_system.Bin VALUES ('KO', 1000, 5, 0);
 INSERT INTO inventory_system.Bin VALUES ('PT', 1000, 5, 0);
 INSERT INTO inventory_system.Bin VALUES ('UZ', 1000, 5, 0);
 
+INSERT INTO inventory_system.Product VALUES (364, 'Nike shirt 1', 'Small','KO',2,2,100,364,302);
+INSERT INTO inventory_system.Product VALUES (374, 'Nike shirt 2', 'Small','KO',2,2,100,374,402);
+INSERT INTO inventory_system.Product VALUES (384, 'Nike shirt 3', 'Small','KO',2,2,100,384,502);
+INSERT INTO inventory_system.Product VALUES (394, 'Nike shirt 4', 'Small','KO',2,2,100,394,650);
+INSERT INTO inventory_system.Product VALUES (354, 'Nike shirt 5', 'Small','KO',2,2,100,354,71);
+
+INSERT INTO inventory_system.Supplier VALUES (9513124873, 'Acme', 302, 364);
+INSERT INTO inventory_system.Supplier VALUES (9513124192, 'Peak', 402, 374);
+INSERT INTO inventory_system.Supplier VALUES (9519021001, 'Admire', 502, 384);
+INSERT INTO inventory_system.Supplier VALUES (9517701000, 'ClothingInc', 650, 394);
+INSERT INTO inventory_system.Supplier VALUES (9501000013, 'DivineClothing', 71, 354);
+
+
+
+
+
 INSERT INTO inventory_system.Inventory VALUES (364,120);
 INSERT INTO inventory_system.Inventory VALUES (374,452);
 INSERT INTO inventory_system.Inventory VALUES (384,278);
 INSERT INTO inventory_system.Inventory VALUES (394,215);
 INSERT INTO inventory_system.Inventory VALUES (354,253);
 
-INSERT INTO inventory_system.Product VALUES (364, 'Nike shirt 1', 'Small','KO',2,2,100,364,302);
-INSERT INTO inventory_system.Product VALUES (374, 'Nike shirt 2', 'Small','KO',2,2,100,374,402);
-INSERT INTO inventory_system.Product VALUES (384, 'Nike shirt 3', 'Small','KO',2,2,100,384,502);
-INSERT INTO inventory_system.Product VALUES (394, 'Nike shirt 4', 'Small','KO',2,2,100,394,650);
-INSERT INTO inventory_system.Product VALUES (354, 'Nike shirt 5', 'Small','KO',2,2,100,354,71);
+
 
 INSERT INTO inventory_system.ManagerEmployee VALUES (39302, 593105933, '17/02/1995', '45 Grove Drive', 125000, 'Adam', 'West', 12, 'Purchasing');
 INSERT INTO inventory_system.ManagerEmployee VALUES (33113, 593100141, '12/06/1985', '75 Grove Drive', 135000, 'David', 'Ames', 4, 'Payroll');
