@@ -81,9 +81,10 @@ Bin_name Char(2) NOT NULL,
 Aisle_no Integer NOT NULL,
 Category_ID Integer NOT NULL,
 Brand_ID Integer NOT NULL,
-Inventory_barcode Integer NOT NULL,
+Inventory_barcode Integer,
 SupplierID Integer,
-PRIMARY KEY (Barcode)
+PRIMARY KEY (Barcode),
+UNIQUE (Inventory_barcode)
 );
 
 CREATE TABLE Aisle(
@@ -390,7 +391,7 @@ ADD CONSTRAINT fk11
 
 ALTER TABLE OutgoingShipmentOrder
 ADD CONSTRAINT fk12
-    FOREIGN KEY (Product_Barcode) REFERENCES Product(Barcode);
+    FOREIGN KEY (Product_Barcode) REFERENCES Product(Barcode) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE OutgoingShipmentOrder
 ADD CONSTRAINT fk13
@@ -414,7 +415,7 @@ ADD CONSTRAINT fk16
 
 ALTER TABLE IncomingShipmentOrder
 ADD CONSTRAINT fk17
-    FOREIGN KEY (Product_Barcode) REFERENCES Product (Barcode);
+    FOREIGN KEY (Product_Barcode) REFERENCES Product (Barcode) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE IncomingShipmentOrder
 ADD CONSTRAINT fk18
