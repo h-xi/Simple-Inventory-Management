@@ -109,18 +109,18 @@ FOREIGN KEY (Brand_ID) REFERENCES Brands,
 FOREIGN KEY (Inventory_barcode) REFERENCES Inventory
 );
 
---REMOVED
+--REMOVED as we want inventory to be the child of product.
 --ALTER TABLE Product
 --ADD CONSTRAINT fk8    
 --    FOREIGN KEY (Inventory_barcode) REFERENCES Inventory (Barcode);
 
---CHANGED TO
+--added delete cascades here so that if product is deleted and corresponding inventory is deleted, the orders are deleted as well
 --ALTER TABLE OutgoingShipmentOrder
 --ADD CONSTRAINT fk14
 --    FOREIGN KEY (Inventory_barcode) REFERENCES Inventory(Barcode) ON DELETE CASCADE ON UPDATE CASCADE;
 
 
---uPDATED THIS TOO
+--added delete cascades here so that if product is deleted and corresponding inventory is deleted, the orders are deleted as well
 --ALTER TABLE IncomingShipmentOrder
 --ADD CONSTRAINT fk18
 --   FOREIGN KEY (Inventory_barcode) REFERENCES Inventory (Barcode) ON DELETE CASCADE ON UPDATE CASCADE;
