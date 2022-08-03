@@ -1,15 +1,15 @@
-CREATE TABLE Brands(Brand_ID Integer, B_name Char(30), PRIMARY KEY (Brand_ID));
-
-
-
+CREATE TABLE Brands(
+Brand_ID Integer,
+B_name Char(30),
+PRIMARY KEY (Brand_ID)
+);
 
 CREATE TABLE Categories(
 Category_ID Integer,
 Cat_name Char(30),
 Aisle_no Integer,
-PRIMARY KEY(Category_ID)
+PRIMARY KEY (Category_ID)
 );
-
 
 CREATE TABLE Supplier(
 S_contact Char(50),
@@ -93,8 +93,8 @@ CREATE TABLE Aisle(
 
 CREATE TABLE Bin(
   Bin_name CHAR(2),
-  Aisle_no Integer,
   Capacity Integer,
+  Aisle_no Integer,
   quant_filled Integer,
   PRIMARY KEY(Bin_name, Aisle_no)
   );
@@ -191,40 +191,40 @@ ADD CONSTRAINT fk11
 
 ALTER TABLE OutgoingShipmentOrder
 ADD CONSTRAINT fk13
-FOREIGN KEY (AssignedDriver) REFERENCES DriverEmployee(Employee_ID);
+    FOREIGN KEY (AssignedDriver) REFERENCES DriverEmployee(Employee_ID);
 
 ALTER TABLE OutgoingShipmentOrder
 ADD CONSTRAINT fk14
-FOREIGN KEY (Inventory_barcode) REFERENCES Inventory(Barcode);
+    FOREIGN KEY (Inventory_barcode) REFERENCES Inventory(Barcode);
 
 ALTER TABLE OutgoingShipmentOrder
 ADD CONSTRAINT fk15
-FOREIGN KEY (Product_Barcode) REFERENCES Product(Barcode);
+    FOREIGN KEY (Product_Barcode) REFERENCES Product(Barcode);
 
 ALTER TABLE OutgoingShipmentOrder
 ADD CONSTRAINT fk16
-FOREIGN KEY (Manager) REFERENCES ManagerEmployee (Employee_ID);
+    FOREIGN KEY (Manager) REFERENCES ManagerEmployee (Employee_ID);
 
 ALTER TABLE OutgoingShipmentOrder
 ADD CONSTRAINT fk166
-FOREIGN KEY (Quantity) REFERENCES Priority (Quantity);
+    FOREIGN KEY (Quantity) REFERENCES Priority (Quantity);
 
 ALTER TABLE OutgoingShipmentOrder
 ADD CONSTRAINT fk167
-FOREIGN KEY (DaysToShipment) REFERENCES Highlight (DaysToShipment);
+    FOREIGN KEY (DaysToShipment) REFERENCES Highlight (DaysToShipment);
 
 ALTER TABLE IncomingShipmentOrder
 ADD CONSTRAINT fk17
-FOREIGN KEY (AssignedReceiver) REFERENCES WorkerEmployee (Employee_ID);
+    FOREIGN KEY (AssignedReceiver) REFERENCES WorkerEmployee (Employee_ID);
 
 ALTER TABLE IncomingShipmentOrder
 ADD CONSTRAINT fk18
-FOREIGN KEY (Inventory_barcode) REFERENCES Inventory (Barcode);
+    FOREIGN KEY (Inventory_barcode) REFERENCES Inventory (Barcode);
 
 ALTER TABLE IncomingShipmentOrder
 ADD CONSTRAINT fk19
-FOREIGN KEY (Product_Barcode) REFERENCES Product (Barcode);
+    FOREIGN KEY (Product_Barcode) REFERENCES Product (Barcode);
 
 ALTER TABLE IncomingShipmentOrder
 ADD CONSTRAINT fk20
-FOREIGN KEY (Manager) REFERENCES ManagerEmployee (Employee_ID);
+    FOREIGN KEY (Manager) REFERENCES ManagerEmployee (Employee_ID);

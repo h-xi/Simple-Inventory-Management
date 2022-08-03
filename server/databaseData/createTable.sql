@@ -11,8 +11,8 @@ CREATE TABLE Aisle(
 
 CREATE TABLE Bin(
   Bin_name CHAR(2),
-  Aisle_no Integer, 
   Capacity Integer,
+  Aisle_no Integer, 
   quant_filled Integer,
   PRIMARY KEY(Bin_name, Aisle_no),
   FOREIGN KEY (Aisle_no) REFERENCES Aisle (Aisle_no) ON DELETE NO ACTION);

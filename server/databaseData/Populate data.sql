@@ -4,6 +4,18 @@ INSERT INTO Brands VALUES (300, ‘Fila');
 INSERT INTO Brands VALUES (400, ‘Champion');
 INSERT INTO Brands VALUES (500, ‘Columbia');
 
+INSERT INTO Categories VALUES (1, 'T-shirt', 1);
+INSERT INTO Categories VALUES (2, 'Shirt', 2);
+INSERT INTO Categories VALUES (3, 'Pants', 3);
+INSERT INTO Categories VALUES (4, 'Shorts', 4);
+INSERT INTO Categories VALUES (5, 'Coats', 5);
+
+INSERT INTO Supplier VALUES (9513124873, Acme, 302, 364);
+INSERT INTO Supplier VALUES (9513124192, Peak, 402, 374);
+INSERT INTO Supplier VALUES (9519021001, Admire, 502, 384);
+INSERT INTO Supplier VALUES (9517701000, ClothingInc, 650, 394);
+INSERT INTO Supplier VALUES (9501000013, DivineClothing, 71, 354);
+
 INSERT INTO Aisle VALUES (1);
 INSERT INTO Aisle VALUES (2);
 INSERT INTO Aisle VALUES (3);
@@ -36,38 +48,17 @@ INSERT INTO Bin VALUES (‘KO’, 1000, 5, 0);
 INSERT INTO Bin VALUES (‘PT’, 1000, 5, 0);
 INSERT INTO Bin VALUES (‘UZ’, 1000, 5, 0);
 
+INSERT INTO Inventory VALUES (364,120);
+INSERT INTO Inventory VALUES (374,452);
+INSERT INTO Inventory VALUES (384,278);
+INSERT INTO Inventory VALUES (394,215);
+INSERT INTO Inventory VALUES (354,253);
 
-
-
-INSERT INTO Categories VALUES (1, 'T-shirt', 1);
-INSERT INTO Categories VALUES (2, 'Shirt', 2);
-INSERT INTO Categories VALUES (3, 'Pants', 3);
-INSERT INTO Categories VALUES (4, 'Shorts', 4);
-INSERT INTO Categories VALUES (5, 'Coats', 5);
-
-INSERT INTO Inventory VALUES (364, 12);
-INSERT INTO Inventory VALUES (374, 45);
-INSERT INTO Inventory VALUES (384, 78);
-INSERT INTO Inventory VALUES ( 394, 15);
-INSERT INTO Inventory VALUES ( 354, 3);
-
-INSERT INTO Supplier VALUES (9513124873, Acme, 302);
-INSERT INTO Supplier VALUES (9513124192, Peak, 402);
-INSERT INTO Supplier VALUES (9519021001, Admire, 502);
-INSERT INTO Supplier VALUES (9517701000, Clothing Inc, 650);
-INSERT INTO Supplier VALUES (9501000013, Divine Clothing, 71);
-
-INSERT INTO Product VALUES (364, ‘Nike shirt 1’, ‘Small’, ‘KO’, 2, 2,100,364,NULL);
-INSERT INTO Product VALUES (374, ‘Nike shirt 2’, ‘Small’, ‘KO’, 2, 2,100,374,NULL);
-INSERT INTO Product VALUES (384, ‘Nike shirt 3’, ‘Small’, ‘KO’, 2, 2,100,384,NULL);
-INSERT INTO Product VALUES (394, ‘Nike shirt 4’, ‘Small’, ‘KO’, 2, 2,100,394,NULL);
-INSERT INTO Product VALUES (354, ‘Nike shirt 5’, ‘Small’, ‘KO’, 2, 2,100,354,NULL);
-
-INSERT INTO ProductSupplier VALUES (364, 302);
-INSERT INTO ProductSupplier VALUES (374, 402);
-INSERT INTO ProductSupplier VALUES (384, 302);
-INSERT INTO ProductSupplier VALUES (394, 302);
-INSERT INTO ProductSupplier VALUES (354, 302);
+INSERT INTO Product VALUES (364, ‘Nike shirt 1’, ‘Small’, ‘KO’,2,2,100,364,302);
+INSERT INTO Product VALUES (374, ‘Nike shirt 2’, ‘Small’, ‘KO’,2,2,100,374,402);
+INSERT INTO Product VALUES (384, ‘Nike shirt 3’, ‘Small’, ‘KO’,2,2,100,384,502);
+INSERT INTO Product VALUES (394, ‘Nike shirt 4’, ‘Small’, ‘KO’,2,2,100,394,650);
+INSERT INTO Product VALUES (354, ‘Nike shirt 5’, ‘Small’, ‘KO’,2,2,100,354,71);
 
 INSERT INTO ManagerEmployee VALUES (39302, 593105933, ‘17/02/1995’, ‘45 Grove Drive’, 125000, ‘Adam’, ‘West’, 12, ‘Purchasing’);
 INSERT INTO ManagerEmployee VALUES (33113, 593100141, ‘12/06/1985’, ‘75 Grove Drive’, 135000, ‘David’, ‘Ames’, 4, ‘Payroll’);
@@ -153,16 +144,17 @@ INSERT INTO Holiday VALUES (30, ‘Paris’);
 
 
 
-INSERT INTO OutgoingShipmentOrder VALUES (48231, ‘12/06/1985’, 2, 30002, ‘123 Almond Drive’, 12, 354,354,35215);INSERT INTO OutgoingShipmentOrder VALUES (48232, ‘13/06/1985’, 5, 30002, ‘123 Almond Drive’, 2, 364,364,35215);
-INSERT INTO OutgoingShipmentOrder VALUES (48233, ‘14/06/1985’, 7, 30002, ‘123 Almond Drive’, 7, 374,374,35215);
-INSERT INTO OutgoingShipmentOrder VALUES (48234, ‘15/06/1985’, 9, 30002, ‘123 Almond Drive’, 14, 384,384,35215);
-INSERT INTO OutgoingShipmentOrder VALUES (48235, ‘16/06/1985’, 4, 30002, ‘123 Almond Drive’, 2, 394,394,35215);
+INSERT INTO OutgoingShipmentOrder VALUES (48231, ‘12/06/1985’, 2, 30002, ‘123 Almond Drive’, 12, 354,354,35215);
+INSERT INTO OutgoingShipmentOrder VALUES (48232, ‘13/06/1985’, 5, 30002, ‘125 Almond Drive’, 2, 364,364,35215);
+INSERT INTO OutgoingShipmentOrder VALUES (48233, ‘14/06/1985’, 7, 56114, ‘127 Almond Drive’, 7, 374,374,35215);
+INSERT INTO OutgoingShipmentOrder VALUES (48234, ‘15/06/1985’, 9, 30002, ‘121 Almond Drive’, 14, 384,384,35215);
+INSERT INTO OutgoingShipmentOrder VALUES (48235, ‘16/06/1985’, 4, 56114, ‘122 Almond Drive’, 2, 394,394,30014);
 
-INSERT INTO IncomingShipmentOrder VALUES (48641, ‘16/06/1984’, 14, 39212, 12, 354,354,39302);
-INSERT INTO IncomingShipmentOrder VALUES (48671, ‘13/06/1984’, 12, 39212, 2, 364,364,39302);
-INSERT INTO IncomingShipmentOrder VALUES (83133, ‘14/06/1984’, 17, 39212, 7, 374,374,39302);
-INSERT INTO IncomingShipmentOrder VALUES (11134, ‘15/06/1984’, 15, 39212,16, 384,384,39302);
-INSERT INTO IncomingShipmentOrder VALUES (73135, ‘16/06/1984’, 7, 310233,20, 394,394,39302);
+INSERT INTO IncomingShipmentOrder VALUES (48641, ‘16/06/1984’, 14, 39212, 354,354,39302);
+INSERT INTO IncomingShipmentOrder VALUES (48671, ‘13/06/1984’, 12, 516214, 364,364,39302);
+INSERT INTO IncomingShipmentOrder VALUES (83133, ‘14/06/1984’, 13, 39212, 374,374,33113);
+INSERT INTO IncomingShipmentOrder VALUES (11134, ‘15/06/1984’, 14, 39212, 384,384,39302);
+INSERT INTO IncomingShipmentOrder VALUES (73135, ‘16/06/1984’, 11, 310233, 394,394,33113);
 
 INSERT INTO Priority VALUES (1, ‘low’)
 INSERT INTO Priority VALUES (2, ‘low’)
