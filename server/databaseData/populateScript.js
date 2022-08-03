@@ -29,7 +29,20 @@ const poolPromise = pool.promise();
 //   }
 // };
 
-const modifyTables = async (operation) => {
+const checkConnection = async () => {
+  try {
+    const connection = await poolPromise.getConnection();
+    const result = "Connection Successful!";
+    console.log(result);
+    return result;
+  } catch (e) {
+    const result = "Connection Unsuccessful";
+    console.log(result);
+    return result;
+  }
+};
+
+const modifyTables = async (operation = "delete") => {
   let schemaString;
   if (operation == "create") {
     schemaString = fs.readFileSync(
@@ -57,17 +70,14 @@ const modifyTables = async (operation) => {
 };
 
 const main = async () => {
-  try {
-    await poolPromise();
+  const connection = await checkConnection();
+  if (connection == "Connection Successful!") {
     if (process.argv[2] === "--create") {
       await modifyTables("create");
     } else if (process.argv[2] === "--delete") {
-      await modifyTables("delete");
+      await modifyTables();
     }
-  } catch (err) {
-    log.error(err);
-    process.exit(1);
   }
 };
 
-main();
+checkConnection();
