@@ -1,14 +1,6 @@
 CREATE TABLE Brands(Brand_ID Integer, B_name Char(30), PRIMARY KEY (Brand_ID));
 
-CREATE TABLE Aisle(Aisle_no Integer,PRIMARY KEY (Aisle_no));
 
-CREATE TABLE Bin(
-  Bin_name CHAR(2),
-  Aisle_no Integer,
-  Capacity Integer,
-  quant_filled Integer,
-  PRIMARY KEY(Bin_name, Aisle_no)
-  );
 
 
 CREATE TABLE Categories(
@@ -94,6 +86,19 @@ SupplierID Integer,
 PRIMARY KEY (Barcode)
 );
 
+CREATE TABLE Aisle(
+    Aisle_no Integer,
+    PRIMARY KEY (Aisle_no)
+    );
+
+CREATE TABLE Bin(
+  Bin_name CHAR(2),
+  Aisle_no Integer,
+  Capacity Integer,
+  quant_filled Integer,
+  PRIMARY KEY(Bin_name, Aisle_no)
+  );
+
 CREATE TABLE Inventory(
 Barcode Integer NOT NULL,
 Quantity Integer NOT NULL,
@@ -176,12 +181,12 @@ ADD CONSTRAINT fk8
 ALTER TABLE Inventory
 ADD CONSTRAINT fk10
     FOREIGN KEY (Barcode)
-    REFERENCES Product (Barcode);
+    REFERENCES Product (Barcode) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE Supplier
 ADD CONSTRAINT fk11
     FOREIGN KEY (ProductID)
-    REFERENCES Product (Barcode);
+    REFERENCES Product (Barcode) ON DELETE CASCADE ON UPDATE CASCADE;
 
 
 ALTER TABLE OutgoingShipmentOrder

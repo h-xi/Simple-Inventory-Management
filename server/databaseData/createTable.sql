@@ -1,6 +1,13 @@
-CREATE TABLE Brands(Brand_ID Integer, B_name Char(30), PRIMARY KEY (Brand_ID));
+CREATE TABLE Brands(
+  Brand_ID Integer,
+  B_name Char(30),
+  PRIMARY KEY (Brand_ID)
+  );
 
-CREATE TABLE Aisle(Aisle_no Integer,PRIMARY KEY (Aisle_no));
+CREATE TABLE Aisle(
+  Aisle_no Integer,
+  PRIMARY KEY (Aisle_no)
+  );
 
 CREATE TABLE Bin(
   Bin_name CHAR(2),
@@ -19,14 +26,13 @@ PRIMARY KEY (Category_ID),
 FOREIGN KEY (Aisle_no) REFERENCES Aisle (Aisle_no)
 );
 
---- SUPPLIER ID has productID added to it and added to its primary key
 CREATE TABLE Supplier(
 S_contact Char(50),
 Supplier_name Char(40),
 Supplier_ID Integer,
 ProductID Integer,
 PRIMARY KEY(Supplier_ID, ProductID),
-FOREIGN KEY (ProductID) REFERENCES Product (Barcode)
+FOREIGN KEY (ProductID) REFERENCES Product (Barcode) ON DELETE CASCADE ON UPDATE CASCADE,
 );
 
 CREATE TABLE ManagerEmployee(
@@ -97,7 +103,7 @@ Inventory_barcode Integer NOT NULL,
 SupplierID Integer,
 PRIMARY KEY (Barcode),
 UNIQUE (Order_ID),
-FOREIGN KEY (Bin_name, Aisle_no) REFERENCES Bin(Bin_name, Aisle_no),
+FOREIGN KEY (Bin_name, Aisle_no) REFERENCES Bin (Bin_name, Aisle_no),
 FOREIGN KEY (Category_ID) REFERENCES Categories,
 FOREIGN KEY (Brand_ID) REFERENCES Brands,
 FOREIGN KEY (Inventory_barcode) REFERENCES Inventory
@@ -107,7 +113,7 @@ CREATE TABLE Inventory(
 Barcode Integer NOT NULL,
 Quantity Integer NOT NULL,
 PRIMARY KEY (Barcode),
-FOREIGN KEY (Barcode) REFERENCES Product(Barcode),
+FOREIGN KEY (Barcode) REFERENCES Product(Barcode) ON DELETE CASCADE ON UPDATE CASCADE,
 );
 
 CREATE TABLE OutgoingShipmentOrder(
