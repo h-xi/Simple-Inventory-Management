@@ -109,6 +109,22 @@ FOREIGN KEY (Brand_ID) REFERENCES Brands,
 FOREIGN KEY (Inventory_barcode) REFERENCES Inventory
 );
 
+--REMOVED
+--ALTER TABLE Product
+--ADD CONSTRAINT fk8    
+--    FOREIGN KEY (Inventory_barcode) REFERENCES Inventory (Barcode);
+
+--CHANGED TO
+--ALTER TABLE OutgoingShipmentOrder
+--ADD CONSTRAINT fk14
+--    FOREIGN KEY (Inventory_barcode) REFERENCES Inventory(Barcode) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+--uPDATED THIS TOO
+--ALTER TABLE IncomingShipmentOrder
+--ADD CONSTRAINT fk18
+--   FOREIGN KEY (Inventory_barcode) REFERENCES Inventory (Barcode) ON DELETE CASCADE ON UPDATE CASCADE;
+
 CREATE TABLE Inventory(
 Barcode Integer NOT NULL,
 Quantity Integer NOT NULL,

@@ -371,9 +371,7 @@ ALTER TABLE Product
 ADD CONSTRAINT fk7    
     FOREIGN KEY (Brand_ID) REFERENCES Brands (Brand_ID);
 
-ALTER TABLE Product
-ADD CONSTRAINT fk8    
-    FOREIGN KEY (Inventory_barcode) REFERENCES Inventory (Barcode);
+
 
 ALTER TABLE Inventory
 ADD CONSTRAINT fk10
@@ -392,7 +390,7 @@ ADD CONSTRAINT fk13
 
 ALTER TABLE OutgoingShipmentOrder
 ADD CONSTRAINT fk14
-    FOREIGN KEY (Inventory_barcode) REFERENCES Inventory(Barcode);
+    FOREIGN KEY (Inventory_barcode) REFERENCES Inventory(Barcode) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE OutgoingShipmentOrder
 ADD CONSTRAINT fk15
@@ -416,7 +414,7 @@ ADD CONSTRAINT fk17
 
 ALTER TABLE IncomingShipmentOrder
 ADD CONSTRAINT fk18
-    FOREIGN KEY (Inventory_barcode) REFERENCES Inventory (Barcode);
+    FOREIGN KEY (Inventory_barcode) REFERENCES Inventory (Barcode) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE IncomingShipmentOrder
 ADD CONSTRAINT fk19
