@@ -11,8 +11,8 @@ function App() {
   const [assignedDriver, setAssignedDriver] = useState("");
   const [deliveryAddress, setDeliveryAddress] = useState("");
 
-  const addOrder = () => {
-    Axios.post('http://localhost:8000/', {
+  const updateOrder = () => {
+    Axios.post('http://localhost:8000/orders', {
       orderId: orderId,
       itemNumber: itemNumber,
       shipmentDate: shipmentDate,
@@ -62,7 +62,7 @@ function App() {
             setAssignedDriver(event.target.value);
           }}
         />
-        <button onClick={addOrder}>Incoming Shipment</button>
+        <button onClick={updateOrder}>Incoming Shipment</button>
       </div>
       <div className="Outgoing">
         <label>Order ID:</label>
@@ -101,7 +101,7 @@ function App() {
             setDeliveryAddress(event.target.value);
           }}
         />
-        <button onClick={addOrder}>Outgoing Shipment</button>
+        <button onClick={updateOrder}>Outgoing Shipment</button>
       </div>
     </div>
   );
