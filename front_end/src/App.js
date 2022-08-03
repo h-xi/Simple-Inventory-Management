@@ -9,11 +9,11 @@ function App() {
   const [Order_ID, setOrder_ID] = useState(0);
   const [ShipmentDate, setShipmentDate] = useState(defaultDate);
   const [Quantity, setQuantity] = useState(0);
-  const [AssignedReceiver, setAssignedReceiver] = useState("");
+  const [AssignedReceiver, setAssignedReceiver] = useState(0);
   const [Inventory_Barcode, setInventory_Barcode] = useState(0);
   const [Product_Barcode, setProduct_Barcode] = useState(0);
   const [Manager, setManager] = useState(0);
-  const [AssignedDriver, setAssignedDriver] = useState("");
+  const [AssignedDriver, setAssignedDriver] = useState(0);
   const [DeliveryAddress, setDeliveryAddress] = useState("");
 
   const outgoingData = {orderData: {
@@ -21,6 +21,7 @@ function App() {
     ShipmentDate: ShipmentDate,
     Quantity: Quantity,
     AssignedDriver: AssignedDriver,
+    DeliveryAddress: DeliveryAddress,
     Inventory_Barcode: Inventory_Barcode,
     Product_Barcode: Product_Barcode,
     Manager: Manager,
@@ -89,9 +90,9 @@ function App() {
           }}
         />
         <label>Assigned Receiver:</label>
-        <input type="text" 
+        <input type="number" 
           onChange={(event) => {
-            setAssignedDriver(event.target.value);
+            setAssignedReceiver(event.target.value);
           }}
         />
         <button onClick={updateIncomingOrder}>Incoming Shipment</button>
@@ -116,7 +117,7 @@ function App() {
           }}
         />
         <label>Shipment Date:</label>
-        <input type="Date" 
+        <input type="text" 
           onChange={(event) => {
             setShipmentDate(event.target.value);
           }}
@@ -128,7 +129,7 @@ function App() {
           }}
         />
         <label>Assigned Driver:</label>
-        <input type="text" 
+        <input type="number" 
           onChange={(event) => {
             setAssignedDriver(event.target.value);
           }}
