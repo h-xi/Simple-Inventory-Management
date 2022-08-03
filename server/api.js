@@ -4,6 +4,9 @@ const app = express();
 
 const startUp = require("./routes/index.js");
 
+const cors = require('cors');
+app.use(cors());
+
 app.use(express.json());
 
 startUp(app);

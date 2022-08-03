@@ -13,6 +13,7 @@ router.post("/", async (req, res) => {
   let errors = [];
   let incoming;
   const orderData = req.body.orderData;
+  console.log(orderData);
   if (orderData.ShipmentDate == "") {
     errors.push("Please provide a shipment date for order");
   }

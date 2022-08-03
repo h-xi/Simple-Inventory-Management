@@ -3,30 +3,55 @@ import { useState } from 'react';
 import Axios from 'axios';
 
 function App() {
-  const [orderId, setOrderId] = useState(0);
-  const [itemNumber, setItemNumber] = useState(0);
-  const [shipmentDate, setShipmentDate] = useState(0);
-  const [quantity, setQuantity] = useState(0);
-  const [assignedReceiver, setAssignedReceiver] = useState("");
-  const [assignedDriver, setAssignedDriver] = useState("");
-  const [deliveryAddress, setDeliveryAddress] = useState("");
+  let defaultDate = new Date();
+  defaultDate.setDate(defaultDate.getDate() + 3);
 
-  const updateOrder = () => {
-    Axios.post('http://localhost:8000/orders', {
-      orderId: orderId,
-      itemNumber: itemNumber,
-      shipmentDate: shipmentDate,
-      quantity: quantity,
-      assignedReceiver: assignedReceiver,
-      assignedDriver: assignedDriver,
-      deliveryAddress: deliveryAddress
+  const [Order_ID, setOrder_ID] = useState(0);
+  const [ShipmentDate, setShipmentDate] = useState(defaultDate);
+  const [Quantity, setQuantity] = useState(0);
+  const [AssignedReceiver, setAssignedReceiver] = useState("");
+  const [Inventory_Barcode, setInventory_Barcode] = useState(0);
+  const [Manager, setManager] = useState(0);
+  const [AssignedDriver, setAssignedDriver] = useState("");
+  const [DeliveryAddress, setDeliveryAddress] = useState("");
+
+  const orderData = {orderData: {
+    Order_ID: Order_ID,
+    ShipmentDate: ShipmentDate,
+    Quantity: Quantity,
+    AssignedDriver: AssignedDriver,
+    Inventory_Barcode: Inventory_Barcode,
+    Manager: Manager,
+  }, orderType: "OutgoingShipmentOrder"};
+
+
+
+  const updateOutgoingOrder = () => {
+    console.log(orderData);
+    Axios.post('http://localhost:3000/orders', orderData).then(() => {
+      console.log("success");
+    }).catch((e) => {
+      console.log(e);
+    });
+  }
+
+  const updateIncomingOrder = () => {
+    Axios.post('http://localhost:3000/orders', {
+      Order_ID: Order_ID,
+      ShipmentDate: ShipmentDate,
+      Quantity: Quantity,
+      AssignedReceiver: AssignedReceiver,
+      Inventory_Barcode: Inventory_Barcode,
+      Manager: Manager,
     }).then(() => {
       console.log("success");
+    }).catch(e => {
+      console.log(e);
     });
   }
 
   const displayInfo = () => {
-    console.log(orderId + itemNumber + shipmentDate + quantity + assignedReceiver + assignedDriver + deliveryAddress);
+    console.log(Order_ID + Inventory_Barcode + ShipmentDate + Quantity + AssignedReceiver + Manager);
   };
 
   return (
@@ -35,13 +60,13 @@ function App() {
         <label>Order ID:</label>
         <input type="number" 
           onChange={(event) => {
-            setOrderId(event.target.value);
+            setOrder_ID(event.target.value);
           }}
         />
         <label>Item Number:</label>
         <input type="number" 
           onChange={(event) => {
-            setItemNumber(event.target.value);
+            setInventory_Barcode(event.target.value);
           }}
         />
         <label>Shipment Date:</label>
@@ -62,23 +87,23 @@ function App() {
             setAssignedDriver(event.target.value);
           }}
         />
-        <button onClick={updateOrder}>Incoming Shipment</button>
+        <button onClick={updateIncomingOrder}>Incoming Shipment</button>
       </div>
       <div className="Outgoing">
         <label>Order ID:</label>
         <input type="number" 
           onChange={(event) => {
-            setOrderId(event.target.value);
+            setOrder_ID(event.target.value);
           }}
         />
         <label>Item Number:</label>
         <input type="number" 
           onChange={(event) => {
-            setItemNumber(event.target.value);
+            setInventory_Barcode(event.target.value);
           }}
         />
         <label>Shipment Date:</label>
-        <input type="date" 
+        <input type="Date" 
           onChange={(event) => {
             setShipmentDate(event.target.value);
           }}
@@ -101,7 +126,13 @@ function App() {
             setDeliveryAddress(event.target.value);
           }}
         />
-        <button onClick={updateOrder}>Outgoing Shipment</button>
+        <label>Manager:</label>
+        <input type="number"
+          onChange={(event) => {
+            setManager(event.target.value);
+          }}
+        />
+        <button onClick={updateOutgoingOrder}>Outgoing Shipment</button>
       </div>
     </div>
   );
