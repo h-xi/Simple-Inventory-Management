@@ -11,42 +11,49 @@ function App() {
   const [Quantity, setQuantity] = useState(0);
   const [AssignedReceiver, setAssignedReceiver] = useState("");
   const [Inventory_Barcode, setInventory_Barcode] = useState(0);
+  const [Product_Barcode, setProduct_Barcode] = useState(0);
   const [Manager, setManager] = useState(0);
   const [AssignedDriver, setAssignedDriver] = useState("");
   const [DeliveryAddress, setDeliveryAddress] = useState("");
 
-  const orderData = {orderData: {
+  const outgoingData = {orderData: {
     Order_ID: Order_ID,
     ShipmentDate: ShipmentDate,
     Quantity: Quantity,
     AssignedDriver: AssignedDriver,
     Inventory_Barcode: Inventory_Barcode,
+    Product_Barcode: Product_Barcode,
     Manager: Manager,
   }, orderType: "OutgoingShipmentOrder"};
 
 
 
   const updateOutgoingOrder = () => {
-    console.log(orderData);
-    Axios.post('http://localhost:3000/orders', orderData).then(() => {
+    console.log(outgoingData);
+    Axios.post('http://localhost:3000/orders', outgoingData
+    ).then(() => {
       console.log("success");
-    }).catch((e) => {
-      console.log(e);
+    }).catch(error => {
+      console.log(error.response);
     });
   }
 
+  const incomingData = {orderData: {
+    Order_ID: Order_ID,
+    ShipmentDate: ShipmentDate,
+    Quantity: Quantity,
+    AssignedReceiver: AssignedReceiver,
+    Inventory_Barcode: Inventory_Barcode,
+    Manager: Manager,
+  }, orderType: "IncomingShipmentOrder"};
+
   const updateIncomingOrder = () => {
-    Axios.post('http://localhost:3000/orders', {
-      Order_ID: Order_ID,
-      ShipmentDate: ShipmentDate,
-      Quantity: Quantity,
-      AssignedReceiver: AssignedReceiver,
-      Inventory_Barcode: Inventory_Barcode,
-      Manager: Manager,
-    }).then(() => {
+    console.log(incomingData);
+    Axios.post('http://localhost:3000/orders', incomingData
+    ).then(() => {
       console.log("success");
-    }).catch(e => {
-      console.log(e);
+    }).catch(error => {
+      console.log(error.response);
     });
   }
 
@@ -96,10 +103,16 @@ function App() {
             setOrder_ID(event.target.value);
           }}
         />
-        <label>Item Number:</label>
+        <label>Inventory Barcode:</label>
         <input type="number" 
           onChange={(event) => {
             setInventory_Barcode(event.target.value);
+          }}
+        />
+        <label>Product Barcode:</label>
+        <input type="number" 
+          onChange={(event) => {
+            setProduct_Barcode(event.target.value);
           }}
         />
         <label>Shipment Date:</label>
