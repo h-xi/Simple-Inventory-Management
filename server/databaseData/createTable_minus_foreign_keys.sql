@@ -4,8 +4,8 @@ CREATE TABLE Aisle(Aisle_no Integer,PRIMARY KEY (Aisle_no));
 
 CREATE TABLE Bin(
   Bin_name CHAR(2),
-  Capacity Integer,
   Aisle_no Integer,
+  Capacity Integer,
   quant_filled Integer,
   PRIMARY KEY(Bin_name, Aisle_no)
   );
@@ -90,10 +90,8 @@ Aisle_no Integer NOT NULL,
 Category_ID Integer NOT NULL,
 Brand_ID Integer NOT NULL,
 Inventory_barcode Integer NOT NULL,
-Order_ID Integer,
 SupplierID Integer,
-PRIMARY KEY (Barcode),
-UNIQUE (Order_ID)
+PRIMARY KEY (Barcode)
 );
 
 CREATE TABLE Inventory(
@@ -152,11 +150,20 @@ ADD CONSTRAINT fk2
 
 ALTER TABLE Product
 ADD CONSTRAINT fk5
-    FOREIGN KEY (Bin_name,Aisle_no) REFERENCES Bin (Bin_name,Aisle_no);
+    FOREIGN KEY (Bin_name) REFERENCES Bin (Bin_name);
 
 ALTER TABLE Product
 ADD CONSTRAINT fk6
     FOREIGN KEY (Category_ID) REFERENCES Categories (Category_ID);
+
+ALTER TABLE ManagerEmployee
+ADD CONSTRAINT fk66
+    FOREIGN KEY (YearsWorked) REFERENCES Benefits (YearsWorked);
+
+
+ALTER TABLE ManagerEmployee
+ADD CONSTRAINT fk666
+    FOREIGN KEY (YearsWorked) REFERENCES Holiday (YearsWorked);
 
 ALTER TABLE Product
 ADD CONSTRAINT fk7    
@@ -177,8 +184,6 @@ ADD CONSTRAINT fk11
     REFERENCES Product (Barcode);
 
 
-
-
 ALTER TABLE OutgoingShipmentOrder
 ADD CONSTRAINT fk13
 FOREIGN KEY (AssignedDriver) REFERENCES DriverEmployee(Employee_ID);
@@ -195,6 +200,13 @@ ALTER TABLE OutgoingShipmentOrder
 ADD CONSTRAINT fk16
 FOREIGN KEY (Manager) REFERENCES ManagerEmployee (Employee_ID);
 
+ALTER TABLE OutgoingShipmentOrder
+ADD CONSTRAINT fk166
+FOREIGN KEY (Quantity) REFERENCES Priority (Quantity);
+
+ALTER TABLE OutgoingShipmentOrder
+ADD CONSTRAINT fk167
+FOREIGN KEY (DaysToShipment) REFERENCES Highlight (DaysToShipment);
 
 ALTER TABLE IncomingShipmentOrder
 ADD CONSTRAINT fk17
