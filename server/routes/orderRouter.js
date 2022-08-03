@@ -3,6 +3,11 @@ const router = express.Router();
 const { addOrder } = require("../controllers/orderController");
 const { getEmployee } = require("../controllers/employeeController");
 const { getBarcode } = require("../controllers/inventoryController");
+const cors = require('cors');
+const { app } = require("tailwind");
+
+app.use(cors());
+app.use(express.json());
 
 router.post("/", async (req, res) => {
   let errors = [];
@@ -32,42 +37,43 @@ router.post("/", async (req, res) => {
   }
 
   if (orderData.Manager) {
-    //TODO: Create a getManager functio that checks if Manager exists in DB. if not, return error to store in errors array
+    const manager = await getEmployee("ManagerEmployee", orderData.Manager);
+    if (!manager) {
+      errors.push("Invalid Manager ID");
+    }
   }
 
   if (req.body.orderType == "IncomingShipmentOrder") {
     incoming = true;
     if (orderData.AssignedReceiver) {
-      //TODO: create a getEmployee function that checks if employee exists in DB
       try {
-        result = await getEmployee();
+        result = await getEmployee(
+          "WorkerEmployee",
+          orderData.AssignedReceiver
+        );
         if (!result) {
           errors.push("Invalid Employee ID");
         }
       } catch (e) {
         console.error(e);
-        // errors.push(e);
+        errors.push(e.Error);
       }
     }
   } else {
     incoming = false;
+    try {
+      result = await getEmployee("DriverEmployee", orderData.AssignedDriver);
+      if (!result) {
+        errors.push("Invalid Employee ID");
+      }
+    } catch (e) {
+      console.error(e);
+      // errors.push(e);
+    }
     if (typeof orderData.DeliveryAddress != "string") {
       errors.push("Please provide a valid Delivery Address");
     }
-    if (orderData.AssignedDriver) {
-      //TODO: create a getEmployee function that checks if employee exists in DB
-      try {
-        result = await getEmployee();
-        if (!result) {
-          errors.push("Invalid Employee ID");
-        }
-      } catch (e) {
-        console.error(e);
-        // errors.push(e);
-      }
-    }
   }
-
   if (errors.length != 0) {
     return res.status(422).json({
       Message: "Order Creation Unsuccessful",
@@ -84,3 +90,5 @@ router.post("/", async (req, res) => {
     });
   }
 });
+
+module.exports = router;
