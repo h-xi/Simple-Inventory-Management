@@ -1,23 +1,15 @@
-CREATE TABLE Brands(Brand_ID Integer, B_name Char(30), PRIMARY KEY (Brand_ID));
-
-CREATE TABLE Aisle(Aisle_no Integer,PRIMARY KEY (Aisle_no));
-
-CREATE TABLE Bin(
-  Bin_name CHAR(2),
-  Capacity Integer,
-  Aisle_no Integer,
-  quant_filled Integer,
-  PRIMARY KEY(Bin_name, Aisle_no)
-  );
-
+CREATE TABLE Brands(
+Brand_ID Integer,
+B_name Char(30),
+PRIMARY KEY (Brand_ID)
+);
 
 CREATE TABLE Categories(
 Category_ID Integer,
 Cat_name Char(30),
 Aisle_no Integer,
-PRIMARY KEY(Category_ID)
+PRIMARY KEY (Category_ID)
 );
-
 
 CREATE TABLE Supplier(
 S_contact Char(50),
@@ -90,11 +82,22 @@ Aisle_no Integer NOT NULL,
 Category_ID Integer NOT NULL,
 Brand_ID Integer NOT NULL,
 Inventory_barcode Integer NOT NULL,
-Order_ID Integer,
 SupplierID Integer,
-PRIMARY KEY (Barcode),
-UNIQUE (Order_ID)
+PRIMARY KEY (Barcode)
 );
+
+CREATE TABLE Aisle(
+    Aisle_no Integer,
+    PRIMARY KEY (Aisle_no)
+    );
+
+CREATE TABLE Bin(
+  Bin_name CHAR(2),
+  Capacity Integer,
+  Aisle_no Integer,
+  quant_filled Integer,
+  PRIMARY KEY(Bin_name, Aisle_no)
+  );
 
 CREATE TABLE Inventory(
 Barcode Integer NOT NULL,
@@ -152,11 +155,20 @@ ADD CONSTRAINT fk2
 
 ALTER TABLE Product
 ADD CONSTRAINT fk5
-    FOREIGN KEY (Bin_name,Aisle_no) REFERENCES Bin (Bin_name,Aisle_no);
+    FOREIGN KEY (Bin_name) REFERENCES Bin (Bin_name);
 
 ALTER TABLE Product
 ADD CONSTRAINT fk6
     FOREIGN KEY (Category_ID) REFERENCES Categories (Category_ID);
+
+ALTER TABLE ManagerEmployee
+ADD CONSTRAINT fk66
+    FOREIGN KEY (YearsWorked) REFERENCES Benefits (YearsWorked);
+
+
+ALTER TABLE ManagerEmployee
+ADD CONSTRAINT fk666
+    FOREIGN KEY (YearsWorked) REFERENCES Holiday (YearsWorked);
 
 ALTER TABLE Product
 ADD CONSTRAINT fk7    
@@ -169,45 +181,50 @@ ADD CONSTRAINT fk8
 ALTER TABLE Inventory
 ADD CONSTRAINT fk10
     FOREIGN KEY (Barcode)
-    REFERENCES Product (Barcode);
+    REFERENCES Product (Barcode) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE Supplier
 ADD CONSTRAINT fk11
     FOREIGN KEY (ProductID)
-    REFERENCES Product (Barcode);
-
-
+    REFERENCES Product (Barcode) ON DELETE CASCADE ON UPDATE CASCADE;
 
 
 ALTER TABLE OutgoingShipmentOrder
 ADD CONSTRAINT fk13
-FOREIGN KEY (AssignedDriver) REFERENCES DriverEmployee(Employee_ID);
+    FOREIGN KEY (AssignedDriver) REFERENCES DriverEmployee(Employee_ID);
 
 ALTER TABLE OutgoingShipmentOrder
 ADD CONSTRAINT fk14
-FOREIGN KEY (Inventory_barcode) REFERENCES Inventory(Barcode);
+    FOREIGN KEY (Inventory_barcode) REFERENCES Inventory(Barcode);
 
 ALTER TABLE OutgoingShipmentOrder
 ADD CONSTRAINT fk15
-FOREIGN KEY (Product_Barcode) REFERENCES Product(Barcode);
+    FOREIGN KEY (Product_Barcode) REFERENCES Product(Barcode);
 
 ALTER TABLE OutgoingShipmentOrder
 ADD CONSTRAINT fk16
-FOREIGN KEY (Manager) REFERENCES ManagerEmployee (Employee_ID);
+    FOREIGN KEY (Manager) REFERENCES ManagerEmployee (Employee_ID);
 
+ALTER TABLE OutgoingShipmentOrder
+ADD CONSTRAINT fk166
+    FOREIGN KEY (Quantity) REFERENCES Priority (Quantity);
+
+ALTER TABLE OutgoingShipmentOrder
+ADD CONSTRAINT fk167
+    FOREIGN KEY (DaysToShipment) REFERENCES Highlight (DaysToShipment);
 
 ALTER TABLE IncomingShipmentOrder
 ADD CONSTRAINT fk17
-FOREIGN KEY (AssignedReceiver) REFERENCES WorkerEmployee (Employee_ID);
+    FOREIGN KEY (AssignedReceiver) REFERENCES WorkerEmployee (Employee_ID);
 
 ALTER TABLE IncomingShipmentOrder
 ADD CONSTRAINT fk18
-FOREIGN KEY (Inventory_barcode) REFERENCES Inventory (Barcode);
+    FOREIGN KEY (Inventory_barcode) REFERENCES Inventory (Barcode);
 
 ALTER TABLE IncomingShipmentOrder
 ADD CONSTRAINT fk19
-FOREIGN KEY (Product_Barcode) REFERENCES Product (Barcode);
+    FOREIGN KEY (Product_Barcode) REFERENCES Product (Barcode);
 
 ALTER TABLE IncomingShipmentOrder
 ADD CONSTRAINT fk20
-FOREIGN KEY (Manager) REFERENCES ManagerEmployee (Employee_ID);
+    FOREIGN KEY (Manager) REFERENCES ManagerEmployee (Employee_ID);
