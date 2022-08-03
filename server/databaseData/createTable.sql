@@ -38,7 +38,7 @@ FOREIGN KEY (ProductID) REFERENCES Product (Barcode) ON DELETE CASCADE ON UPDATE
 CREATE TABLE ManagerEmployee(
 Employee_ID Integer,
 SIN Integer,
-DOB Date,
+DOB Char(20),
 Address Char(50),
 Salary Integer,
 FirstName Char(15),
@@ -54,7 +54,7 @@ FOREIGN KEY (YearsWorked) REFERENCES Holiday
 CREATE TABLE DriverEmployee(
 Employee_ID Integer,
 SIN Integer,
-DOB Date,
+DOB Char(20),
 Address Char(50),
 Salary Integer,
 FirstName Char(15),
@@ -68,7 +68,7 @@ UNIQUE (SIN)
 CREATE TABLE WorkerEmployee(
 Employee_ID Integer,
 SIN Integer,
-DOB Date,
+DOB Char(20),
 Address Char(50),
 Salary Integer,
 FirstName Char(15),
@@ -95,7 +95,7 @@ CREATE TABLE Product(
 Barcode Integer,
 P_name Char(30),
 Size Char(6),
-Bin_name Char(1) NOT NULL,
+Bin_name Char(2) NOT NULL,
 Aisle_no Integer NOT NULL,
 Category_ID Integer NOT NULL,
 Brand_ID Integer NOT NULL,
@@ -118,7 +118,7 @@ FOREIGN KEY (Barcode) REFERENCES Product(Barcode) ON DELETE CASCADE ON UPDATE CA
 
 CREATE TABLE OutgoingShipmentOrder(
 Order_ID Integer,
-ShipmentDate Integer,
+ShipmentDate Char(20),
 Quantity Integer,
 AssignedDriver Integer NOT NULL,
 DeliveryAddress Char(50),
@@ -137,7 +137,7 @@ FOREIGN KEY (DaysToShipment) REFERENCES Highlight (DaysToShipment)
 
 CREATE TABLE IncomingShipmentOrder(
 Order_ID Integer,
-ShipmentDate Integer,
+ShipmentDate Char(20),
 Quantity Integer,
 AssignedReceiver Integer NOT NULL,
 Inventory_barcode Integer NOT NULL,
@@ -160,7 +160,7 @@ PRIMARY KEY (Quantity)
 
 CREATE TABLE Highlight(
 DaysToShipment Integer,
-HighLightView Char(1),
+HighLightView Char(3),
 PRIMARY KEY (DaysToShipment)
 -- remove this
 --FOREIGN KEY (DaysToShipment) REFERENCES OutgoingShipmentOrder(DaysToShipment)
