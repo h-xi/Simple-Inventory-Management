@@ -15,17 +15,22 @@ function App() {
   const [AssignedDriver, setAssignedDriver] = useState("");
   const [DeliveryAddress, setDeliveryAddress] = useState("");
 
+  const orderData = {orderData: {
+    Order_ID: Order_ID,
+    ShipmentDate: ShipmentDate,
+    Quantity: Quantity,
+    AssignedDriver: AssignedDriver,
+    Inventory_Barcode: Inventory_Barcode,
+    Manager: Manager,
+  }, orderType: "OutgoingShipmentOrder"};
+
+
+
   const updateOutgoingOrder = () => {
-    Axios.post('http://localhost:3000/orders', {
-      Order_ID: Order_ID,
-      ShipmentDate: ShipmentDate,
-      Quantity: Quantity,
-      AssignedReceiver: AssignedReceiver,
-      Inventory_Barcode: Inventory_Barcode,
-      Manager: Manager,
-    }).then(() => {
+    console.log(orderData);
+    Axios.post('http://localhost:3000/orders', orderData).then(() => {
       console.log("success");
-    }).catch(e => {
+    }).catch((e) => {
       console.log(e);
     });
   }
@@ -98,7 +103,7 @@ function App() {
           }}
         />
         <label>Shipment Date:</label>
-        <input type="text" 
+        <input type="Date" 
           onChange={(event) => {
             setShipmentDate(event.target.value);
           }}
