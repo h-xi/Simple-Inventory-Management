@@ -78,6 +78,6 @@ const main = async () => {
       await modifyTables();
     }
   }
+  console.log("connection Unsuccessful!");
+  return null;
 };
-
-checkConnection();
