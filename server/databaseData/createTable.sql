@@ -105,9 +105,34 @@ PRIMARY KEY (Barcode),
 UNIQUE (Order_ID),
 FOREIGN KEY (Bin_name, Aisle_no) REFERENCES Bin (Bin_name, Aisle_no),
 FOREIGN KEY (Category_ID) REFERENCES Categories,
-FOREIGN KEY (Brand_ID) REFERENCES Brands,
-FOREIGN KEY (Inventory_barcode) REFERENCES Inventory
+FOREIGN KEY (Brand_ID) REFERENCES Brands
 );
+
+--REMOVED as we want inventory to be the child of product.
+--ALTER TABLE Product
+--ADD CONSTRAINT fk8    
+--    FOREIGN KEY (Inventory_barcode) REFERENCES Inventory (Barcode);
+
+--added delete cascades here so that if product is deleted and corresponding inventory is deleted, the orders are deleted as well
+--ALTER TABLE OutgoingShipmentOrder
+--ADD CONSTRAINT fk14
+--    FOREIGN KEY (Inventory_barcode) REFERENCES Inventory(Barcode) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+--added delete cascades here so that if product is deleted and corresponding inventory is deleted, the orders are deleted as well
+--ALTER TABLE IncomingShipmentOrder
+--ADD CONSTRAINT fk18
+--   FOREIGN KEY (Inventory_barcode) REFERENCES Inventory (Barcode) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--added delete cascades here so that if product is deleted and corresponding order is deleted
+--ALTER TABLE IncomingShipmentOrder
+--ADD CONSTRAINT fk17
+--   FOREIGN KEY (Product_Barcode) REFERENCES Product (Barcode) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--added delete cascades here so that if product is deleted and corresponding order is deleted
+--ALTER TABLE OutgoingShipmentOrder
+--ADD CONSTRAINT fk12
+--    FOREIGN KEY (Product_Barcode) REFERENCES Product(Barcode) ON DELETE CASCADE ON UPDATE CASCADE;
 
 CREATE TABLE Inventory(
 Barcode Integer NOT NULL,
@@ -128,8 +153,8 @@ Product_Barcode Integer NOT NULL,
 Manager Integer NOT NULL,
 PRIMARY KEY (Order_ID),
 FOREIGN KEY (AssignedDriver) REFERENCES DriverEmployee(Employee_ID),
-FOREIGN KEY (Inventory_barcode) REFERENCES Inventory(Barcode),
-FOREIGN KEY (Product_Barcode) REFERENCES Product(Barcode),
+FOREIGN KEY (Inventory_barcode) REFERENCES Inventory(Barcode) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (Product_Barcode) REFERENCES Product(Barcode) ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY (Manager) REFERENCES ManagerEmployee,
 FOREIGN KEY (Quantity) REFERENCES Priority (Quantity),
 FOREIGN KEY (DaysToShipment) REFERENCES Highlight (DaysToShipment)
@@ -145,8 +170,8 @@ Product_Barcode Integer NOT NULL,
 Manager Integer NOT NULL,
 PRIMARY KEY (Order_ID),
 FOREIGN KEY (AssignedReceiver) REFERENCES WorkerEmployee(Employee_ID),
-FOREIGN KEY (Inventory_barcode) REFERENCES Inventory(Barcode),
-FOREIGN KEY (Product_Barcode) REFERENCES Product(Barcode),
+FOREIGN KEY (Inventory_barcode) REFERENCES Inventory(Barcode) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (Product_Barcode) REFERENCES Product(Barcode) ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY (Manager) REFERENCES ManagerEmployee
 );
 

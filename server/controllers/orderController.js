@@ -40,10 +40,10 @@ const addOrder = async (order, incoming = true) => {
 const deleteOrder = async (orderID, incoming = true) => {
   if (incoming) {
     table = "IncomingShipmentOrder";
-    sql = `DELETE FROM ${table} WHERE Order_ID = ${orderID}`;
+    sql = `DELETE FROM inventory_system.${table} WHERE Order_ID = ${orderID}`;
   } else {
     table = "OutgoingShipmentOrder";
-    sql = `DELETE FROM ${table} WHERE Order_ID = ${orderID}`;
+    sql = `DELETE FROM inventory_system.${table} WHERE Order_ID = ${orderID}`;
   }
   try {
     console.log(sql);
@@ -71,13 +71,13 @@ const updateOrder = async (order, incoming = true) => {
   if (incoming) {
     table = "IncomingShipmentOrder";
     assignedEmployee = order.AssignedReceiver;
-    sql = `UPDATE ${table} SET ShipmentDate = ${shipmentDate}, Quantity = ${quantity}, AssignedReceiver = ${assignedEmployee}, Inventory_Barcode = ${barcode}, Product_Barcode = ${product}, Manager = ${manager} WHERE Order_ID = ${order_id})`;
+    sql = `UPDATE inventory_system.${table} SET ShipmentDate = ${shipmentDate}, Quantity = ${quantity}, AssignedReceiver = ${assignedEmployee}, Inventory_Barcode = ${barcode}, Product_Barcode = ${product}, Manager = ${manager} WHERE Order_ID = ${order_id})`;
   } else {
     table = "OutgoingShipmentOrder";
     assignedEmployee = order.AssignedDriver;
     daysToShipment = order.DaysToShipment;
     deliveryAddress = order.DeliveryAddress;
-    sql = `UPDATE ${table} SET ShipmentDate = ${shipmentDate}, Quantity = ${quantity}, AssignedDriver = ${assignedEmployee}, DeliveryAddress = ${deliveryAddress}, DaysToShipment = ${daysToShipment}, Inventory_Barcode = ${barcode}, Product_Barcode = ${product}, Manager = ${manager})`;
+    sql = `UPDATE inventory_system.${table} SET ShipmentDate = ${shipmentDate}, Quantity = ${quantity}, AssignedDriver = ${assignedEmployee}, DeliveryAddress = ${deliveryAddress}, DaysToShipment = ${daysToShipment}, Inventory_Barcode = ${barcode}, Product_Barcode = ${product}, Manager = ${manager} WHERE Order_ID = ${order_id});`;
   }
   try {
     console.log(sql);
@@ -116,8 +116,5 @@ const createTest = async () => {
     throw err;
   }
 };
-//TODO: DELETE ON CASCADE
-
-//TODO: UPDATE FN ON ORDER
 
 module.exports = { addOrder: addOrder, deleteOrder: deleteOrder };
