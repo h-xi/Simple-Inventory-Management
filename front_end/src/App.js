@@ -14,17 +14,17 @@ function App() {
   const [Product_Barcode, setProduct_Barcode] = useState(0);
   const [Manager, setManager] = useState(0);
   const [AssignedDriver, setAssignedDriver] = useState(0);
-  const [DeliveryAddress, setDeliveryAddress] = useState("");
+  //const [DeliveryAddress, setDeliveryAddress] = useState("");
 
   const outgoingData = {orderData: {
-    Order_ID: Order_ID,
-    ShipmentDate: ShipmentDate,
-    Quantity: Quantity,
-    AssignedDriver: AssignedDriver,
-    DeliveryAddress: DeliveryAddress,
-    Inventory_Barcode: Inventory_Barcode,
-    Product_Barcode: Product_Barcode,
-    Manager: Manager,
+    order_id: Order_ID,
+    shipmentDate: ShipmentDate,
+    quantity: Quantity,
+    assignedEmployee: AssignedDriver,
+    //DeliveryAddress: DeliveryAddress,
+    barcode: Inventory_Barcode,
+    product: Product_Barcode,
+    manager: Manager,
   }, orderType: "OutgoingShipmentOrder"};
 
 
@@ -40,16 +40,18 @@ function App() {
   }
 
   const incomingData = {orderData: {
-    Order_ID: Order_ID,
-    ShipmentDate: ShipmentDate,
-    Quantity: Quantity,
-    AssignedReceiver: AssignedReceiver,
-    Inventory_Barcode: Inventory_Barcode,
-    Product_Barcode: Product_Barcode,
-    Manager: Manager,
+    order_id: Order_ID,
+    shipmentDate: ShipmentDate,
+    quantity: Quantity,
+    assignedEmployee: AssignedReceiver,
+    barcode: Inventory_Barcode,
+    product: Product_Barcode,
+    manager: Manager,
   }, orderType: "IncomingShipmentOrder"};
 
   const updateIncomingOrder = () => {
+    console.log(typeof ShipmentDate);
+    console.log(ShipmentDate);
     console.log(incomingData);
     Axios.post('http://localhost:3000/orders', incomingData
     ).then(() => {
@@ -59,9 +61,9 @@ function App() {
     });
   }
 
-  const displayInfo = () => {
-    console.log(Order_ID + Inventory_Barcode + ShipmentDate + Quantity + AssignedReceiver + Manager);
-  };
+  // const displayInfo = () => {
+  //   console.log(Order_ID + Inventory_Barcode + ShipmentDate + Quantity + AssignedReceiver + Manager);
+  // };
 
   return (
     <div className="App">
@@ -85,7 +87,7 @@ function App() {
           }}
         />
         <label>Shipment Date:</label>
-        <input type="date" 
+        <input type="text" 
           onChange={(event) => {
             setShipmentDate(event.target.value);
           }}
@@ -100,6 +102,12 @@ function App() {
         <input type="number" 
           onChange={(event) => {
             setAssignedReceiver(event.target.value);
+          }}
+        />
+        <label>Manager:</label>
+        <input type="number" 
+          onChange={(event) => {
+            setManager(event.target.value);
           }}
         />
         <button onClick={updateIncomingOrder}>Incoming Shipment</button>
@@ -141,12 +149,12 @@ function App() {
             setAssignedDriver(event.target.value);
           }}
         />
-        <label>Delivery Address:</label>
+        {/* <label>Delivery Address:</label>
         <input type="text" 
           onChange={(event) => {
             setDeliveryAddress(event.target.value);
           }}
-        />
+        /> */}
         <label>Manager:</label>
         <input type="number"
           onChange={(event) => {
