@@ -1,6 +1,10 @@
 import './App.css';
 import { useState } from 'react';
 import Axios from 'axios';
+import * as React from 'react';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
 function App() {
   // let defaultDate = new Date();
@@ -49,10 +53,9 @@ function App() {
   }, orderType: "OutgoingShipmentOrder"};
 
   const updateOutgoingOrder = () => {
-    console.log(outgoingData);
     Axios.post('http://localhost:3000/orders', outgoingData
     ).then(() => {
-      console.log("success");
+      console.log("Outgoing data successfully updated:", outgoingData);
     }).catch(error => {
       console.log(error.response.data);
     });
@@ -60,7 +63,10 @@ function App() {
 
   return (
     <div className="App">
+      <ManageAccountsIcon icon="ManageAccounts"/>
+      <h1 className="App-name">Inventory Management System</h1>
       <div className="Incoming">
+        <h3>Incoming Shipment Orders</h3>
         <label>Order ID:</label>
         <input type="number" 
           onChange={(event) => {
@@ -103,9 +109,12 @@ function App() {
             setManager(event.target.value);
           }}
         />
-        <button onClick={updateIncomingOrder}>Incoming Shipment</button>
+        <Stack direction="row" spacing={2}>
+        <Button variant="contained" onClick={updateIncomingOrder}>Incoming Shipment</Button>
+        </Stack>
       </div>
       <div className="Outgoing">
+        <h3>Outgoing Shipment Orders</h3>
         <label>Order ID:</label>
         <input type="number" 
           onChange={(event) => {
@@ -160,7 +169,9 @@ function App() {
             setManager(event.target.value);
           }}
         />
-        <button onClick={updateOutgoingOrder}>Outgoing Shipment</button>
+        <Stack direction="row" spacing={2}>
+        <Button variant="contained" onClick={updateOutgoingOrder}>Outgoing Shipment</Button>
+        </Stack>
       </div>
     </div>
   );
