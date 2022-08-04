@@ -1,6 +1,39 @@
 const pool = require("../utils/dbConnector.js");
+const { buildQuery } = require("../utils/dataQuery");
 
 const promisePool = pool.promise();
+
+const getOrder = async (params) => {
+  let incoming = true;
+  if ("AssignedDriver" in params) {
+    incoming = false;
+  }
+  const conditions = buildQuery(params);
+  if (incoming) {
+    var sql = `SELECT * FROM inventory_system.IncomingShipmentOrder WHERE ${conditions.where};`;
+  } else {
+    var sql = `SELECT * FROM inventory_system.OutgoingShipmentOrder WHERE ${conditions.where};`;
+  }
+  try {
+    console.log(sql);
+    const result = await promisePool.query(sql, conditions.values);
+    console.log(result[0][0]);
+    return result[0][0];
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+};
+
+getOrder({
+  // Order_ID: 11134,
+  // ShipmentDate: "2020-06-02",
+  Quantity: 14,
+  // AssignedDriver: 12146,
+  // Inventory_Barcode: 354,
+  // Product_Barcode: 354,
+  // Manager: 30014,
+});
 
 //Given order object and orderType flag, add order into database, else throw error
 const addOrder = async (order, incoming = true) => {
@@ -118,3 +151,32 @@ const createTest = async () => {
 };
 
 module.exports = { addOrder: addOrder, deleteOrder: deleteOrder };
+
+// if (params.Order_ID) {
+//   queries.push(Order_ID);
+// }
+// if (params.ShipmentDate) {
+//   queries.push(ShipmentDate);
+// }
+// if (params.Quantity) {
+//   queries.push(Quantity);
+// }
+// if (params.AssignedReceiver) {
+//   queries.push(AssignedReceiver);
+// }
+// if (params.AssignedDriver) {
+//   incoming = false;
+//   queries.push(AssignedDriver);
+// }
+// if (params.Inventory_barcode) {
+//   queries.push(Inventory_barcode);
+// }
+// if (params.Product_Barcode) {
+//   queries.push(Product_Barcode);
+// }
+// if (params.Manager) {
+//   queries.push(Manager);
+// }
+// if (params.DeliveryAddress) {
+//   queries.push();
+// }
