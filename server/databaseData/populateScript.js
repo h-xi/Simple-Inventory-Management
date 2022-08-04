@@ -61,7 +61,8 @@ const modifyTables = async (operation = "delete") => {
   for (const operation of operations) {
     try {
       await poolPromise.query(operation);
-      console.log("Tables succesfully Created");
+      console.log("Tables succesfully Created!");
+      return "Tables successfully Created!";
     } catch (e) {
       console.error(e);
       throw e;
@@ -71,13 +72,25 @@ const modifyTables = async (operation = "delete") => {
 
 const main = async () => {
   const connection = await checkConnection();
+  console.log(connection);
   if (connection == "Connection Successful!") {
     if (process.argv[2] === "--create") {
-      await modifyTables("create");
+      try {
+        console.log("hello");
+        return await modifyTables("create");
+      } catch (e) {
+        console.error(e);
+      }
     } else if (process.argv[2] === "--delete") {
-      await modifyTables();
+      try {
+        await modifyTables();
+      } catch (e) {
+        console.error(e);
+      }
     }
   }
-  console.log("connection Unsuccessful!");
-  return null;
+  //   console.log("connection Unsuccessful!");
+  //   return null;
 };
+
+main();
