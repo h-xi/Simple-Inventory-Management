@@ -51,13 +51,13 @@ const addOrder = async (order, incoming = true) => {
   if (incoming) {
     table = "IncomingShipmentOrder";
     assignedEmployee = order.AssignedReceiver;
-    sql = `INSERT INTO inventory_system.${table} VALUES(${order_id}, ${shipmentDate}, ${quantity}, ${assignedEmployee}, ${barcode}, ${product}, ${manager})`;
+    sql = `INSERT INTO inventory_system.${table} VALUES(${order_id}, "${shipmentDate}", ${quantity}, ${assignedEmployee}, ${barcode}, ${product}, ${manager})`;
   } else {
     table = "OutgoingShipmentOrder";
     assignedEmployee = order.AssignedDriver;
     daysToShipment = order.DaysToShipment;
     deliveryAddress = order.DeliveryAddress;
-    sql = `INSERT INTO inventory_system.${table} VALUES(${order_id}, ${shipmentDate}, ${quantity}, ${assignedEmployee}, ${deliveryAddress}, ${daysToShipment}, ${barcode}, ${product}, ${manager})`;
+    sql = `INSERT INTO inventory_system.${table} VALUES(${order_id}, "${shipmentDate}", ${quantity}, ${assignedEmployee}, "${deliveryAddress}", ${daysToShipment}, ${barcode}, ${product}, ${manager})`;
   }
   try {
     console.log(sql);
