@@ -3,11 +3,11 @@ import { useState } from 'react';
 import Axios from 'axios';
 
 function App() {
-  let defaultDate = new Date();
-  defaultDate.setDate(defaultDate.getDate() + 3);
+  // let defaultDate = new Date();
+  // defaultDate.setDate(defaultDate.getDate() + 3); //LOOK AT THIS FOR TOMORROW // STRING INITIAL STATE!!!
 
   const [Order_ID, setOrder_ID] = useState(0);
-  const [ShipmentDate, setShipmentDate] = useState(defaultDate);
+  const [ShipmentDate, setShipmentDate] = useState("");
   const [Quantity, setQuantity] = useState(0);
   const [AssignedReceiver, setAssignedReceiver] = useState(0);
   const [Inventory_Barcode, setInventory_Barcode] = useState(0);
