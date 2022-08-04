@@ -35,7 +35,7 @@ function App() {
     ).then(() => {
       console.log("success");
     }).catch(error => {
-      console.log(error.response);
+      console.log(error.response.data);
     });
   }
 
@@ -45,6 +45,7 @@ function App() {
     Quantity: Quantity,
     AssignedReceiver: AssignedReceiver,
     Inventory_Barcode: Inventory_Barcode,
+    Product_Barcode: Product_Barcode,
     Manager: Manager,
   }, orderType: "IncomingShipmentOrder"};
 
@@ -54,7 +55,7 @@ function App() {
     ).then(() => {
       console.log("success");
     }).catch(error => {
-      console.log(error.response);
+      console.log(error.response.data);
     });
   }
 
@@ -71,10 +72,16 @@ function App() {
             setOrder_ID(event.target.value);
           }}
         />
-        <label>Item Number:</label>
+        <label>Inventory Barcode:</label>
         <input type="number" 
           onChange={(event) => {
             setInventory_Barcode(event.target.value);
+          }}
+        />
+        <label>Product Barcode:</label>
+        <input type="number" 
+          onChange={(event) => {
+            setProduct_Barcode(event.target.value);
           }}
         />
         <label>Shipment Date:</label>

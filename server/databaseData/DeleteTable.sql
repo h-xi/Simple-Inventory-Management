@@ -1,0 +1,18 @@
+SET foreign_key_checks = 0;
+DROP TABLE  inventory_system.Brands;
+DROP TABLE  inventory_system.Categories;
+DROP TABLE  inventory_system.Supplier;
+DROP TABLE  inventory_system.Aisle;
+DROP TABLE  inventory_system.Bin;
+DROP TABLE  inventory_system.Inventory;
+DROP TABLE  inventory_system.Product;
+DROP TABLE  inventory_system.ManagerEmployee;
+DROP TABLE  inventory_system.DriverEmployee;
+DROP TABLE  inventory_system.WorkerEmployee;
+DROP TABLE  inventory_system.Benefits;
+DROP TABLE  inventory_system.Holiday;
+DROP TABLE  inventory_system.OutgoingShipmentOrder;
+DROP TABLE  inventory_system.IncomingShipmentOrder;
+DROP TABLE  inventory_system.Priority;
+DROP TABLE  inventory_system.Highlight;
+SET foreign_key_checks = 1;

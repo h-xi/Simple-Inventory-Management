@@ -32,7 +32,7 @@ const createTables = async () => {
 
 const dropTables = async () => {
   const schemasString = fs.readFileSync(
-    "createTable_minus_foreign_keys.sql",
+    "DeleteTable.sql",
     "utf-8"
   );
   //Split and filter logic taken from cccttt10's "super-rent-backend"
@@ -44,7 +44,7 @@ const dropTables = async () => {
   for (const tableSchema of tableSchemas) {
     try {
       await poolPromise.query(tableSchema);
-      console.log("Tables succesfully Created");
+      console.log("Tables succesfully Deleted");
     } catch (e) {
       console.error(e);
       throw e;
@@ -78,7 +78,7 @@ const main = async () => {
       }
     } else if (process.argv[2] === "--delete") {
       try {
-        await modifyTables();
+        await dropTables();
       } catch (e) {
         console.error(e);
       }
