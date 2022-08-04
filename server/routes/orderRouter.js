@@ -3,17 +3,11 @@ const router = express.Router();
 const { addOrder } = require("../controllers/orderController");
 const { getEmployee } = require("../controllers/employeeController");
 const { getBarcode } = require("../controllers/inventoryController");
-const { app } = require("tailwind");
-
-// const cors = require('cors');
-// app.use(cors());
-// app.use(express.json());
 
 router.post("/", async (req, res) => {
   let errors = [];
   let incoming;
   const orderData = req.body.orderData;
-  console.log(orderData);
   if (orderData.ShipmentDate == "") {
     errors.push("Please provide a shipment date for order");
   }
@@ -83,7 +77,7 @@ router.post("/", async (req, res) => {
   }
   try {
     const result = await addOrder(orderData, incoming);
-    return res.send(result);
+    return res.send({ Message: "Order Creation Successful!" });
   } catch (e) {
     return res.status(500).json({
       Message: "Order Creation Unsuccessful",
