@@ -55,7 +55,7 @@ function App() {
     console.log(incomingData);
     Axios.post('http://localhost:3000/orders', incomingData
     ).then(() => {
-      console.log("Gimme dat MACBOOK PRO");
+      console.log("Incoming data successfully updated:", incomingData);
     }).catch(error => {
       console.log(error.response.data);
     });
@@ -89,7 +89,7 @@ function App() {
         <label>Shipment Date:</label>
         <input type="text" 
           onChange={(event) => {
-            setShipmentDate(event.target.value);
+            setShipmentDate("event.target.value");
           }}
         />
         <label>Quantity:</label>
