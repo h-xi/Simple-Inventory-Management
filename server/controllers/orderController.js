@@ -116,8 +116,5 @@ const createTest = async () => {
     throw err;
   }
 };
-//TODO: DELETE ON CASCADE
-
-//TODO: UPDATE FN ON ORDER
 
 module.exports = { addOrder: addOrder, deleteOrder: deleteOrder };
