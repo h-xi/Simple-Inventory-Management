@@ -2,7 +2,7 @@ const fs = require("fs");
 const mysql = require("mysql2/promise");
 const dotenv = require("dotenv");
 // const log = require("../util/log");
-const pool = require("../dbConnector");
+const pool = require("../utils/dbConnector");
 const { create } = require("domain");
 const poolPromise = pool.promise();
 

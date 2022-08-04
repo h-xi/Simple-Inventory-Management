@@ -1,4 +1,4 @@
-const pool = require("../dbConnector.js");
+const pool = require("../utils/dbConnector.js");
 
 const promisePool = pool.promise();
 
