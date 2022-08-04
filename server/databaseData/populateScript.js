@@ -3,31 +3,54 @@ const mysql = require("mysql2/promise");
 const dotenv = require("dotenv");
 // const log = require("../util/log");
 const pool = require("../dbConnector");
+const { create } = require("domain");
 const poolPromise = pool.promise();
 
 // dotenv.config({ path: "./config.env" });
 
-// const createTables = async () => {
-//   const schemasString = fs.readFileSync(
-//     "createTable_minus_foreign_keys.sql",
-//     "utf-8"
-//   );
-//   //Split and filter logic taken from cccttt10's "super-rent-backend"
-//   const tableSchemas = schemasString
-//     .split(";")
-//     .filter(
-//       (tableSchema) => typeof tableSchema === "string" && tableSchema.length > 0
-//     );
-//   for (const tableSchema of tableSchemas) {
-//     try {
-//       await poolPromise.query(tableSchema);
-//       console.log("Tables succesfully Created");
-//     } catch (e) {
-//       console.error(e);
-//       throw e;
-//     }
-//   }
-// };
+const createTables = async () => {
+  const schemasString = fs.readFileSync(
+    "createTable_minus_foreign_keys.sql",
+    "utf-8"
+  );
+  //Split and filter logic taken from cccttt10's "super-rent-backend"
+  const tableSchemas = schemasString
+    .split(";")
+    .filter(
+      (tableSchema) => typeof tableSchema === "string" && tableSchema.length > 0
+    );
+  for (const tableSchema of tableSchemas) {
+    try {
+      await poolPromise.query(tableSchema);
+      console.log("Tables succesfully Created");
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  }
+};
+
+const dropTables = async () => {
+  const schemasString = fs.readFileSync(
+    "createTable_minus_foreign_keys.sql",
+    "utf-8"
+  );
+  //Split and filter logic taken from cccttt10's "super-rent-backend"
+  const tableSchemas = schemasString
+    .split(";")
+    .filter(
+      (tableSchema) => typeof tableSchema === "string" && tableSchema.length > 0
+    );
+  for (const tableSchema of tableSchemas) {
+    try {
+      await poolPromise.query(tableSchema);
+      console.log("Tables succesfully Created");
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  }
+};
 
 const checkConnection = async () => {
   try {
@@ -42,42 +65,14 @@ const checkConnection = async () => {
   }
 };
 
-const modifyTables = async (operation = "delete") => {
-  let schemaString;
-  if (operation == "create") {
-    schemaString = fs.readFileSync(
-      "createTable_minus_foreign_keys.sql",
-      "utf-8"
-    );
-  } else {
-    schemaString = fs.readFileSync("dropTable.sql", "utf-8");
-  }
-  //Split and filter logic taken from cccttt10's "super-rent-backend"
-  const operations = schemaString
-    .split(";")
-    .filter(
-      (operations) => typeof operations === "string" && operations.length > 0
-    );
-  for (const operation of operations) {
-    try {
-      await poolPromise.query(operation);
-      console.log("Tables succesfully Created!");
-      return "Tables successfully Created!";
-    } catch (e) {
-      console.error(e);
-      throw e;
-    }
-  }
-};
-
 const main = async () => {
   const connection = await checkConnection();
   console.log(connection);
   if (connection == "Connection Successful!") {
     if (process.argv[2] === "--create") {
       try {
-        console.log("hello");
-        return await modifyTables("create");
+        const tables = await createTables();
+        return tables;
       } catch (e) {
         console.error(e);
       }
