@@ -35,7 +35,7 @@ function App() {
     ).then(() => {
       console.log("success");
     }).catch(error => {
-      console.log(error.response);
+      console.log(error.response.data);
     });
   }
 
@@ -54,7 +54,7 @@ function App() {
     ).then(() => {
       console.log("success");
     }).catch(error => {
-      console.log(error.response);
+      console.log(error.response.data);
     });
   }
 
