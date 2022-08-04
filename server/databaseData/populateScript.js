@@ -7,20 +7,60 @@ const poolPromise = pool.promise();
 
 // dotenv.config({ path: "./config.env" });
 
-const createTables = async () => {
-  const schemasString = fs.readFileSync(
-    "createTable_minus_foreign_keys.sql",
-    "utf-8"
-  );
+// const createTables = async () => {
+//   const schemasString = fs.readFileSync(
+//     "createTable_minus_foreign_keys.sql",
+//     "utf-8"
+//   );
+//   //Split and filter logic taken from cccttt10's "super-rent-backend"
+//   const tableSchemas = schemasString
+//     .split(";")
+//     .filter(
+//       (tableSchema) => typeof tableSchema === "string" && tableSchema.length > 0
+//     );
+//   for (const tableSchema of tableSchemas) {
+//     try {
+//       await poolPromise.query(tableSchema);
+//       console.log("Tables succesfully Created");
+//     } catch (e) {
+//       console.error(e);
+//       throw e;
+//     }
+//   }
+// };
+
+const checkConnection = async () => {
+  try {
+    const connection = await poolPromise.getConnection();
+    const result = "Connection Successful!";
+    console.log(result);
+    return result;
+  } catch (e) {
+    const result = "Connection Unsuccessful";
+    console.log(result);
+    return result;
+  }
+};
+
+const modifyTables = async (operation = "delete") => {
+  let schemaString;
+  if (operation == "create") {
+    schemaString = fs.readFileSync(
+      "createTable_minus_foreign_keys.sql",
+      "utf-8"
+    );
+  } else {
+    schemaString = fs.readFileSync("dropTable.sql", "utf-8");
+  }
   //Split and filter logic taken from cccttt10's "super-rent-backend"
-  const tableSchemas = schemasString
+  const operations = schemaString
     .split(";")
     .filter(
-      (tableSchema) => typeof tableSchema === "string" && tableSchema.length > 0
+      (operations) => typeof operations === "string" && operations.length > 0
     );
-  for (const tableSchema of tableSchemas) {
+  for (const operation of operations) {
     try {
-      await poolPromise.query(tableSchema);
+      await poolPromise.query(operation);
       console.log("Tables succesfully Created");
     } catch (e) {
       console.error(e);
@@ -29,165 +69,15 @@ const createTables = async () => {
   }
 };
 
-createTables();
-
-// const importVehicleTypes = async () => {
-//   const vehicleTypes = JSON.parse(
-//     fs.readFileSync("src/dev-data/data/vehicleTypes.json", "utf8")
-//   );
-//   let insertVehicleTypesQuery = "";
-//   for (const vehicleType of vehicleTypes) {
-//     const { vehicleTypeName, dayRate } = vehicleType;
-//     insertVehicleTypesQuery += `
-//             INSERT INTO vehicleTypes(vehicleTypeName, dayRate)
-//             VALUES("${vehicleTypeName}", ${dayRate});
-//         `;
-//   }
-//   await connection.query(insertVehicleTypesQuery);
-//   log.success("👌 imported vehicleTypes data!");
-// };
-
-// const importCustomers = async () => {
-//   const customers = JSON.parse(
-//     fs.readFileSync("src/dev-data/data/customers.json", "utf8")
-//   );
-//   let insertCustomersQuery = "";
-//   for (const customer of customers) {
-//     const { driversLicence, phone, name } = customer;
-//     insertCustomersQuery += `
-//             INSERT INTO customers(driversLicence, phone, name)
-//             VALUES("${driversLicence}", "${phone}", "${name}");
-//         `;
-//   }
-//   await connection.query(insertCustomersQuery);
-//   log.success("👌 imported customers data!");
-// };
-
-// const importVehicles = async () => {
-//   const vehicles = JSON.parse(
-//     fs.readFileSync("src/dev-data/data/vehicles.json", "utf8")
-//   );
-//   let insertVehiclesQuery = "";
-//   for (const vehicle of vehicles) {
-//     const {
-//       vehicleLicence,
-//       make,
-//       model,
-//       year,
-//       color,
-//       status,
-//       vehicleTypeName,
-//       location,
-//       city,
-//     } = vehicle;
-//     insertVehiclesQuery += `
-//             INSERT INTO vehicles(vehicleLicence, make, model, year, color,
-//                                  status, vehicleTypeName, location, city)
-//             VALUES("${vehicleLicence}", "${make}", "${model}", ${year}, "${color}",
-//                   "${status}", "${vehicleTypeName}", "${location}", "${city}");
-//         `;
-//   }
-//   await connection.query(insertVehiclesQuery);
-//   log.success("👌 imported vehicles data!");
-// };
-
-// const importReservations = async () => {
-//   const reservations = JSON.parse(
-//     fs.readFileSync("src/dev-data/data/reservations.json", "utf8")
-//   );
-//   let insertReservationsQuery = "";
-//   for (const reservation of reservations) {
-//     const { confNum, vehicleTypeName, driversLicence, fromDate, toDate } =
-//       reservation;
-//     insertReservationsQuery += `
-//             INSERT INTO reservations(confNum, vehicleTypeName, driversLicence, fromDate, toDate)
-//             VALUES("${confNum}", "${vehicleTypeName}", "${driversLicence}",
-//                     STR_TO_DATE("${fromDate}", "%Y-%m-%d"), STR_TO_DATE("${toDate}", "%Y-%m-%d"));
-//         `;
-//   }
-//   await connection.query(insertReservationsQuery);
-//   log.success("👌 imported reservations data!");
-// };
-
-// const importRents = async () => {
-//   const rents = JSON.parse(
-//     fs.readFileSync("src/dev-data/data/rents.json", "utf8")
-//   );
-//   let insertRentsQuery = "";
-//   for (const rent of rents) {
-//     const { rentId, vehicleLicence, driversLicence, fromDate, toDate } = rent;
-//     const confNum = rent.confNum;
-//     if (confNum)
-//       insertRentsQuery += `
-//                 INSERT INTO rents(rentId, vehicleLicence, driversLicence, fromDate, toDate, confNum)
-//                 VALUES("${rentId}", "${vehicleLicence}", "${driversLicence}",
-//                         STR_TO_DATE("${fromDate}", "%Y-%m-%d"), STR_TO_DATE("${toDate}", "%Y-%m-%d"),
-//                         "${confNum}");
-//             `;
-//     else
-//       insertRentsQuery += `
-//                 INSERT INTO rents(rentId, vehicleLicence, driversLicence, fromDate, toDate, confNum)
-//                 VALUES("${rentId}", "${vehicleLicence}", "${driversLicence}",
-//                         STR_TO_DATE("${fromDate}", "%Y-%m-%d"), STR_TO_DATE("${toDate}", "%Y-%m-%d"),
-//                         NULL);
-//             `;
-//   }
-//   await connection.query(insertRentsQuery);
-//   log.success("👌 imported rents data!");
-// };
-
-// const importReturns = async () => {
-//   const returns = JSON.parse(
-//     fs.readFileSync("src/dev-data/data/returns.json", "utf8")
-//   );
-//   let insertReturnsQuery = "";
-//   for (const ret of returns) {
-//     const { rentId, date, price } = ret;
-//     insertReturnsQuery += `
-//             INSERT INTO returns(rentId, date, price)
-//             VALUES("${rentId}", STR_TO_DATE("${date}", "%Y-%m-%d"), ${price});
-//         `;
-//   }
-//   await connection.query(insertReturnsQuery);
-//   log.success("👌 imported returns data!");
-// };
-
-// const importData = async () => {
-//   await createTables();
-//   await importVehicleTypes();
-//   await importCustomers();
-//   await importVehicles();
-//   await importReservations();
-//   await importRents();
-//   await importReturns();
-//   log.success("👌 imported all data to database, done");
-//   process.exit(0);
-// };
-
-// const dropTables = async () => {
-//   const queriesString = fs.readFileSync("src/dev-data/dropTables.sql", "utf-8");
-//   const queries = queriesString
-//     .split(";")
-//     .filter((query) => typeof query === "string" && query.length > 0);
-//   for (const query of queries) {
-//     await connection.query(query);
-//   }
-//   log.success("👌 dropped all tables and deleted all data!");
-//   process.exit(0);
-// };
-
-// const main = async () => {
-//   try {
-//     await connect();
-//     if (process.argv[2] === "--import") {
-//       await importData();
-//     } else if (process.argv[2] === "--delete") {
-//       await dropTables();
-//     }
-//   } catch (err) {
-//     log.error(err);
-//     process.exit(1);
-//   }
-// };
-
-// main();
+const main = async () => {
+  const connection = await checkConnection();
+  if (connection == "Connection Successful!") {
+    if (process.argv[2] === "--create") {
+      await modifyTables("create");
+    } else if (process.argv[2] === "--delete") {
+      await modifyTables();
+    }
+  }
+  console.log("connection Unsuccessful!");
+  return null;
+};
