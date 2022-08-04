@@ -363,6 +363,7 @@ ALTER TABLE Product
 ADD CONSTRAINT fk5    
     FOREIGN KEY (Brand_ID) REFERENCES Brands (Brand_ID);
 
+
 ALTER TABLE ManagerEmployee
 ADD CONSTRAINT fk6
     FOREIGN KEY (YearsWorked) REFERENCES Benefits (YearsWorked);

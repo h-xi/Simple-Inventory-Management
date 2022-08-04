@@ -77,7 +77,7 @@ const updateOrder = async (order, incoming = true) => {
     assignedEmployee = order.AssignedDriver;
     daysToShipment = order.DaysToShipment;
     deliveryAddress = order.DeliveryAddress;
-    sql = `UPDATE inventory_system.${table} SET ShipmentDate = ${shipmentDate}, Quantity = ${quantity}, AssignedDriver = ${assignedEmployee}, DeliveryAddress = ${deliveryAddress}, DaysToShipment = ${daysToShipment}, Inventory_Barcode = ${barcode}, Product_Barcode = ${product}, Manager = ${manager})`;
+    sql = `UPDATE inventory_system.${table} SET ShipmentDate = ${shipmentDate}, Quantity = ${quantity}, AssignedDriver = ${assignedEmployee}, DeliveryAddress = ${deliveryAddress}, DaysToShipment = ${daysToShipment}, Inventory_Barcode = ${barcode}, Product_Barcode = ${product}, Manager = ${manager} WHERE Order_ID = ${order_id})`;)
   }
   try {
     console.log(sql);
