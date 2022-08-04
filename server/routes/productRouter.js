@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { deleteProduct } = require("../controllers/productController");
 
-router.delete("/", (req, res) => {
+router.delete(":/barcode", (req, res) => {
     const barcode = req.query.params; // req.query.param
 
     try {
