@@ -17,14 +17,14 @@ function App() {
   //const [DeliveryAddress, setDeliveryAddress] = useState("");
 
   const outgoingData = {orderData: {
-    order_id: Order_ID,
-    shipmentDate: ShipmentDate,
-    quantity: Quantity,
-    assignedEmployee: AssignedDriver,
+    Order_ID: Order_ID,
+    ShipmentDate: ShipmentDate,
+    Quantity: Quantity,
+    AssignedDriver: AssignedDriver,
     //DeliveryAddress: DeliveryAddress,
-    barcode: Inventory_Barcode,
-    product: Product_Barcode,
-    manager: Manager,
+    Inventory_Barcode: Inventory_Barcode,
+    Product_Barcode: Product_Barcode,
+    Manager: Manager,
   }, orderType: "OutgoingShipmentOrder"};
 
 
@@ -40,13 +40,13 @@ function App() {
   }
 
   const incomingData = {orderData: {
-    order_id: Order_ID,
-    shipmentDate: ShipmentDate,
-    quantity: Quantity,
-    assignedEmployee: AssignedReceiver,
-    barcode: Inventory_Barcode,
-    product: Product_Barcode,
-    manager: Manager,
+    Order_ID: Order_ID,
+    ShipmentDate: ShipmentDate,
+    Quantity: Quantity,
+    AssignedReceiver: AssignedReceiver,
+    Inventory_Barcode: Inventory_Barcode,
+    Product_Barcode: Product_Barcode,
+    Manager: Manager,
   }, orderType: "IncomingShipmentOrder"};
 
   const updateIncomingOrder = () => {
@@ -55,7 +55,7 @@ function App() {
     console.log(incomingData);
     Axios.post('http://localhost:3000/orders', incomingData
     ).then(() => {
-      console.log("success");
+      console.log("Gimme dat MACBOOK PRO");
     }).catch(error => {
       console.log(error.response.data);
     });

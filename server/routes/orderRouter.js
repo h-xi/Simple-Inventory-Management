@@ -15,9 +15,9 @@ router.post("/", async (req, res) => {
     errors.push("Please provide valid shipment date");
   }
 
-  if (isNaN(new Date(orderData.ShipmentDate))) {
-    errors.push("Shipment Date value is invalid");
-  }
+  // if (isNaN(new Date(orderData.ShipmentDate))) {
+  //   errors.push("Shipment Date value is invalid");
+  // }
 
   if (orderData.Quantity == 0) {
     errors.push("Invalid Quantity Amount");
