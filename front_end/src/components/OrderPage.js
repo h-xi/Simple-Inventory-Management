@@ -4,7 +4,7 @@ import Axios from 'axios';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 
-export default function OrderPage() {
+function OrderPage() {
     // let defaultDate = new Date();
     // defaultDate.setDate(defaultDate.getDate() + 3); //LOOK AT THIS FOR TOMORROW // STRING INITIAL STATE!!!
   
@@ -172,3 +172,5 @@ export default function OrderPage() {
         </div>
     );
   }
+  
+  export default OrderPage;
