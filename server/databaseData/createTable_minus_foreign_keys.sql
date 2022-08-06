@@ -194,24 +194,24 @@ INSERT INTO inventory_system.Product VALUES (364, 'Nike shirt 1', 'Small','KO',2
 INSERT INTO inventory_system.Product VALUES (374, 'Nike shirt 2', 'Small','KO',2,2,100,374,402,120);
 INSERT INTO inventory_system.Product VALUES (384, 'Nike shirt 3', 'Large','KO',2,2,100,384,502,142);
 INSERT INTO inventory_system.Product VALUES (394, 'Nike shirt 4', 'Small','KO',2,2,100,394,650,72);
-INSERT INTO inventory_system.Product VALUES (354, 'Nike shirt 5', 'Large','KO',2,2,100,354,71,80);
+INSERT INTO inventory_system.Product VALUES (354, 'Nike shirt 5', 'Large','KO',2,2,100,354,71,112);
 
 INSERT INTO inventory_system.Product VALUES (464, 'Adidas shirt 1', 'Small','AE',2,2,200,464,302,45);
-INSERT INTO inventory_system.Product VALUES (474, 'Adidas shirt 2', 'Medium','AE',2,2,200,474,402,89);
+INSERT INTO inventory_system.Product VALUES (474, 'Adidas shirt 2', 'Medium','AE',2,2,200,474,402,109);
 INSERT INTO inventory_system.Product VALUES (484, 'Adidas shirt 3', 'Small','AE',2,2,200,484,502,76);
 INSERT INTO inventory_system.Product VALUES (494, 'Adidas shirt 4', 'Large','AE',2,2,200,494,650,110);
-INSERT INTO inventory_system.Product VALUES (454, 'Adidas shirt 5', 'Small','AE',2,2,200,454,71,49);
+INSERT INTO inventory_system.Product VALUES (454, 'Adidas shirt 5', 'Small','AE',2,2,200,454,71,45);
 
 INSERT INTO inventory_system.Product VALUES (564, 'Fila shirt 1', 'Large','FG',2,2,300,564,302,34);
 INSERT INTO inventory_system.Product VALUES (574, 'Fila shirt 2', 'Large','FG',2,2,300,574,402,45);
 INSERT INTO inventory_system.Product VALUES (584, 'Fila shirt 3', 'Small','FG',2,2,300,584,502,23);
-INSERT INTO inventory_system.Product VALUES (594, 'Fila shirt 4', 'Large','FG',2,2,300,594,650,67);
+INSERT INTO inventory_system.Product VALUES (594, 'Fila shirt 4', 'Large','FG',2,2,300,594,650,101);
 INSERT INTO inventory_system.Product VALUES (554, 'Fila shirt 5', 'Small','FG',2,2,300,554,71,16);
 
 INSERT INTO inventory_system.Product VALUES (664, 'Champion shirt 1', 'Small','AE',2,2,400,664,302,17);
 INSERT INTO inventory_system.Product VALUES (674, 'Champion shirt 2', 'Large','AE',2,2,400,674,402,78);
-INSERT INTO inventory_system.Product VALUES (684, 'Champion shirt 3', 'Small','AE',2,2,400,684,502,23);
-INSERT INTO inventory_system.Product VALUES (694, 'Champion shirt 4', 'Medium','AE',2,2,400,694,650,47);
+INSERT INTO inventory_system.Product VALUES (684, 'Champion shirt 3', 'Small','AE',2,2,400,684,502,45);
+INSERT INTO inventory_system.Product VALUES (694, 'Champion shirt 4', 'Medium','AE',2,2,400,694,650,45);
 INSERT INTO inventory_system.Product VALUES (654, 'Champion shirt 5', 'Medium','AE',2,2,400,654,71,36);
 
 INSERT INTO inventory_system.Supplier VALUES (9513124873, 'Acme', 302, 364);

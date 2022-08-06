@@ -5,11 +5,11 @@ const promisePool = pool.promise();
 
 
 const aggregationGroup = async (params) => {
-//This finds the maximum price of the products for each brand (returning Brand ID, Brand Name and Price).
-    var sql = `SELECT		P.Brand_ID, B.B_Name, MAX(P.Price)
+//This finds the average price of products, sized small, for each brand (returning their Brand ID and Brand Name).
+    var sql = `SELECT		P.Brand_ID, B.B_Name as Brand_Name, AVG(P.Price)
     FROM		Product P, Brands B
-    WHERE		B.Brand_ID = P.Brand_ID
-    GROUP BY	P.Brand_ID;
+    WHERE		B.Brand_ID = P.Brand_ID AND P.Size LIKE 'Small'
+    GROUP BY 	P.Brand_ID;
     `;
 
   try {

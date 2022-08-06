@@ -5,11 +5,14 @@ const promisePool = pool.promise();
 
 
 const nestedAggregationGroup = async (params) => {
-//This finds the average price of products, sized small, for each brand (Returning Brand ID, Brand Name and Price).
-    var sql = `SELECT		P.Brand_ID, B.B_Name, AVG(P.Price)
-    FROM		Product P, Brands B
-    WHERE		B.Brand_ID = P.Brand_ID AND P.Size LIKE 'Small'
-    GROUP BY 	P.Brand_ID;
+//This finds Brands that have at least two products that are above 100 in price (Returns Brand_ID).
+    var sql = `SELECT P.Brand_ID
+                FROM Product P 
+                GROUP BY P.Brand_ID 
+                HAVING 2 <= (SELECT COUNT(*) 
+                              FROM Product P2 
+                              WHERE P2.Price>100 AND P.Brand_ID = P2.Brand_ID); 
+    
     `;
 
   try {
