@@ -18,11 +18,4 @@ const buildQuery = (params) => {
   return res;
 };
 
-// {
-//     objectID: 4453,
-//     shippingDate: '10/23/2020'
-// }
-
-buildQuery({ Key: "Value1", Key2: "Value2", Key3: "Value3" });
-
 module.exports = { buildQuery: buildQuery };
