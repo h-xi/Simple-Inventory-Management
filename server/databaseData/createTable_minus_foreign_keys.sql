@@ -190,11 +190,11 @@ INSERT INTO inventory_system.Bin VALUES ('KO', 1000, 5, 0);
 INSERT INTO inventory_system.Bin VALUES ('PT', 1000, 5, 0);
 INSERT INTO inventory_system.Bin VALUES ('UZ', 1000, 5, 0);
 
-INSERT INTO inventory_system.Product VALUES (364, 'Nike shirt 1', 'Small','KO',2,2,100,364,302);
-INSERT INTO inventory_system.Product VALUES (374, 'Nike shirt 2', 'Small','KO',2,2,100,374,402);
-INSERT INTO inventory_system.Product VALUES (384, 'Nike shirt 3', 'Small','KO',2,2,100,384,502);
-INSERT INTO inventory_system.Product VALUES (394, 'Nike shirt 4', 'Small','KO',2,2,100,394,650);
-INSERT INTO inventory_system.Product VALUES (354, 'Nike shirt 5', 'Small','KO',2,2,100,354,71);
+INSERT INTO inventory_system.Product VALUES (364, 'Nike shirt 1', 'Small','KO',2,2,100,364,302,90);
+INSERT INTO inventory_system.Product VALUES (374, 'Nike shirt 2', 'Small','KO',2,2,100,374,402,120);
+INSERT INTO inventory_system.Product VALUES (384, 'Nike shirt 3', 'Small','KO',2,2,100,384,502,142);
+INSERT INTO inventory_system.Product VALUES (394, 'Nike shirt 4', 'Small','KO',2,2,100,394,650,72);
+INSERT INTO inventory_system.Product VALUES (354, 'Nike shirt 5', 'Small','KO',2,2,100,354,71,80);
 
 INSERT INTO inventory_system.Supplier VALUES (9513124873, 'Acme', 302, 364);
 INSERT INTO inventory_system.Supplier VALUES (9513124192, 'Peak', 402, 374);
