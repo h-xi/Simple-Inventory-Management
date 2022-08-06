@@ -13,8 +13,9 @@ const addProduct = async (order, incoming = true) => {
   let brand_id = Product.Brand_ID;
   let inventory_barcode = Product.Inventory_barcode;
   let supplier_id = Product.SupplierID;
+  let price = Product.Price;
 
-  sql = `INSERT INTO inventory_system.${Product} VALUES(${barcode}, "${p_name}", "${size}", "${bin_name}", ${aisle_no}, ${category_id}, ${brand_id}, ${inventory_barcode}, ${supplier_id})`;
+  sql = `INSERT INTO inventory_system.${Product} VALUES(${barcode}, "${p_name}", "${size}", "${bin_name}", ${aisle_no}, ${category_id}, ${brand_id}, ${inventory_barcode}, ${supplier_id}, ${price})`;
 
   try {
     console.log(sql);
@@ -51,8 +52,9 @@ const updateProduct = async (product, incoming = true) => {
   let brand_id = Product.Brand_ID;
   let inventory_barcode = Product.Inventory_barcode;
   let supplier_id = Product.SupplierID;
+  let price = Product.Price;
 
-  sql = `UPDATE inventory_system.${Product} SET P_name = "${p_name}", Size = "${size}", Bin_name = "${bin_name}", Aisle_no = ${aisle_no}, Category_ID = ${category_id}, Brand_ID = ${brand_id}, Inventory_barcode =  ${inventory_barcode}, SupplierID = ${supplier_id} WHERE Barcode = ${barcode})`;
+  sql = `UPDATE inventory_system.${Product} SET P_name = "${p_name}", Size = "${size}", Bin_name = "${bin_name}", Aisle_no = ${aisle_no}, Category_ID = ${category_id}, Brand_ID = ${brand_id}, Inventory_barcode =  ${inventory_barcode}, SupplierID = ${supplier_id}, Price = ${price} WHERE Barcode = ${barcode})`;
 
   try {
     console.log(sql);
