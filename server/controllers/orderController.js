@@ -1,41 +1,7 @@
 const pool = require("../utils/dbConnector.js");
 const { buildQuery } = require("../utils/dataQuery");
-const e = require("express");
 
 const promisePool = pool.promise();
-
-// const getOrder = async (params) => {
-//   const conditions = buildQuery(params);
-//   var outgoing = false;
-//   if (
-//     params.AssignedDriver ||
-//     params.DeliveryAddress ||
-//     params.DaysToShipment
-//   ) {
-//     outgoing = true;
-//     var sql = `SELECT * FROM inventory_system.OutgoingShipmentOrder WHERE ${conditions.where};`;
-//   }
-//   try {
-//     console.log(sql);
-//     if (outgoing) {
-//       const result = await promisePool.query(sql, conditions.values);
-//       console.log(result[0][0]);
-//       return result[0][0];
-//     } else {
-//       var sql = `SELECT * FROM inventory_system.IncomingShipmentOrder WHERE ${conditions.where};`;
-//       const result = await promisePool.query(sql, conditions.values);
-//       console.log(result);
-//       if (result[0][0].length() < 0) {
-//         var sql = `SELECT * FROM inventory_system.OutgoingShipmentOrder WHERE ${conditions.where};`;
-//         const result1 = await promisePool.query(sql, conditions.values);
-//         console.log(result1);
-//       }
-//     }
-//   } catch (e) {
-//     console.error(e);
-//     throw e;
-//   }
-// };
 
 const getIncomingOrder = async (params) => {
   let result;
@@ -181,66 +147,9 @@ const updateOrder = async (order, incoming = true) => {
   }
 };
 
-// addOrder(
-//   {
-//     Order_ID: 48231,
-//     ShipmentDate: `"12/06/1985"`,
-//     Quantity: 2,
-//     AssignedDriver: 30002,
-//     DeliveryAddress: `"123 Almond Drive"`,
-//     DaysToShipment: 12,
-//     Inventory_Barcode: 354,
-//     Product_Barcode: 354,
-//     Manager: 35215,
-//   },
-//   false
-// );
-
-//USE This!!!! call with promisePool not pool
-const createTest = async () => {
-  try {
-    const [rows, fields] = await promisePool.query(
-      "CREATE TABLE hello (name VARCHAR(10))"
-    );
-    console.debug(rows);
-    console.debug(fields);
-  } catch (err) {
-    throw err;
-  }
-};
-
 module.exports = {
   addOrder: addOrder,
   deleteOrder: deleteOrder,
   getIncomingOrder: getIncomingOrder,
   getOutgoingOrder: getOutgoingOrder,
 };
-
-// if (params.Order_ID) {
-//   queries.push(Order_ID);
-// }
-// if (params.ShipmentDate) {
-//   queries.push(ShipmentDate);
-// }
-// if (params.Quantity) {
-//   queries.push(Quantity);
-// }
-// if (params.AssignedReceiver) {
-//   queries.push(AssignedReceiver);
-// }
-// if (params.AssignedDriver) {
-//   incoming = false;
-//   queries.push(AssignedDriver);
-// }
-// if (params.Inventory_barcode) {
-//   queries.push(Inventory_barcode);
-// }
-// if (params.Product_Barcode) {
-//   queries.push(Product_Barcode);
-// }
-// if (params.Manager) {
-//   queries.push(Manager);
-// }
-// if (params.DeliveryAddress) {
-//   queries.push();
-// }
