@@ -58,7 +58,19 @@ INSERT INTO inventory_system.Product VALUES (364, 'Nike shirt 1', 'Small','KO',2
 INSERT INTO inventory_system.Product VALUES (374, 'Nike shirt 2', 'Small','KO',2,2,100,374,402,120);
 INSERT INTO inventory_system.Product VALUES (384, 'Nike shirt 3', 'Small','KO',2,2,100,384,502,142);
 INSERT INTO inventory_system.Product VALUES (394, 'Nike shirt 4', 'Small','KO',2,2,100,394,650,72);
-INSERT INTO inventory_system.Product VALUES (354, 'Nike shirt 5', 'Small','KO',2,2,100,354,71,80);
+INSERT INTO inventory_system.Product VALUES (354, 'Nike shirt 5', 'Large','KO',2,2,100,354,71,80);
+
+INSERT INTO inventory_system.Product VALUES (464, 'Adidas shirt 1', 'Small','AE',2,2,200,464,302,45);
+INSERT INTO inventory_system.Product VALUES (474, 'Adidas shirt 2', 'Medium','AE',2,2,200,474,402,89);
+INSERT INTO inventory_system.Product VALUES (484, 'Adidas shirt 3', 'Small','AE',2,2,200,484,502,76);
+INSERT INTO inventory_system.Product VALUES (494, 'Adidas shirt 4', 'Large','AE',2,2,200,494,650,110);
+INSERT INTO inventory_system.Product VALUES (454, 'Adidas shirt 5', 'Small','AE',2,2,200,454,71,49);
+
+INSERT INTO inventory_system.Product VALUES (564, 'Fila shirt 1', 'Small','KO',2,2,100,364,302,90);
+INSERT INTO inventory_system.Product VALUES (574, 'Fila shirt 2', 'Small','KO',2,2,100,374,402,120);
+INSERT INTO inventory_system.Product VALUES (584, 'Fila shirt 3', 'Small','KO',2,2,100,384,502,142);
+INSERT INTO inventory_system.Product VALUES (594, 'Fila shirt 4', 'Small','KO',2,2,100,394,650,72);
+INSERT INTO inventory_system.Product VALUES (554, 'Fila shirt 5', 'Large','KO',2,2,100,354,71,80);
 
 INSERT INTO inventory_system.ManagerEmployee VALUES (39302, 593105933, '17/02/1995', '45 Grove Drive', 125000, 'Adam', 'West', 12, 'Purchasing');
 INSERT INTO inventory_system.ManagerEmployee VALUES (33113, 593100141, '12/06/1985', '75 Grove Drive', 135000, 'David', 'Ames', 4, 'Payroll');
