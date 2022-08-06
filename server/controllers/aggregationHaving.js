@@ -5,8 +5,13 @@ const promisePool = pool.promise();
 
 
 const aggregationHaving = async (params) => {
-//This finds brands that have atleast 2 products that are available in large size.
-    var sql = `SELECT	P.Brand_ID	FROM	Product P	WHERE	Size LIKE 'Large'	GROUP BY	P.Brand_ID	HAVING	Count(*)>1;`;
+//This finds brands that have atleast 2 products that are available in large size (returning their Brand ID and Brand Name).
+    var sql = `SELECT		P.Brand_ID, B.B_Name
+                FROM		Product P, Brands B
+                Where		B.Brand_ID = P.Brand_ID AND Size LIKE 'Large'
+                Group By	P.Brand_ID
+                Having		Count(*)>1;
+    `;
 
   try {
     console.log(sql);

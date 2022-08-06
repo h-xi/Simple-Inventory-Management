@@ -20,7 +20,7 @@ const division = async (params) => {
 //     Drop View Zip;
 //     `;
 
-//Find brands that offer products in all 3 sizes. (This version gives both brand names and brand IDs.)
+//Find brands that offer products in all 3 sizes. (Returning Brand ID and Brand Name.)
     var sql = `CREATE VIEW	Zip as
                 SELECT		Brand_ID, SIZE
                 FROM		Product
@@ -31,7 +31,7 @@ const division = async (params) => {
                 GROUP BY	Brand_ID
                 HAVING	count(*)>2;
 
-              SELECT		B_Name, Zip2.Brand_ID
+              SELECT	Zip2.Brand_ID, B_Name
               FROM		Zip2, Brands
               WHERE		Zip2.Brand_ID = Brands.Brand_ID;
 

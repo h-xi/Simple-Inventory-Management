@@ -5,8 +5,12 @@ const promisePool = pool.promise();
 
 
 const aggregationGroup = async (params) => {
-//This finds the maximum price of the products for each brand.
-    var sql = `SELECT	P.Brand_ID, MAX(P.Price) FROM	Product P GROUP BY	P.Brand_ID;`;
+//This finds the maximum price of the products for each brand (returning Brand ID, Brand Name and Price).
+    var sql = `SELECT		P.Brand_ID, B.B_Name, MAX(P.Price)
+    FROM		Product P, Brands B
+    WHERE		B.Brand_ID = P.Brand_ID
+    GROUP BY	P.Brand_ID;
+    `;
 
   try {
     console.log(sql);
