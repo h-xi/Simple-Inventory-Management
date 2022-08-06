@@ -9,6 +9,8 @@ import { Link, Route, BrowserRouter, Routes } from 'react-router-dom';
 import OrderPage from "./components/OrderPage";
 import LandingPage from "./components/LandingPage";
 import DeletePage from "./components/DeletePage";
+import GetIncomingOrderPage from "./components/GetIncomingOrderPage";
+import GetOutgoingOrderPage from "./components/GetOutgoingOrderPage";
   // function App() {
   // let defaultDate = new Date();
   // defaultDate.setDate(defaultDate.getDate() + 3); //LOOK AT THIS FOR TOMORROW // STRING INITIAL STATE!!!
@@ -190,6 +192,8 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/orders" element={<OrderPage />} />
           <Route path="/products" element={<DeletePage />} />
+          <Route path="/orders/incoming" element={<GetIncomingOrderPage />} />
+          <Route path="/orders/outgoing" element={<GetOutgoingOrderPage />} />
         </Routes>
       </BrowserRouter>
     </div>
