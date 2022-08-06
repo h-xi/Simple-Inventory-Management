@@ -1,5 +1,6 @@
 const testRouter = require("./testRouter");
 const orderRouter = require("./orderRouter");
+const productRouter = require("./productRouter");
 // const cors = require('cors');
 // app.use(cors());
 // app.use(express.json());
@@ -7,4 +8,5 @@ const orderRouter = require("./orderRouter");
 module.exports = (app) => {
   app.use("/", testRouter);
   app.use("/orders", orderRouter);
+  app.use("/products", productRouter);
 };

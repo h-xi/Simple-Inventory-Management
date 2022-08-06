@@ -29,6 +29,7 @@ const addProduct = async (order, incoming = true) => {
 
 //Delete Product function
 const deleteProduct = async (barcode) => {
+  console.log(barcode);
   table = "Product";
   sql = `DELETE FROM inventory_system.${table} WHERE Barcode = ${barcode}`;
 
@@ -63,19 +64,6 @@ const updateProduct = async (product, incoming = true) => {
     console.debug(fields);
   } catch (e) {
     throw e;
-  }
-};
-
-//USE This!!!! call with promisePool not pool
-const createTest = async () => {
-  try {
-    const [rows, fields] = await promisePool.query(
-      "CREATE TABLE hello (name VARCHAR(10))"
-    );
-    console.debug(rows);
-    console.debug(fields);
-  } catch (err) {
-    throw err;
   }
 };
 
