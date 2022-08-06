@@ -14,6 +14,4 @@ const getBarcode = async (inventory_barcode) => {
   }
 };
 
-getBarcode(0);
-
 module.exports = { getBarcode: getBarcode };
