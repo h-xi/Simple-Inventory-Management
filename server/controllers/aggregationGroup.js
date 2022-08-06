@@ -3,62 +3,37 @@ const { buildQuery } = require("../utils/dataQuery");
 
 const promisePool = pool.promise();
 
-const getIncomingOrder = async (params) => {
-  let result;
-  let Gotconditions;
-  let conditions;
-  const paramLength = Object.keys(params).length;
-  console.log(paramLength);
-  if (paramLength == 0) {
-    var sql = `SELECT * FROM inventory_system.IncomingShipmentOrder;`;
-  } else {
-    conditions = buildQuery(params);
+const getOrder = async (params) => {
+  let incoming = true;
+  if ("AssignedDriver" in params) {
+    incoming = false;
+  }
+  const conditions = buildQuery(params);
+  if (incoming) {
     var sql = `SELECT * FROM inventory_system.IncomingShipmentOrder WHERE ${conditions.where};`;
-    Gotconditions = true;
-  }
-  try {
-    console.log(sql);
-    if (Gotconditions) {
-      result = await promisePool.query(sql, conditions.values);
-    } else {
-      result = await promisePool.query(sql);
-    }
-    if (result[0].length < 1) {
-      return null;
-    } else return result[0];
-  } catch (e) {
-    console.error(e);
-    throw error;
-  }
-};
-const getOutgoingOrder = async (params) => {
-  let result;
-  let Gotconditions;
-  let conditions;
-  const paramLength = Object.keys(params).length;
-  console.log(paramLength);
-  if (paramLength == 0) {
-    var sql = `SELECT * FROM inventory_system.OutgoingShipmentOrder;`;
   } else {
-    conditions = buildQuery(params);
     var sql = `SELECT * FROM inventory_system.OutgoingShipmentOrder WHERE ${conditions.where};`;
-    Gotconditions = true;
   }
   try {
     console.log(sql);
-    if (Gotconditions) {
-      result = await promisePool.query(sql, conditions.values);
-    } else {
-      result = await promisePool.query(sql);
-    }
-    if (result[0].length < 1) {
-      return null;
-    } else return result[0];
+    const result = await promisePool.query(sql, conditions.values);
+    console.log(result[0][0]);
+    return result[0][0];
   } catch (e) {
     console.error(e);
-    throw error;
+    throw e;
   }
 };
+
+getOrder({
+  // Order_ID: 11134,
+  // ShipmentDate: "2020-06-02",
+  Quantity: 14,
+  // AssignedDriver: 12146,
+  // Inventory_Barcode: 354,
+  // Product_Barcode: 354,
+  // Manager: 30014,
+});
 
 //Given order object and orderType flag, add order into database, else throw error
 const addOrder = async (order, incoming = true) => {
@@ -113,6 +88,11 @@ const deleteOrder = async (orderID, incoming = true) => {
   }
 };
 
+
+
+
+
+
 //UPDATE order function (need to check)
 const updateOrder = async (order, incoming = true) => {
   let order_id = order.Order_ID;
@@ -147,9 +127,61 @@ const updateOrder = async (order, incoming = true) => {
   }
 };
 
-module.exports = {
-  addOrder: addOrder,
-  deleteOrder: deleteOrder,
-  getIncomingOrder: getIncomingOrder,
-  getOutgoingOrder: getOutgoingOrder,
+// addOrder(
+//   {
+//     Order_ID: 48231,
+//     ShipmentDate: `"12/06/1985"`,
+//     Quantity: 2,
+//     AssignedDriver: 30002,
+//     DeliveryAddress: `"123 Almond Drive"`,
+//     DaysToShipment: 12,
+//     Inventory_Barcode: 354,
+//     Product_Barcode: 354,
+//     Manager: 35215,
+//   },
+//   false
+// );
+
+//USE This!!!! call with promisePool not pool
+const createTest = async () => {
+  try {
+    const [rows, fields] = await promisePool.query(
+      "CREATE TABLE hello (name VARCHAR(10))"
+    );
+    console.debug(rows);
+    console.debug(fields);
+  } catch (err) {
+    throw err;
+  }
 };
+
+module.exports = { addOrder: addOrder, deleteOrder: deleteOrder };
+
+// if (params.Order_ID) {
+//   queries.push(Order_ID);
+// }
+// if (params.ShipmentDate) {
+//   queries.push(ShipmentDate);
+// }
+// if (params.Quantity) {
+//   queries.push(Quantity);
+// }
+// if (params.AssignedReceiver) {
+//   queries.push(AssignedReceiver);
+// }
+// if (params.AssignedDriver) {
+//   incoming = false;
+//   queries.push(AssignedDriver);
+// }
+// if (params.Inventory_barcode) {
+//   queries.push(Inventory_barcode);
+// }
+// if (params.Product_Barcode) {
+//   queries.push(Product_Barcode);
+// }
+// if (params.Manager) {
+//   queries.push(Manager);
+// }
+// if (params.DeliveryAddress) {
+//   queries.push();
+// }

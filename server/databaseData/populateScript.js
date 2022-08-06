@@ -1,7 +1,6 @@
 const fs = require("fs");
 const mysql = require("mysql2/promise");
 const dotenv = require("dotenv");
-// const log = require("../util/log");
 const pool = require("../utils/dbConnector");
 const { create } = require("domain");
 const poolPromise = pool.promise();
@@ -31,10 +30,7 @@ const createTables = async () => {
 };
 
 const dropTables = async () => {
-  const schemasString = fs.readFileSync(
-    "DeleteTable.sql",
-    "utf-8"
-  );
+  const schemasString = fs.readFileSync("DeleteTable.sql", "utf-8");
   //Split and filter logic taken from cccttt10's "super-rent-backend"
   const tableSchemas = schemasString
     .split(";")
@@ -54,7 +50,7 @@ const dropTables = async () => {
 
 const checkConnection = async () => {
   try {
-    const connection = await poolPromise.getConnection();
+    await poolPromise.getConnection();
     const result = "Connection Successful!";
     console.log(result);
     return result;
