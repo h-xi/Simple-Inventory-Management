@@ -66,13 +66,28 @@ const getIncomingOrder = async (params) => {
   }
 };
 const getOutgoingOrder = async (params) => {
-  const conditions = buildQuery(params);
-  var sql = `SELECT * FROM inventory_system.OutgoingShipmentOrder WHERE ${conditions.where};`;
+  let result;
+  let Gotconditions;
+  let conditions;
+  const paramLength = Object.keys(params).length;
+  console.log(paramLength);
+  if (paramLength == 0) {
+    var sql = `SELECT * FROM inventory_system.OutgoingShipmentOrder;`;
+  } else {
+    conditions = buildQuery(params);
+    var sql = `SELECT * FROM inventory_system.OutgoingShipmentOrder WHERE ${conditions.where};`;
+    Gotconditions = true;
+  }
   try {
-    const result = await promisePool.query(sql, conditions.values);
-    if (result[0][0].length < 1) {
+    console.log(sql);
+    if (Gotconditions) {
+      result = await promisePool.query(sql, conditions.values);
+    } else {
+      result = await promisePool.query(sql);
+    }
+    if (result[0].length < 1) {
       return null;
-    } else return result[0][0];
+    } else return result[0];
   } catch (e) {
     console.error(e);
     throw error;
