@@ -2,25 +2,6 @@ const pool = require("../utils/dbConnector.js");
 
 const promisePool = pool.promise();
 
-// This is what Product looks like:
-// CREATE TABLE Product(
-//     Barcode Integer,
-//     P_name Char(30),
-//     Size Char(6),
-//     Bin_name Char(2) NOT NULL,
-//     Aisle_no Integer NOT NULL,
-//     Category_ID Integer NOT NULL,
-//     Brand_ID Integer NOT NULL,
-//     Inventory_barcode Integer NOT NULL,
-//     SupplierID Integer,
-//     PRIMARY KEY (Barcode),
-//     UNIQUE (Order_ID),
-//     FOREIGN KEY (Bin_name, Aisle_no) REFERENCES Bin (Bin_name, Aisle_no),
-//     FOREIGN KEY (Category_ID) REFERENCES Categories,
-//     FOREIGN KEY (Brand_ID) REFERENCES Brands,
-//     FOREIGN KEY (Inventory_barcode) REFERENCES Inventory
-//     );
-
 //Given product object, add product into database, else throw error
 const addProduct = async (order, incoming = true) => {
   let barcode = Product.Barcode;
@@ -33,7 +14,7 @@ const addProduct = async (order, incoming = true) => {
   let inventory_barcode = Product.Inventory_barcode;
   let supplier_id = Product.SupplierID;
 
-  sql = `INSERT INTO inventory_system.${Product} VALUES(${barcode}, ${p_name}, ${size}, ${bin_name}, ${aisle_no}, ${category_id}, ${brand_id}, ${inventory_barcode}, ${supplier_id})`;
+  sql = `INSERT INTO inventory_system.${Product} VALUES(${barcode}, "${p_name}", "${size}", "${bin_name}", ${aisle_no}, ${category_id}, ${brand_id}, ${inventory_barcode}, ${supplier_id})`;
 
   try {
     console.log(sql);
@@ -72,7 +53,7 @@ const updateProduct = async (product, incoming = true) => {
   let inventory_barcode = Product.Inventory_barcode;
   let supplier_id = Product.SupplierID;
 
-  sql = `UPDATE inventory_system.${Product} SET P_name = ${p_name}, Size = ${size}, Bin_name = ${bin_name}, Aisle_no = ${aisle_no}, Category_ID = ${category_id}, Brand_ID = ${brand_id}, Inventory_barcode =  ${inventory_barcode}, SupplierID = ${supplier_id} WHERE Barcode = ${barcode})`;
+  sql = `UPDATE inventory_system.${Product} SET P_name = "${p_name}", Size = "${size}", Bin_name = "${bin_name}", Aisle_no = ${aisle_no}, Category_ID = ${category_id}, Brand_ID = ${brand_id}, Inventory_barcode =  ${inventory_barcode}, SupplierID = ${supplier_id} WHERE Barcode = ${barcode})`;
 
   try {
     console.log(sql);

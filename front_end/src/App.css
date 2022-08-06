@@ -2,6 +2,15 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-color: #757ce8;
+  font: -apple-system;
+}
+
+.addOrderForm{
+  display:flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-evenly;
 }
 
 .Incoming {
@@ -48,4 +57,21 @@
 
 .Outgoing button:hover {
   cursor: pointer;
+}
+
+.icons {
+  position: absolute;    
+  right: 0; 
+
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  float: right;
+  margin-top: 10px;
+  margin-right: 5px;
+}
+
+.App-name {
+  display: flex;
+  justify-content: center;
 }
