@@ -5,7 +5,7 @@ const promisePool = pool.promise();
 
 
 const nestedAggregationGroup = async (params) => {
-//This finds the maximum price of the products for each brand.
+//This finds the average price of products, sized small, for each brand.
     var sql = `SELECT		P.Brand_ID, AVG(P.Price) FROM		Product P WHERE		P.Size LIKE 'Small' GROUP BY 	P.Brand_ID;`;
 
   try {
