@@ -7,9 +7,9 @@ router.get("/", async (req, res) => {
   res.send("hello");
 });
 
-router.delete("/:barcode", async (req, res) => {
-  const barcode = req.params.barcode; // req.query.param
-
+router.delete("/", async (req, res) => {
+  const barcode = req.body.Barcode; // req.query.param
+  console.log(req.body);
   try {
     const result = await deleteProduct(barcode);
     console.log(result);

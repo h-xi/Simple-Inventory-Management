@@ -189,7 +189,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/orders" element={<OrderPage />} />
-          <Route path="/delete" element={<DeletePage />} />
+          <Route path="/products" element={<DeletePage />} />
         </Routes>
       </BrowserRouter>
     </div>
