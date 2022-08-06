@@ -4,9 +4,9 @@ const { buildQuery } = require("../utils/dataQuery");
 const promisePool = pool.promise();
 
 
-const aggregationGroup = async (params) => {
-//This finds the maximum price of the products for each brand.
-    var sql = `SELECT	P.Brand_ID, MAX(P.Price) FROM	Product P GROUP BY	P.Brand_ID;`;
+const aggregationHaving = async (params) => {
+//This finds brands that have atleast 2 products that are available in large size.
+    var sql = `SELECT	P.Brand_ID	FROM	Product P	WHERE	Size LIKE 'Large'	GROUP BY	P.Brand_ID	HAVING	Count(*)>1;`;
 
   try {
     console.log(sql);
@@ -22,4 +22,4 @@ const aggregationGroup = async (params) => {
 
 
 
-module.exports = { aggregationGroup: aggregationGroup };
+module.exports = { aggregationHaving: aggregationHaving };
