@@ -1,39 +1,83 @@
 const pool = require("../utils/dbConnector.js");
 const { buildQuery } = require("../utils/dataQuery");
+const e = require("express");
 
 const promisePool = pool.promise();
 
-const getOrder = async (params) => {
-  let incoming = true;
-  if ("AssignedDriver" in params) {
-    incoming = false;
-  }
-  const conditions = buildQuery(params);
-  if (incoming) {
-    var sql = `SELECT * FROM inventory_system.IncomingShipmentOrder WHERE ${conditions.where};`;
+// const getOrder = async (params) => {
+//   const conditions = buildQuery(params);
+//   var outgoing = false;
+//   if (
+//     params.AssignedDriver ||
+//     params.DeliveryAddress ||
+//     params.DaysToShipment
+//   ) {
+//     outgoing = true;
+//     var sql = `SELECT * FROM inventory_system.OutgoingShipmentOrder WHERE ${conditions.where};`;
+//   }
+//   try {
+//     console.log(sql);
+//     if (outgoing) {
+//       const result = await promisePool.query(sql, conditions.values);
+//       console.log(result[0][0]);
+//       return result[0][0];
+//     } else {
+//       var sql = `SELECT * FROM inventory_system.IncomingShipmentOrder WHERE ${conditions.where};`;
+//       const result = await promisePool.query(sql, conditions.values);
+//       console.log(result);
+//       if (result[0][0].length() < 0) {
+//         var sql = `SELECT * FROM inventory_system.OutgoingShipmentOrder WHERE ${conditions.where};`;
+//         const result1 = await promisePool.query(sql, conditions.values);
+//         console.log(result1);
+//       }
+//     }
+//   } catch (e) {
+//     console.error(e);
+//     throw e;
+//   }
+// };
+
+const getIncomingOrder = async (params) => {
+  let result;
+  let Gotconditions;
+  let conditions;
+  const paramLength = Object.keys(params).length;
+  console.log(paramLength);
+  if (paramLength == 0) {
+    var sql = `SELECT * FROM inventory_system.IncomingShipmentOrder;`;
   } else {
-    var sql = `SELECT * FROM inventory_system.OutgoingShipmentOrder WHERE ${conditions.where};`;
+    conditions = buildQuery(params);
+    var sql = `SELECT * FROM inventory_system.IncomingShipmentOrder WHERE ${conditions.where};`;
+    Gotconditions = true;
   }
   try {
     console.log(sql);
-    const result = await promisePool.query(sql, conditions.values);
-    console.log(result[0][0]);
-    return result[0][0];
+    if (Gotconditions) {
+      result = await promisePool.query(sql, conditions.values);
+    } else {
+      result = await promisePool.query(sql);
+    }
+    if (result[0].length < 1) {
+      return null;
+    } else return result[0];
   } catch (e) {
     console.error(e);
-    throw e;
+    throw error;
   }
 };
-
-getOrder({
-  // Order_ID: 11134,
-  // ShipmentDate: "2020-06-02",
-  Quantity: 14,
-  // AssignedDriver: 12146,
-  // Inventory_Barcode: 354,
-  // Product_Barcode: 354,
-  // Manager: 30014,
-});
+const getOutgoingOrder = async (params) => {
+  const conditions = buildQuery(params);
+  var sql = `SELECT * FROM inventory_system.OutgoingShipmentOrder WHERE ${conditions.where};`;
+  try {
+    const result = await promisePool.query(sql, conditions.values);
+    if (result[0][0].length < 1) {
+      return null;
+    } else return result[0][0];
+  } catch (e) {
+    console.error(e);
+    throw error;
+  }
+};
 
 //Given order object and orderType flag, add order into database, else throw error
 const addOrder = async (order, incoming = true) => {
@@ -150,7 +194,12 @@ const createTest = async () => {
   }
 };
 
-module.exports = { addOrder: addOrder, deleteOrder: deleteOrder };
+module.exports = {
+  addOrder: addOrder,
+  deleteOrder: deleteOrder,
+  getIncomingOrder: getIncomingOrder,
+  getOutgoingOrder: getOutgoingOrder,
+};
 
 // if (params.Order_ID) {
 //   queries.push(Order_ID);

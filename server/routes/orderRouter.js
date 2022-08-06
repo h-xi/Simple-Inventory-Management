@@ -1,8 +1,46 @@
 const express = require("express");
 const router = express.Router();
-const { addOrder } = require("../controllers/orderController");
+const {
+  addOrder,
+  getIncomingOrder,
+  getOutgoingOrder,
+} = require("../controllers/orderController");
 const { getEmployee } = require("../controllers/employeeController");
 const { getBarcode } = require("../controllers/inventoryController");
+
+router.get("/incoming", async (req, res) => {
+  const params = {};
+  if (req.query.Order_ID) {
+    params.Order_ID = req.query.Order_ID;
+  }
+  if (req.query.ShipmentDate) {
+    params.ShipmentDate = req.query.ShipmentDate;
+  }
+  if (req.query.Quantity) {
+    params.Quantity = req.query.Quantity;
+  }
+  if (req.query.AssignedReceiver) {
+    params.AssignedReceiver = req.query.AssignedReceiver;
+  }
+  if (req.query.Inventory_Barcode) {
+    params.Inventory_Barcode = req.query.Inventory_Barcode;
+  }
+  if (req.query.Product_Barcode) {
+    params.Product_Barcode = req.query.Product_Barcode;
+  }
+  if (req.query.Manager) {
+    params.Manager = req.query.Manager;
+  }
+  console.log({ theParams: params });
+  try {
+    const result = await getIncomingOrder(params);
+    console.log(result);
+    return res.send(result);
+  } catch (e) {
+    console.error(e);
+    res.status(500).send({ message: "Internal Error" });
+  }
+});
 
 router.post("/", async (req, res) => {
   let errors = [];
@@ -15,9 +53,9 @@ router.post("/", async (req, res) => {
     errors.push("Please provide valid shipment date");
   }
 
-  if (isNaN(new Date(orderData.ShipmentDate))) {
-    errors.push("Shipment Date value is invalid");
-  }
+  // if (isNaN(new Date(orderData.ShipmentDate))) {
+  //   errors.push("Shipment Date value is invalid");
+  // }
 
   if (orderData.Quantity == 0) {
     errors.push("Invalid Quantity Amount");
