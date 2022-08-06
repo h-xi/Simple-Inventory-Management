@@ -83,6 +83,7 @@ Category_ID Integer NOT NULL,
 Brand_ID Integer NOT NULL,
 Inventory_barcode Integer,
 SupplierID Integer,
+Price Integer,
 PRIMARY KEY (Barcode),
 UNIQUE (Inventory_barcode)
 );
