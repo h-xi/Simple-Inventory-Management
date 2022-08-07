@@ -14,4 +14,9 @@ const getBarcode = async (inventory_barcode) => {
   }
 };
 
+//TODO: Create fn that updates inventory table's quantity when an order is made/updated
+// const editQuantity = async (quantity) => {
+
+// };
+
 module.exports = { getBarcode: getBarcode };

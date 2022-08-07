@@ -15,6 +15,7 @@ const pool = mysql.createPool({
   database: DATABASE || "inventory_system",
   waitForConnections: true,
   connectionLimit: 10,
+  multipleStatements: true,
 });
 
 module.exports = pool;
