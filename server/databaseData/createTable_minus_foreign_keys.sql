@@ -230,6 +230,24 @@ INSERT INTO inventory_system.Inventory VALUES (384,278);
 INSERT INTO inventory_system.Inventory VALUES (394,215);
 INSERT INTO inventory_system.Inventory VALUES (354,253);
 
+INSERT INTO inventory_system.Inventory VALUES (464,320);
+INSERT INTO inventory_system.Inventory VALUES (474,352);
+INSERT INTO inventory_system.Inventory VALUES (484,378);
+INSERT INTO inventory_system.Inventory VALUES (494,315);
+INSERT INTO inventory_system.Inventory VALUES (454,353);
+
+INSERT INTO inventory_system.Inventory VALUES (564,120);
+INSERT INTO inventory_system.Inventory VALUES (574,452);
+INSERT INTO inventory_system.Inventory VALUES (584,278);
+INSERT INTO inventory_system.Inventory VALUES (594,215);
+INSERT INTO inventory_system.Inventory VALUES (554,253);
+
+INSERT INTO inventory_system.Inventory VALUES (664,120);
+INSERT INTO inventory_system.Inventory VALUES (674,452);
+INSERT INTO inventory_system.Inventory VALUES (684,278);
+INSERT INTO inventory_system.Inventory VALUES (694,215);
+INSERT INTO inventory_system.Inventory VALUES (654,253);
+
 
 
 INSERT INTO inventory_system.ManagerEmployee VALUES (39302, 593105933, '17/02/1995', '45 Grove Drive', 125000, 'Adam', 'West', 12, 'Purchasing');
@@ -321,6 +339,13 @@ INSERT INTO inventory_system.OutgoingShipmentOrder VALUES (48232, '13/06/1985', 
 INSERT INTO inventory_system.OutgoingShipmentOrder VALUES (48233, '14/06/1985', 7, 56114, '127 Almond Drive', 7, 374,374,35215);
 INSERT INTO inventory_system.OutgoingShipmentOrder VALUES (48234, '15/06/1985', 9, 30002, '121 Almond Drive', 14, 384,384,35215);
 INSERT INTO inventory_system.OutgoingShipmentOrder VALUES (48235, '16/06/1985', 4, 56114, '122 Almond Drive', 2, 394,394,30014);
+
+INSERT INTO inventory_system.OutgoingShipmentOrder VALUES (48241, '12/07/1985', 10, 30002, '123 Almond Drive', 9, 454,454,35215);
+INSERT INTO inventory_system.OutgoingShipmentOrder VALUES (48242, '13/07/1985', 3, 30002, '125 Almond Drive', 2, 464,464,35215);
+INSERT INTO inventory_system.OutgoingShipmentOrder VALUES (48243, '14/07/1985', 6, 56114, '127 Almond Drive', 7, 474,474,35215);
+
+INSERT INTO inventory_system.OutgoingShipmentOrder VALUES (58234, '17/06/1985', 4, 30002, '121 Almond Drive', 11, 584,584,35215);
+INSERT INTO inventory_system.OutgoingShipmentOrder VALUES (58235, '11/06/1985', 2, 56114, '122 Almond Drive', 8, 594,594,30014);
 
 INSERT INTO inventory_system.IncomingShipmentOrder VALUES (48671, '13/06/1984', 12, 516214, 364,364,39302);
 INSERT INTO inventory_system.IncomingShipmentOrder VALUES (83133, '14/06/1984', 13, 39212, 374,374,33113);
