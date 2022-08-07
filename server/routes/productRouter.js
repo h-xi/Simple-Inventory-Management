@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-const { deleteProduct } = require("../controllers/productController");
+const {
+  deleteProduct,
+  getFilteredProduct,
+} = require("../controllers/productController");
 
 router.get("/", async (req, res) => {
   res.send("hello");
@@ -18,6 +21,19 @@ router.delete("/", async (req, res) => {
     console.error(e);
     res.status(422).json({
       Message: "Product Deletion Unsuccessful",
+    });
+  }
+});
+
+router.get("/filtered", async (req, res) => {
+  const params = req.body.params;
+  try {
+    const result = await getFilteredProduct(params);
+    res.send(result);
+  } catch (e) {
+    res.status(500).json({
+      message: "Unsuccessful Retrieval of Data",
+      error: e,
     });
   }
 });

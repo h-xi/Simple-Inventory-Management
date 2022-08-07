@@ -27,6 +27,20 @@ const addProduct = async (order, incoming = true) => {
   }
 };
 
+const getFilteredProduct = async (filters) => {
+  const params = filters.join(", ");
+  console.log(params);
+  const sql = `SELECT ${params} FROM inventory_system.product`;
+  try {
+    const result = await promisePool.query(sql);
+    console.log(result[0]);
+    return result[0];
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+};
+
 //Delete Product function
 const deleteProduct = async (barcode) => {
   console.log(barcode);
@@ -68,4 +82,7 @@ const updateProduct = async (product, incoming = true) => {
 };
 
 //What is this?
-module.exports = { deleteProduct: deleteProduct };
+module.exports = {
+  deleteProduct: deleteProduct,
+  getFilteredProduct: getFilteredProduct,
+};
