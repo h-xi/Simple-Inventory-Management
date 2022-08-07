@@ -158,7 +158,7 @@ router.post("/", async (req, res) => {
   } catch (e) {
     return res.status(500).json({
       Message: "Order Creation Unsuccessful",
-      field: e,
+      field: e.message,
     });
   }
 });

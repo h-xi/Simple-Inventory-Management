@@ -12,7 +12,9 @@ router.get("/nested", async (req, res) => {
     console.log(result);
     res.send(result);
   } catch (e) {
-    res.status(500).json({ message: "Error retrieving Data", Error: e });
+    res
+      .status(500)
+      .json({ message: "Error retrieving Data", Error: e.message });
   }
 });
 
@@ -22,7 +24,9 @@ router.get("/group", async (req, res) => {
     console.log(result);
     res.send(result);
   } catch (e) {
-    res.status(500).json({ message: "Error retrieving Data", Error: e });
+    res
+      .status(500)
+      .json({ message: "Error retrieving Data", Error: e.message });
   }
 });
 
@@ -32,7 +36,9 @@ router.get("/having", async (req, res) => {
     console.log(result);
     res.send(result);
   } catch (e) {
-    res.status(500).json({ message: "Error retrieving Data", Error: e });
+    res
+      .status(500)
+      .json({ message: "Error retrieving Data", Error: e.message });
   }
 });
 module.exports = router;

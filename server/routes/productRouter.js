@@ -33,7 +33,7 @@ router.get("/filtered", async (req, res) => {
   } catch (e) {
     res.status(500).json({
       message: "Unsuccessful Retrieval of Data",
-      error: e,
+      error: e.message,
     });
   }
 });
