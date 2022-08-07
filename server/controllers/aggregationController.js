@@ -3,15 +3,27 @@ const pool = require("../utils/dbConnector.js");
 const promisePool = pool.promise();
 
 const nestedAggregationGroup = async () => {
-  //This finds Brands that have at least two products that are above 100 in price and finds their average price (Returns Brand_ID and Price).
-  var sql = `SELECT P.Brand_ID, AVG(Price)
-                FROM Product P 
-                GROUP BY P.Brand_ID 
-                HAVING 2 <= (SELECT COUNT(*) 
-                              FROM Product P2 
-                              WHERE P2.Price>100 AND P.Brand_ID = P2.Brand_ID); 
+  // //This finds Brands that have at least two products that are above 100 in price and finds their average price (Returns Brand_ID and Price).
+  // var sql = `SELECT P.Brand_ID, AVG(Price)
+  //               FROM Product P 
+  //               GROUP BY P.Brand_ID 
+  //               HAVING 2 <= (SELECT COUNT(*) 
+  //                             FROM Product P2 
+  //                             WHERE P2.Price>100 AND P.Brand_ID = P2.Brand_ID); 
     
-    `;
+  //   `;
+
+  //This finds Brands that have at least two products priced above 100 and finds the average price of these products for each brand (Returns Brand_ID and Price).
+
+    var sql = `SELECT P.Brand_ID, AVG(Price)
+                FROM Product P
+                WHERE	P.price>100
+                GROUP BY P.Brand_ID 
+                HAVING 1 < (SELECT COUNT(P.Brand_ID));`;
+
+
+
+
 
   try {
     console.log(sql);
