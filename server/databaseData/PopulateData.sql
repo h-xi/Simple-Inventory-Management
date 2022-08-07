@@ -61,7 +61,7 @@ INSERT INTO inventory_system.Product VALUES (394, 'Nike shirt 4', 'Small','KO',2
 INSERT INTO inventory_system.Product VALUES (354, 'Nike shirt 5', 'Large','KO',2,2,100,354,71,80);
 
 INSERT INTO inventory_system.Product VALUES (464, 'Adidas shirt 1', 'Small','AE',2,2,200,464,302,45);
-INSERT INTO inventory_system.Product VALUES (474, 'Adidas shirt 2', 'Medium','AE',2,2,200,474,402,89);
+INSERT INTO inventory_system.Product VALUES (474, 'Adidas shirt 2', 'Medium','AE',2,2,200,474,402,109);
 INSERT INTO inventory_system.Product VALUES (484, 'Adidas shirt 3', 'Small','AE',2,2,200,484,502,76);
 INSERT INTO inventory_system.Product VALUES (494, 'Adidas shirt 4', 'Large','AE',2,2,200,494,650,110);
 INSERT INTO inventory_system.Product VALUES (454, 'Adidas shirt 5', 'Small','AE',2,2,200,454,71,49);
