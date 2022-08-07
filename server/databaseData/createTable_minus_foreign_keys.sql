@@ -422,21 +422,21 @@ ADD CONSTRAINT fk14
     FOREIGN KEY (Quantity) REFERENCES Priority (Quantity);
 
 ALTER TABLE OutgoingShipmentOrder
-ADD CONSTRAINT fk167
+ADD CONSTRAINT fk15
     FOREIGN KEY (DaysToShipment) REFERENCES Highlight (DaysToShipment);
 
 ALTER TABLE IncomingShipmentOrder
-ADD CONSTRAINT fk15
+ADD CONSTRAINT fk16
     FOREIGN KEY (AssignedReceiver) REFERENCES WorkerEmployee (Employee_ID);
 
 ALTER TABLE IncomingShipmentOrder
-ADD CONSTRAINT fk16
+ADD CONSTRAINT fk17
     FOREIGN KEY (Inventory_barcode) REFERENCES Inventory (Barcode) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE IncomingShipmentOrder
-ADD CONSTRAINT fk17
+ADD CONSTRAINT fk18
     FOREIGN KEY (Product_Barcode) REFERENCES Product (Barcode) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE IncomingShipmentOrder
-ADD CONSTRAINT fk18
+ADD CONSTRAINT fk19
     FOREIGN KEY (Manager) REFERENCES ManagerEmployee (Employee_ID);
