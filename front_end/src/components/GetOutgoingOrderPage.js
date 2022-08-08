@@ -52,6 +52,7 @@ function GetOutgoingOrderPage() {
 
     const getOutgoingOrder = () => {
       const filtered = getQuery();
+      console.log(filtered);
       Axios.get('http://localhost:3000/orders/outgoing/', {params: filtered}
       ).then(res => {
         console.log(res.data.args);

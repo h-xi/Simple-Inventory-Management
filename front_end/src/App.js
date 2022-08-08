@@ -12,6 +12,8 @@ import DeletePage from "./components/DeletePage";
 import GetIncomingOrderPage from "./components/GetIncomingOrderPage";
 import GetOutgoingOrderPage from "./components/GetOutgoingOrderPage";
 import ProjectProducts from "./components/ProjectProducts";
+
+
 import JoinBrands from "./components/JoinBrands";
 import GroupAggregation from "./components/GroupAggregation";
 import HavingAggregation from "./components/HavingAggregation";
@@ -30,7 +32,7 @@ function App() {
           <Route path="/products" element={<DeletePage />} />
           <Route path="/orders/incoming" element={<GetIncomingOrderPage />} />
           <Route path="/orders/outgoing" element={<GetOutgoingOrderPage />} />
-          <Route path="/products/filtered" element={<NestedAggregation />} />
+          <Route path="/products/filtered" element={<ProjectProducts />} />
           <Route path="/brands" element={<JoinBrands />} />
           <Route path="/products/aggregations/group" element={<GroupAggregation />} />
           <Route path="/products/aggregations/having" element={<HavingAggregation />} />
