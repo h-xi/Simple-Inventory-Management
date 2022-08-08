@@ -15,7 +15,7 @@ const nestedAggregationGroup = async () => {
 
   //This finds Brands that have at least two products priced above 100 and finds the average price of these products for each brand (Returns Brand_ID and Price).
 
-    var sql = `SELECT P.Brand_ID, AVG(Price)
+    var sql = `SELECT P.Brand_ID, AVG(Price) as AVG_Price
                 FROM Product P
                 WHERE	P.price>100
                 GROUP BY P.Brand_ID 
@@ -38,7 +38,7 @@ const nestedAggregationGroup = async () => {
 
 const aggregationGroup = async () => {
   //This finds the average price of products, sized small, for each brand (returning their Brand ID and Brand Name).
-  var sql = `SELECT		P.Brand_ID, B.B_Name as Brand_Name, AVG(P.Price)
+  var sql = `SELECT		P.Brand_ID, B.B_Name as Brand_Name, AVG(P.Price) as AVG_Price
     FROM		Product P, Brands B
     WHERE		B.Brand_ID = P.Brand_ID AND P.Size LIKE 'Small'
     GROUP BY 	P.Brand_ID;
