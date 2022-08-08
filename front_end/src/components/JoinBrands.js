@@ -6,11 +6,17 @@ import Stack from '@mui/material/Stack';
 
 const JoinBrands = () => {
 
-  const [value, setValue] = useState(0);
+  const [numberTimes, setNumberTimes] = useState(0);
+
+  const outgoingData = {orderData: {
+    
+  }, orderType: "OutgoingShipmentOrder"};
 
   const joinBrands = () => {
-      console.log({value})
-      Axios.get('http://localhost:3000/brands/', {params: {value}}
+    console.log({numberTimes});
+    // let obj = JSON.stringify({numberTimes});
+    // console.log(obj);
+      Axios.get('http://localhost:3000/brands/', numberTimes
     ).then(res => {
       console.log(res.data);
     }).catch(error => {
@@ -22,7 +28,7 @@ const JoinBrands = () => {
       <label>Enter Value:</label>
             <input type="number" 
               onChange={(event) => {
-                setValue(event.target.value);
+                setNumberTimes(event.target.valueAsNumber);
               }}
             />
       <Stack direction="row" spacing={2}>

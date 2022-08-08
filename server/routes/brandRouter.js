@@ -9,6 +9,7 @@ const {
 router.get("/", async (req, res) => {
   const numberTimes = req.body.numberTimes;
   try {
+    console.log(numberTimes);
     const result = await getBrandsMoreThanX(numberTimes);
     res.send(result);
   } catch (e) {

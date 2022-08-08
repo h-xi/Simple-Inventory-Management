@@ -12,6 +12,7 @@ const getBrandsMoreThanX = async (numberTimes) => {
                 HAVING	Count(*) > ${numberTimes};`;
 
   try {
+    console.log(sql);
     let query = await promisePool.query(sql);
     query = JSON.parse(JSON.stringify(query));
     const result = query[0][0];
