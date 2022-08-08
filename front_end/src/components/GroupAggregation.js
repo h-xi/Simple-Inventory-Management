@@ -8,7 +8,8 @@ const GroupAggregation = () => {
   const [userList, setusers] = useState([]);
   const groupAggregation = () => {
 
-      Axios.get('http://localhost:3000/products/aggregations/group/', 
+  
+    Axios.get('http://localhost:3000/products/aggregations/group/', 
     ).then(res => {
       console.log(res.data);
       setusers(res.data);
@@ -16,11 +17,20 @@ const GroupAggregation = () => {
       console.log(error.response.data);
     });
   }
+
+  if (data) {
+    return (
+      <div>
+        <h1>{data.Brand_ID}</h1>
+        
+      </div>
+    )
+  }
   return (
     <div>
       
       <Stack direction="row" spacing={2}>
-              <Button variant="contained" onClick={groupAggregation}>Select Attributes</Button>
+              <Button variant="contained" onClick={groupAggregation}>Group Attributes</Button>
       </Stack>
 
       <table>

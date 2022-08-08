@@ -101,7 +101,7 @@ function GetIncomingOrderPage() {
            />
         </div>
         <Stack direction="row" spacing={2}>
-            <Button variant="contained" onClick={getIncomingOrder}>Incoming Shipment</Button>
+            <Button variant="contained" onClick={getIncomingOrder}>Get Incoming</Button>
         </Stack>
     </div>
   )

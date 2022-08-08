@@ -29,12 +29,12 @@ export default function LandingPage() {
                 </Stack>
                 <Stack direction="row" spacing={2}>
                     <Link to="/products/filtered">
-                    <Button variant="contained">Projection</Button>
+                    <Button variant="contained">Show Products - Projection</Button>
                     </Link>
                 </Stack>
                 <Stack direction="row" spacing={2}>
                     <Link to="/brands">
-                    <Button variant="contained">Join</Button>
+                    <Button variant="contained">Find Brands - Join</Button>
                     </Link>
                 </Stack>
                 <Stack direction="row" spacing={2}>

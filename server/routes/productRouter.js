@@ -25,7 +25,7 @@ router.delete("/", async (req, res) => {
   }
 });
 
-router.get("/filtered", async (req, res) => {
+router.post("/filtered", async (req, res) => {
   const params = req.body.params;
   try {
     const result = await getFilteredProduct(params);

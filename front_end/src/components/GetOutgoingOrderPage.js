@@ -122,7 +122,7 @@ function GetOutgoingOrderPage() {
               }}
             />
             <Stack direction="row" spacing={2}>
-            <Button variant="contained" onClick={() => {getOutgoingOrder();}}>Outgoing Shipment</Button>
+            <Button variant="contained" onClick={() => {getOutgoingOrder();}}>Get Outgoing</Button>
             </Stack>
           </div>
     </div>
