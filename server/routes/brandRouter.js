@@ -6,7 +6,7 @@ const {
 } = require("../controllers/brandController");
 
 //JOIN ROUTER
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
   const numberTimes = req.body.numberTimes;
   try {
     console.log(numberTimes);
