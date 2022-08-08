@@ -6,7 +6,7 @@ const {
   aggregationHaving,
 } = require("../controllers/aggregationController");
 
-router.get("/join", async (req, res) => {
+router.get("/nested", async (req, res) => {
   try {
     const result = await nestedAggregationGroup();
     console.log(result);
