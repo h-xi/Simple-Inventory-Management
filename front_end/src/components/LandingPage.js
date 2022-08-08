@@ -27,6 +27,36 @@ export default function LandingPage() {
                     <Button variant="contained">Get Outgoing Products</Button>
                     </Link>
                 </Stack>
+                <Stack direction="row" spacing={2}>
+                    <Link to="/products/filtered">
+                    <Button variant="contained">Projection</Button>
+                    </Link>
+                </Stack>
+                <Stack direction="row" spacing={2}>
+                    <Link to="/brands">
+                    <Button variant="contained">Join</Button>
+                    </Link>
+                </Stack>
+                <Stack direction="row" spacing={2}>
+                    <Link to="/products/aggregations/group">
+                    <Button variant="contained">Aggregation with Group</Button>
+                    </Link>
+                </Stack>
+                <Stack direction="row" spacing={2}>
+                    <Link to="/products/aggregations/having">
+                    <Button variant="contained">Aggregation with Have</Button>
+                    </Link>
+                </Stack>
+                <Stack direction="row" spacing={2}>
+                    <Link to="/products/aggregations/nested">
+                    <Button variant="contained">Nested Aggregation</Button>
+                    </Link>
+                </Stack>
+                <Stack direction="row" spacing={2}>
+                    <Link to="/brands/morethan">
+                    <Button variant="contained">Division</Button>
+                    </Link>
+                </Stack>
             </div>
         </div>
     )

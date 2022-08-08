@@ -4,6 +4,7 @@ import Axios from 'axios';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { Link } from 'react-router-dom';
+import { getTableBodyUtilityClass } from '@mui/material';
 
 
 
@@ -20,6 +21,7 @@ function GetOutgoingOrderPage() {
   const [AssignedDriver, setAssignedDriver] = useState(0);
   const [DeliveryAddress, setDeliveryAddress] = useState("");
   const [DaysToShipment, setDaysToShipment] = useState(0);
+  const [data, setData] = useState([]);
     const url = require('url');
 
     const outgoingData = {
@@ -48,31 +50,9 @@ function GetOutgoingOrderPage() {
 
     }
 
-    // const new_data = data.list;
-
-    // const renderResult = () => {
-    //   if (new_data !== undefined) {
-    //     return (
-    //       <div>
-    //         {new_data.map(function(d, idx){
-    //           return (<li key={idx}>{d.name}</li>)
-    //         })}
-    //       </div>
-    //     );
-    //   } else {
-    //     console.log("sorry had problems")
-    //   }
-    // }
-
-    const [data, setData] = useState({});
-    //const new_data = data.list;
-
-
-
-    
-
     const getOutgoingOrder = () => {
       const filtered = getQuery();
+      console.log(filtered);
       Axios.get('http://localhost:3000/orders/outgoing/', {params: filtered}
       ).then(res => {
         console.log(res.data.args);
@@ -142,7 +122,7 @@ function GetOutgoingOrderPage() {
               }}
             />
             <Stack direction="row" spacing={2}>
-            <Button variant="contained" onClick={() => {getOutgoingOrder(); }}>Outgoing Shipment</Button>
+            <Button variant="contained" onClick={() => {getOutgoingOrder();}}>Outgoing Shipment</Button>
             </Stack>
           </div>
     </div>
