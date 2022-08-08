@@ -21,9 +21,12 @@ const JoinBrands = () => {
         console.log(error.response.data);
       });
   };
+
+//Find brands that have been ordered (outgoing shipment order) more than 'x' number of times
   return (
     <div>
-      <label>Enter Value:</label>
+      <h3>Find brands that have been ordered in the outgoing shipment more than inputted number of times</h3>
+      <label>Enter Number of Times:</label>
       <input
         type="number"
         onChange={(event) => {
@@ -32,7 +35,7 @@ const JoinBrands = () => {
       />
       <Stack direction="row" spacing={2}>
         <Button variant="contained" onClick={joinBrands}>
-          Select Attributes
+          Find Brands
         </Button>
       </Stack>
     </div>

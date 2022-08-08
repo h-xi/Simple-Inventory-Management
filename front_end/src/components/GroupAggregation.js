@@ -29,7 +29,7 @@ const GroupAggregation = () => {
     <div>
       
       <Stack direction="row" spacing={2}>
-              <Button variant="contained" onClick={groupAggregation}>Select Attributes</Button>
+              <Button variant="contained" onClick={groupAggregation}>Group Attributes</Button>
       </Stack>
     </div>
   )

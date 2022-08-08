@@ -18,7 +18,7 @@ const HavingAggregation = () => {
     <div>
       
       <Stack direction="row" spacing={2}>
-              <Button variant="contained" onClick={havingAggregation}>Select Attributes</Button>
+              <Button variant="contained" onClick={havingAggregation}>Group Having Attributes</Button>
       </Stack>
     </div>
   )
