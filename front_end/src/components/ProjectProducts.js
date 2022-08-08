@@ -25,7 +25,7 @@ const ProjectProducts = () => {
   // const [Price, setPrice] = useState(0);
   const [params, setParams] = useState([]);
 
-  const handleParams = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleParams = (event) => {
     console.log({ params });
     const index = params.indexOf(event.target.value);
     if (index === -1) {
