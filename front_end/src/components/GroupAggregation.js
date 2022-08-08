@@ -18,14 +18,7 @@ const GroupAggregation = () => {
     });
   }
 
-  if (data) {
-    return (
-      <div>
-        <h1>{data.Brand_ID}</h1>
-        
-      </div>
-    )
-  }
+
   return (
     <div>
       

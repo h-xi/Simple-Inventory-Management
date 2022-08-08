@@ -12,7 +12,7 @@ const NestedAggregation = () => {
 
   const nestedAggregation = () => {
 
-      Axios.get('http://localhost:3000/products/aggregations/join/', 
+      Axios.get('http://localhost:3000/products/aggregations/nested/', 
     ).then(res => {
       console.log(res.data);
     //setting user list

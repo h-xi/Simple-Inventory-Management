@@ -8,7 +8,7 @@ const DivideBrands = () => {
   const [userList, setusers] = useState([]);
   const findBrandsWithAllSizes = () => {
 
-      Axios.get('http://localhost:3000/brands/morethan', 
+      Axios.get('http://localhost:3000/brands/morethan/', 
     ).then(res => {
       console.log(res.data);
       setusers(res.data);
