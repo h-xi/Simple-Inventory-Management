@@ -51,7 +51,7 @@ function UpdatePage() {
     }, orderType: "OutgoingShipmentOrder"};
   
     const updateOutgoingOrder = () => {
-      Axios.post('http://localhost:3000/orders', outgoingData
+      Axios.post('http://localhost:3000/orders/update', outgoingData
       ).then(() => {
         console.log("Outgoing data successfully updated:", outgoingData);
       }).catch(error => {
