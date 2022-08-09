@@ -17,7 +17,7 @@ Download MySQL Workbench <br>
 `cd server` <br>
 `npm install` <br>
 `cd databaseData` <br>
-//Connect to MYSQL workbench <br>
+*connect to MySQL workbench* <br>
 `node populateScript --create`   <br>
 `cd ..` <br>
 `cd utils` <br>
