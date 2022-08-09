@@ -6,8 +6,8 @@ import Stack from "@mui/material/Stack";
 
 const JoinBrands = () => {
   const [numberTimes, setNumberTimes] = useState(0);
+  const [data, setData] = useState([]);
 
-  const outgoingData = { orderData: {}, orderType: "OutgoingShipmentOrder" };
 
   const joinBrands = () => {
     console.log(numberTimes);
@@ -16,6 +16,7 @@ const JoinBrands = () => {
     Axios.post("http://localhost:3000/brands/", { numberTimes: numberTimes })
       .then((res) => {
         console.log(res.data);
+        //setData(res.data);
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -38,6 +39,24 @@ const JoinBrands = () => {
           Find Brands
         </Button>
       </Stack>
+      <table>
+        <tr>
+          <th>Brand ID  </th>
+          <th>Brand Name  </th>
+          
+        </tr>
+        
+        <tbody>
+          {data.map((user) => (
+            <tr>
+              <td>{user.Brand_ID}</td>
+              <td>{user.B_Name}</td>         
+            </tr>
+          ))}
+        </tbody>
+        
+       
+        </table>
     </div>
   );
 };
