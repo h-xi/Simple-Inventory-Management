@@ -150,6 +150,7 @@ const updateOrder = async (order, incoming = true) => {
 module.exports = {
   addOrder: addOrder,
   deleteOrder: deleteOrder,
+  updateOrder: updateOrder,
   getIncomingOrder: getIncomingOrder,
   getOutgoingOrder: getOutgoingOrder,
 };
