@@ -12,61 +12,48 @@ import {
 } from "@mui/material";
 import { Checkbox } from "@mui/material";
 
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+
 const ProjectProducts = () => {
-  // const [Barcode, setBarcode] = useState(0);
-  // const [P_name, setP_name] = useState("");
-  // const [Size, setSize] = useState("");
-  // const [Bin_name, setBin_name] = useState("");
-  // const [Aisle_no, setAisle_no] = useState(0);
-  // const [Category_ID, setCategory_ID] = useState(0);
-  // const [Brand_ID, setBrand_ID] = useState(0);
-  // const [Inventory_Barcode, setInventory_Barcode] = useState(0);
-  // const [SupplierID, setSupplierID] = useState(0);
-  // const [Price, setPrice] = useState(0);
   const [params, setParams] = useState([]);
+  const [data, setData] = useState([]);
 
   const handleParams = (event) => {
-    console.log({ params });
     const index = params.indexOf(event.target.value);
     if (index === -1) {
       setParams([...params, event.target.value]);
     } else {
       setParams(params.filter((param) => param !== event.target.value));
     }
-    // const index = (id) => {
-    //     setParams(prevState => {
-    //         if(prevState.includes(id)) {
-    //             const clone = [...prevState];
-    //             clone.splice(prevState.indexOf(id), 1)
-    //             return clone;
-    //         } else {
-    //             return [...prevState, id]
-    //         }
-    //     });
-    // }
   };
 
-  // const incomingData = {
-  //     Barcode: Barcode,
-  //     P_name: P_name,
-  //     Size: Size,
-  //     Bin_name: Bin_name,
-  //     Aisle_no: Aisle_no,
-  //     Category_ID: Category_ID,
-  //     Brand_ID: Brand_ID,
-  //     Inventory_Barcode: Inventory_Barcode,
-  //     SupplierID: SupplierID,
-  //     Price: Price,
-  //   };
+  const updateData = (initialData) => {
+    console.log(initialData);
+    let data = [];
+    for (const items of initialData) {
+      let result = Object.values(items);
+      data.push(result);
+    }
+    console.log(data);
+    setData(data);
+  };
 
   const projectProducts = () => {
     Axios.post("http://localhost:3000/products/filtered/", { params: params })
       .then((res) => {
-        console.log(res.data.args);
+        console.log(params);
+        // console.log(res.data.args);
         console.log(res.data);
+        updateData(res.data);
       })
       .catch((error) => {
-        console.log(error.response.data);
+        console.log(error);
       });
   };
 
@@ -184,6 +171,32 @@ const ProjectProducts = () => {
           Select Attributes
         </Button>
       </Stack>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              {params.map((param) => (
+                <TableCell component="th" scope="col">
+                  {param}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data.map((datapoint) => (
+              <TableRow
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                {datapoint.map((point) => (
+                  <TableCell component="th" scope="row">
+                    {point}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 };

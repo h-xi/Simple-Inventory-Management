@@ -129,13 +129,13 @@ const updateOrder = async (order, incoming = true) => {
   if (incoming) {
     table = "IncomingShipmentOrder";
     assignedEmployee = order.AssignedReceiver;
-    sql = `UPDATE inventory_system.${table} SET ShipmentDate = ${shipmentDate}, Quantity = ${quantity}, AssignedReceiver = ${assignedEmployee}, Inventory_Barcode = ${barcode}, Product_Barcode = ${product}, Manager = ${manager} WHERE Order_ID = ${order_id})`;
+    sql = `UPDATE inventory_system.${table} SET ShipmentDate = "${shipmentDate}", Quantity = ${quantity}, AssignedReceiver = ${assignedEmployee}, Inventory_Barcode = ${barcode}, Product_Barcode = ${product}, Manager = ${manager} WHERE Order_ID = ${order_id};`;
   } else {
     table = "OutgoingShipmentOrder";
     assignedEmployee = order.AssignedDriver;
     daysToShipment = order.DaysToShipment;
     deliveryAddress = order.DeliveryAddress;
-    sql = `UPDATE inventory_system.${table} SET ShipmentDate = ${shipmentDate}, Quantity = ${quantity}, AssignedDriver = ${assignedEmployee}, DeliveryAddress = ${deliveryAddress}, DaysToShipment = ${daysToShipment}, Inventory_Barcode = ${barcode}, Product_Barcode = ${product}, Manager = ${manager} WHERE Order_ID = ${order_id})`;
+    sql = `UPDATE inventory_system.${table} SET ShipmentDate = "${shipmentDate}", Quantity = ${quantity}, AssignedDriver = ${assignedEmployee}, DeliveryAddress = "${deliveryAddress}", DaysToShipment = ${daysToShipment}, Inventory_Barcode = ${barcode}, Product_Barcode = ${product}, Manager = ${manager} WHERE Order_ID = ${order_id};`;
   }
   try {
     console.log(sql);
@@ -150,6 +150,7 @@ const updateOrder = async (order, incoming = true) => {
 module.exports = {
   addOrder: addOrder,
   deleteOrder: deleteOrder,
+  updateOrder: updateOrder,
   getIncomingOrder: getIncomingOrder,
   getOutgoingOrder: getOutgoingOrder,
 };

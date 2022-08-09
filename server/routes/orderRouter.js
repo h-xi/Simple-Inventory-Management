@@ -4,6 +4,7 @@ const {
   addOrder,
   getIncomingOrder,
   getOutgoingOrder,
+  updateOrder,
 } = require("../controllers/orderController");
 const { getEmployee } = require("../controllers/employeeController");
 const { getBarcode } = require("../controllers/inventoryController");
@@ -53,7 +54,7 @@ router.get("/outgoing", async (req, res) => {
     params.Quantity = req.query.Quantity;
   }
   if (req.query.AssignedDriver) {
-    params.AssignedReceiver = req.query.AssignedReceiver;
+    params.AssignedDriver = req.query.AssignedDriver;
   }
   if (req.query.DeliveryAddress) {
     params.DeliveryAddress = req.query.DeliveryAddress;
@@ -159,6 +160,27 @@ router.post("/", async (req, res) => {
     return res.status(500).json({
       Message: "Order Creation Unsuccessful",
       field: e.message,
+    });
+  }
+});
+
+router.post("/update", async (req, res) => {
+  let errors = [];
+  let incoming;
+  const orderData = req.body.orderData;
+  if (req.body.orderType == "IncomingShipmentOrder") {
+    incoming = true;
+  } else {
+    incoming = false;
+  }
+  try {
+    const result = await updateOrder(orderData, incoming);
+    res.send(result);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({
+      Message: "Unsuccessful Update Attempt",
+      Error: e,
     });
   }
 });

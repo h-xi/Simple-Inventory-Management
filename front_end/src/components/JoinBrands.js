@@ -1,12 +1,11 @@
-import React from "react";
-import { useState } from "react";
+import React, {useState} from 'react';
 import Axios from "axios";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 
 const JoinBrands = () => {
   const [numberTimes, setNumberTimes] = useState(0);
-
+  const [userList, setusers] = useState([]);
   const outgoingData = { orderData: {}, orderType: "OutgoingShipmentOrder" };
 
   const joinBrands = () => {
@@ -16,6 +15,7 @@ const JoinBrands = () => {
     Axios.post("http://localhost:3000/brands/", { numberTimes: numberTimes })
       .then((res) => {
         console.log(res.data);
+        setusers(res.data);
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -38,6 +38,28 @@ const JoinBrands = () => {
           Find Brands
         </Button>
       </Stack>
+
+      <table>
+        <tr>
+          <th>Brand ID  </th>
+          <th>Brand Name  </th>
+          
+        </tr>
+        
+        <tbody>
+          {userList.map((user) => (
+            <tr>
+              <td>{user.Brand_ID}</td>
+              <td>{user.b_name}</td>
+             
+            </tr>
+          ))}
+        </tbody>
+        
+       
+        </table>
+
+
     </div>
   );
 };

@@ -12,6 +12,7 @@ import DeletePage from "./components/DeletePage";
 import GetIncomingOrderPage from "./components/GetIncomingOrderPage";
 import GetOutgoingOrderPage from "./components/GetOutgoingOrderPage";
 import ProjectProducts from "./components/ProjectProducts";
+import UpdatePage from "./components/UpdatePage";
 
 
 import JoinBrands from "./components/JoinBrands";
@@ -29,6 +30,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/orders" element={<OrderPage />} />
+          <Route path="/orders/update/" element={<UpdatePage />} />
           <Route path="/products" element={<DeletePage />} />
           <Route path="/orders/incoming" element={<GetIncomingOrderPage />} />
           <Route path="/orders/outgoing" element={<GetOutgoingOrderPage />} />
