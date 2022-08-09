@@ -12,6 +12,32 @@ import {
 } from "@mui/material";
 import { Checkbox } from "@mui/material";
 
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+
+// function createData(
+//   name: string,
+//   calories: number,
+//   fat: number,
+//   carbs: number,
+//   protein: number
+// ) {
+//   return { name, calories, fat, carbs, protein };
+// }
+
+// const rows = [
+//   createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
+//   createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
+//   createData("Eclair", 262, 16.0, 24, 6.0),
+//   createData("Cupcake", 305, 3.7, 67, 4.3),
+//   createData("Gingerbread", 356, 16.0, 49, 3.9),
+// ];
+
 const ProjectProducts = () => {
   // const [Barcode, setBarcode] = useState(0);
   // const [P_name, setP_name] = useState("");
@@ -24,9 +50,8 @@ const ProjectProducts = () => {
   // const [SupplierID, setSupplierID] = useState(0);
   // const [Price, setPrice] = useState(0);
   const [params, setParams] = useState([]);
-
+  const [data, setData] = useState([]);
   const handleParams = (event) => {
-    console.log({ params });
     const index = params.indexOf(event.target.value);
     if (index === -1) {
       setParams([...params, event.target.value]);
@@ -46,6 +71,16 @@ const ProjectProducts = () => {
     // }
   };
 
+  const updateData = (initialData) => {
+    console.log(initialData);
+    let data = [];
+    for (const items of initialData) {
+      let result = Object.values(items);
+      data.push(result);
+    }
+    console.log(data);
+    setData(data);
+  };
   // const incomingData = {
   //     Barcode: Barcode,
   //     P_name: P_name,
@@ -62,11 +97,13 @@ const ProjectProducts = () => {
   const projectProducts = () => {
     Axios.post("http://localhost:3000/products/filtered/", { params: params })
       .then((res) => {
-        console.log(res.data.args);
+        console.log(params);
+        // console.log(res.data.args);
         console.log(res.data);
+        updateData(res.data);
       })
       .catch((error) => {
-        console.log(error.response.data);
+        console.log(error);
       });
   };
 
@@ -184,6 +221,48 @@ const ProjectProducts = () => {
           Select Attributes
         </Button>
       </Stack>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              {params.map((param) => (
+                <TableCell component="th" scope="col">
+                  {param}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data.map((datapoint) => (
+              <TableRow
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                {datapoint.map((point) => (
+                  <TableCell component="th" scope="row">
+                    {point}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+          {/* <TableBody>
+            {rows.map((row) => (
+              <TableRow
+                key={row.name}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {row.name}
+                </TableCell>
+                <TableCell align="right">{row.calories}</TableCell>
+                <TableCell align="right">{row.fat}</TableCell>
+                <TableCell align="right">{row.carbs}</TableCell>
+                <TableCell align="right">{row.protein}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody> */}
+        </Table>
+      </TableContainer>
     </div>
   );
 };

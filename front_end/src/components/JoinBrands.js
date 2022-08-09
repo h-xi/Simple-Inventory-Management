@@ -7,6 +7,7 @@ import Stack from "@mui/material/Stack";
 const JoinBrands = () => {
   const [numberTimes, setNumberTimes] = useState(0);
   const [data, setData] = useState([]);
+  const result = []
 
 
   const joinBrands = () => {
@@ -16,7 +17,7 @@ const JoinBrands = () => {
     Axios.post("http://localhost:3000/brands/", { numberTimes: numberTimes })
       .then((res) => {
         console.log(res.data);
-        //setData(res.data);
+        //
       })
       .catch((error) => {
         console.log(error.response.data);
