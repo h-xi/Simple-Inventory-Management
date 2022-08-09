@@ -1,0 +1,77 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #757ce8;
+  font: -apple-system;
+}
+
+.addOrderForm{
+  display:flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
+
+.Incoming {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 10px;
+}
+
+.Outgoing {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 10px;
+}
+
+.Incoming input {
+  width: 200px;
+  height: 30px;
+}
+
+.Outgoing input {
+  width: 200px;
+  height: 30px;
+}
+
+.Incoming button {
+  width: 200px;
+  height: 30px;
+  margin-top: 10px;
+}
+
+.Outgoing button {
+  width: 200px;
+  height: 30px;
+  margin-top: 10px;
+}
+
+.Incoming button:hover {
+  cursor: pointer;
+}
+
+.Outgoing button:hover {
+  cursor: pointer;
+}
+
+.icons {
+  position: absolute;    
+  right: 0; 
+
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  float: right;
+  margin-top: 10px;
+  margin-right: 5px;
+}
+
+.App-name {
+  display: flex;
+  justify-content: center;
+}
