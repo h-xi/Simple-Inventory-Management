@@ -53,7 +53,7 @@ router.get("/outgoing", async (req, res) => {
     params.Quantity = req.query.Quantity;
   }
   if (req.query.AssignedDriver) {
-    params.AssignedReceiver = req.query.AssignedReceiver;
+    params.AssignedDriver = req.query.AssignedDriver;
   }
   if (req.query.DeliveryAddress) {
     params.DeliveryAddress = req.query.DeliveryAddress;
