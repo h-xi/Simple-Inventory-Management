@@ -62,7 +62,7 @@ function UpdatePage() {
     return (
         <div className="addOrderForm">
           <div className="Incoming">
-            <h3>Incoming Shipment Orders</h3>
+            <h3>Update Incoming Shipment Orders</h3>
             <label>Order ID:</label>
             <input type="number" 
               onChange={(event) => {
@@ -110,7 +110,7 @@ function UpdatePage() {
             </Stack>
           </div>
           <div className="Outgoing">
-            <h3>Outgoing Shipment Orders</h3>
+            <h3>Update Outgoing Shipment Orders</h3>
             <label>Order ID:</label>
             <input type="number" 
               onChange={(event) => {
