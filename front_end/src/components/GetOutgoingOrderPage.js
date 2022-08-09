@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, {useState} from 'react';
 import Axios from 'axios';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
@@ -22,6 +21,8 @@ function GetOutgoingOrderPage() {
   const [DeliveryAddress, setDeliveryAddress] = useState("");
   const [DaysToShipment, setDaysToShipment] = useState(0);
   const [data, setData] = useState([]);
+
+  const [userList, setusers] = useState([]);
     const url = require('url');
 
     const outgoingData = {
@@ -56,6 +57,7 @@ function GetOutgoingOrderPage() {
       Axios.get('http://localhost:3000/orders/outgoing/', {params: filtered}
       ).then(res => {
         console.log(res.data.args);
+        setusers(res.data);
         setData(res.data.args);
         console.table(res.data);
       }).catch(error => {
@@ -124,6 +126,42 @@ function GetOutgoingOrderPage() {
             <Stack direction="row" spacing={2}>
             <Button variant="contained" onClick={() => {getOutgoingOrder();}}>Get Outgoing</Button>
             </Stack>
+
+            <table>
+        <tr>
+          <th>Brand ID  </th>
+          <th>Shipment Date  </th>
+          <th>Quantity  </th>
+          <th>Assigned Driver  </th>
+          <th>Delivery Address  </th>
+          <th>Days To Shipment  </th>
+          <th>Inventory Barcode  </th>
+          <th>Product Barcode  </th>
+          <th>Manager  </th>
+          
+        </tr>
+        
+        <tbody>
+          {userList.map((user) => (
+            <tr>
+              <td>{user.Order_ID}</td>
+              <td>{user.ShipmentDate}</td>
+              <td>{user.Quantity}</td>
+              <td>{user.AssignedDriver}</td>
+              <td>{user.DeliveryAddress}</td>
+              <td>{user.DaysToShipment}</td>   
+              <td>{user.Inventory_Barcode}</td>  
+              <td>{user.Product_Barcode}</td>
+              <td>{user.Manager}</td>   
+            </tr>
+          ))}
+        </tbody>
+        
+       
+        </table>
+
+
+
           </div>
     </div>
   )
