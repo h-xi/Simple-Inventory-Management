@@ -1,22 +1,22 @@
 # project_a2o6b_q1f2b_z3j4e
-Download MySQL Workbench
+Download MySQL Workbench <br>
 
 
-To run frontend:
+To run frontend: <br>
 
-cd front_end
-npm install
-npm start
+cd front_end <br>
+npm install <br>
+npm start <br>
 
 
 
-To run backend:
+To run backend: <br>
 
-cd server
-npm install
-cd databaseData
-//Connect to MYSQL workbench
-node populateScript --create  
-cd ..
-cd utils
-node api.js
+cd server <br>
+npm install <br>
+cd databaseData <br>
+//Connect to MYSQL workbench <br>
+node populateScript --create   <br>
+cd .. <br>
+cd utils <br>
+node api.js <br>
