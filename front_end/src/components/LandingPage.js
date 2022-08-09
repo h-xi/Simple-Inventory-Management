@@ -13,6 +13,11 @@ export default function LandingPage() {
                     </Link>
                 </Stack>
                 <Stack direction="row" spacing={2}>
+                    <Link to="/orders/update">
+                    <Button variant="contained">Update Orders</Button>
+                    </Link>
+                </Stack>
+                <Stack direction="row" spacing={2}>
                     <Link to="/products">
                     <Button variant="contained">Delete Product</Button>
                     </Link>
