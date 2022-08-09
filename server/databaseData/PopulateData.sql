@@ -180,18 +180,20 @@ INSERT INTO inventory_system.Holiday VALUES (30, 'London');
 
 
 
-INSERT INTO inventory_system.OutgoingShipmentOrder VALUES (48231, '12/06/1985', 2, 30002, '123 Almond Drive', 12, 354,354,35215);
-INSERT INTO inventory_system.OutgoingShipmentOrder VALUES (48232, '13/06/1985', 5, 30002, '125 Almond Drive', 2, 364,364,35215);
+INSERT INTO inventory_system.OutgoingShipmentOrder VALUES (48231, '12/06/1985', 2, 62146, '123 Almond Drive', 12, 354,354,35215);
+INSERT INTO inventory_system.OutgoingShipmentOrder VALUES (48562, '12/06/1985', 2, 56114, '170 Almond Drive', 12, 354,354,35215);
+INSERT INTO inventory_system.OutgoingShipmentOrder VALUES (48011, '12/06/1985', 2, 30523, '112 Almond Drive', 12, 354,354,30014);
+INSERT INTO inventory_system.OutgoingShipmentOrder VALUES (48232, '13/06/1985', 5, 98115, '125 Almond Drive', 2, 364,364,35215);
 INSERT INTO inventory_system.OutgoingShipmentOrder VALUES (48233, '14/06/1985', 7, 56114, '127 Almond Drive', 7, 374,374,35215);
 INSERT INTO inventory_system.OutgoingShipmentOrder VALUES (48234, '15/06/1985', 9, 30002, '121 Almond Drive', 14, 384,384,35215);
 INSERT INTO inventory_system.OutgoingShipmentOrder VALUES (48235, '16/06/1985', 4, 56114, '122 Almond Drive', 2, 394,394,30014);
 
-INSERT INTO inventory_system.OutgoingShipmentOrder VALUES (48241, '12/07/1985', 10, 30002, '123 Almond Drive', 9, 454,454,35215);
+INSERT INTO inventory_system.OutgoingShipmentOrder VALUES (48241, '12/07/1985', 10, 98115, '123 Almond Drive', 9, 454,454,35215);
 INSERT INTO inventory_system.OutgoingShipmentOrder VALUES (48242, '13/07/1985', 3, 30002, '125 Almond Drive', 2, 464,464,35215);
 INSERT INTO inventory_system.OutgoingShipmentOrder VALUES (48243, '14/07/1985', 6, 56114, '127 Almond Drive', 7, 474,474,35215);
 
 INSERT INTO inventory_system.OutgoingShipmentOrder VALUES (58234, '17/06/1985', 4, 30002, '121 Almond Drive', 11, 584,584,35215);
-INSERT INTO inventory_system.OutgoingShipmentOrder VALUES (58235, '11/06/1985', 2, 56114, '122 Almond Drive', 8, 594,594,30014);
+INSERT INTO inventory_system.OutgoingShipmentOrder VALUES (58235, '11/06/1985', 2, 98115, '122 Almond Drive', 8, 594,594,30014);
 
 
 INSERT INTO inventory_system.IncomingShipmentOrder VALUES (48671, '13/06/1984', 12, 516214, 364,364,39302);
