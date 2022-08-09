@@ -30,7 +30,6 @@ const DivideBrands = () => {
         <tr>
           <th>Brand ID  </th>
           <th>Brand Name  </th>
-          <th>Average Price  </th>
           
         </tr>
         
@@ -38,8 +37,7 @@ const DivideBrands = () => {
           {userList.map((user) => (
             <tr>
               <td>{user.Brand_ID}</td>
-              <td>{user.Brand_Name}</td>
-              <td>{user.AVG_Price}</td>             
+              <td>{user.B_Name}</td>         
             </tr>
           ))}
         </tbody>
